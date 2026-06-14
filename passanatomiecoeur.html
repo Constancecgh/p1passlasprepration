@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Schéma du Cœur — Anatomie PASS — Constance</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  [data-theme="light"]{--bg:#fff5f8;--surface:#fff;--border:#fce7f3;--accent:#db2777;--accent2:#7c3aed;--text:#1e1b18;--muted:#6b7280;--toggle-bg:#fce7f3;--card:#fff;--warn-bg:rgba(251,191,36,0.08);--warn-border:rgba(251,191,36,0.35);--warn-text:#92400e;}
+  [data-theme="dark"]{--bg:#0a0a0f;--surface:#13131a;--border:#1e1e2e;--accent:#f472b6;--accent2:#a78bfa;--text:#e2e8f0;--muted:#64748b;--toggle-bg:#1e1e2e;--card:#13131a;--warn-bg:rgba(251,191,36,0.06);--warn-border:rgba(251,191,36,0.2);--warn-text:#fde68a;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;min-height:100vh;transition:background .3s,color .3s;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:rgba(255,245,248,0.92);}
+  [data-theme="dark"] nav{background:rgba(10,10,15,0.92);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--accent);text-decoration:none;}
+  .nav-back{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;}
+  .nav-back:hover{color:var(--text);}
+  .theme-toggle{background:var(--toggle-bg);border:1px solid var(--border);border-radius:100px;padding:5px 12px;cursor:pointer;font-size:14px;color:var(--muted);user-select:none;}
+
+  .wrap{max-width:1200px;margin:0 auto;padding:100px 32px 60px;}
+  .badge{display:inline-block;background:rgba(219,39,119,.07);border:1px solid rgba(219,39,119,.2);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:12px;}
+  h1{font-family:'Libre Baskerville',serif;font-size:clamp(22px,3.5vw,36px);font-weight:700;margin-bottom:6px;}
+  h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+  /* COUPE EXPLICATION */
+  .coupe-info{background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.2);border-radius:12px;padding:14px 18px;margin:12px 0 16px;display:flex;gap:14px;align-items:flex-start;}
+  [data-theme="dark"] .coupe-info{background:rgba(129,140,248,0.06);border-color:rgba(129,140,248,0.2);}
+  .coupe-icon{font-size:22px;flex-shrink:0;}
+  .coupe-text{font-size:13px;line-height:1.7;color:var(--text);}
+  .coupe-text strong{color:var(--accent2);}
+
+  /* AVERTISSEMENT */
+  .warning{background:var(--warn-bg);border:1px solid var(--warn-border);border-radius:10px;padding:10px 16px;font-size:12px;color:var(--warn-text);line-height:1.6;margin-bottom:18px;display:flex;gap:10px;align-items:flex-start;}
+
+  /* MODES */
+  .mode-row{display:flex;gap:8px;margin-bottom:18px;flex-wrap:wrap;}
+  .mode-btn{padding:8px 18px;border-radius:100px;border:2px solid var(--border);background:var(--surface);font-size:12px;font-weight:700;cursor:pointer;font-family:'Source Serif 4',serif;color:var(--muted);transition:all .2s;}
+  .mode-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+  /* LAYOUT */
+  .layout{display:grid;grid-template-columns:1fr 310px;gap:20px;align-items:start;}
+
+  /* SCHEMA */
+  .schema-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:16px;overflow:hidden;}
+  #heart-svg{width:100%;height:auto;display:block;}
+
+  /* PANNEAU DROIT */
+  .side-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;position:sticky;top:80px;}
+
+  /* INFO */
+  .info-empty{text-align:center;padding:32px 10px;color:var(--muted);}
+  .info-empty-icon{font-size:26px;margin-bottom:8px;}
+  .info-empty-txt{font-size:13px;line-height:1.6;}
+  .info-name{font-family:'Libre Baskerville',serif;font-size:17px;font-weight:700;color:var(--text);margin-bottom:5px;}
+  .info-tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 10px;border-radius:100px;margin-bottom:11px;text-transform:uppercase;letter-spacing:.06em;}
+  .info-desc{font-size:13px;line-height:1.75;color:var(--muted);}
+  .info-desc strong{color:var(--text);}
+  .info-piege{margin-top:11px;padding:10px 12px;background:rgba(219,39,119,.06);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;font-size:12px;color:var(--accent);line-height:1.6;}
+  [data-theme="dark"] .info-piege{background:rgba(244,114,182,.06);}
+
+  /* LÉGENDE */
+  .leg-group{margin-bottom:14px;}
+  .leg-group-title{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+  .leg-items{display:flex;flex-direction:column;gap:3px;}
+  .leg-item{display:flex;align-items:center;gap:8px;padding:5px 9px;border-radius:7px;cursor:pointer;transition:all .15s;border:1px solid transparent;font-size:12px;}
+  .leg-item:hover{background:var(--bg);border-color:var(--border);}
+  .leg-item.active{background:var(--bg);border-color:var(--accent);}
+  .leg-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0;}
+  .leg-name{font-weight:600;color:var(--text);}
+
+  /* QUIZ */
+  .quiz-prog{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:10px;}
+  .quiz-q{font-family:'Libre Baskerville',serif;font-size:14px;font-weight:700;color:var(--text);line-height:1.45;margin-bottom:12px;}
+  .quiz-opts{display:flex;flex-direction:column;gap:6px;}
+  .qopt{padding:10px 13px;background:rgba(0,0,0,.02);border:2px solid var(--border);border-radius:9px;font-size:12px;cursor:pointer;font-family:'Source Serif 4',serif;color:var(--text);text-align:left;transition:all .15s;line-height:1.4;}
+  [data-theme="dark"] .qopt{background:rgba(255,255,255,.02);}
+  .qopt:hover:not(:disabled){border-color:var(--accent);}
+  .qopt.ok{background:rgba(219,39,119,.08);border-color:var(--accent);color:var(--accent);}
+  .qopt.ko{background:rgba(124,58,237,.08);border-color:var(--accent2);color:var(--accent2);}
+  .qopt:disabled{cursor:default;}
+  .quiz-fb{font-size:12px;line-height:1.6;padding:9px 12px;border-radius:8px;display:none;margin-top:8px;}
+  .quiz-fb.show{display:block;}
+  .quiz-fb.ok{background:rgba(219,39,119,.07);color:var(--accent);}
+  .quiz-fb.ko{background:rgba(124,58,237,.07);color:var(--accent2);}
+  .quiz-next{margin-top:6px;background:none;border:2px solid var(--border);border-radius:8px;padding:7px 15px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Source Serif 4',serif;transition:all .2s;display:none;}
+  .quiz-next.show{display:inline-block;}
+  .quiz-next:hover{border-color:var(--accent);color:var(--accent);}
+  .quiz-result{text-align:center;padding:16px 0;}
+  .qr-emoji{font-size:34px;margin-bottom:8px;}
+  .qr-score{font-family:'Libre Baskerville',serif;font-size:22px;font-weight:700;color:var(--accent);}
+  .qr-restart{margin-top:12px;padding:9px 18px;background:var(--accent);color:#fff;border:none;border-radius:9px;font-size:12px;font-weight:700;cursor:pointer;font-family:'Source Serif 4',serif;}
+
+  /* RESSOURCES */
+  .ressources{margin-top:16px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px 18px;}
+  .res-title{font-size:10px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+  .res-item{display:flex;align-items:baseline;gap:8px;font-size:12px;margin-bottom:6px;}
+  .res-item a{color:var(--accent);font-weight:600;text-decoration:none;}
+  .res-item a:hover{text-decoration:underline;}
+  .res-item span{color:var(--muted);}
+
+  /* COLOR KEY */
+  .color-key{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:14px;padding-top:12px;border-top:1px solid var(--border);}
+  .ck-item{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);}
+  .ck-dot{width:14px;height:8px;border-radius:3px;}
+
+  footer{border-top:1px solid var(--border);padding:20px 32px;max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px;}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--accent);}
+  .footer-copy{font-size:11px;color:var(--muted);}
+  @media(max-width:740px){.layout{grid-template-columns:1fr;}.side-card{position:static;}.wrap{padding:80px 14px 40px;}nav{padding:.9rem 1.2rem;}footer{padding:16px;flex-direction:column;text-align:center;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Constance</a>
+  <a class="nav-back" href="passanatomiecardio.html">← Fiche Cardiovasculaire</a>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+</nav>
+
+<div class="wrap">
+  <div class="badge">Schéma mémoriel · Anatomie PASS/LAS</div>
+  <h1>Le Cœur — <span>Vue en coupe frontale annotée</span></h1>
+
+  <!-- EXPLICATION DE LA COUPE -->
+  <div class="coupe-info">
+    <div class="coupe-icon">✂️</div>
+    <div class="coupe-text">
+      <strong>Ce que tu vois ici : une coupe frontale (coronale) du cœur.</strong>
+      On a "tranché" le cœur de gauche à droite pour voir l'intérieur des 4 cavités en même temps.
+      Le <strong>côté droit anatomique du cœur</strong> (OD + VD, sang bleu désoxygéné) apparaît à gauche sur le schéma — c'est normal, c'est une convention anatomique (comme regarder quelqu'un en face).
+      Le <strong>cœur est décalé vers la gauche dans le thorax</strong> (environ 2/3 à gauche de la ligne médiane) — la pointe (apex) est en 5e espace intercostal gauche.
+    </div>
+  </div>
+
+  <div class="warning">
+    <span style="font-size:15px;flex-shrink:0">⚠️</span>
+    <span><strong>Schéma mémoriel simplifié</strong> — pour les détails anatomiques précis, consulte le <strong>Netter</strong> ou <strong>Kenhub.com</strong> (gratuit, schémas pro interactifs). Ce schéma aide à mémoriser les notions clés du concours, pas à faire de la chirurgie cardiaque.</span>
+  </div>
+
+  <div class="mode-row">
+    <button class="mode-btn active" id="btnExplore" onclick="setMode('explore')">🔍 Explorer</button>
+    <button class="mode-btn" id="btnQuiz" onclick="setMode('quiz')">🎯 Quiz</button>
+    <button class="mode-btn" id="btnLegende" onclick="setMode('legende')">📋 Légende</button>
+  </div>
+
+  <div class="layout">
+    <!-- SVG COEUR -->
+    <div class="schema-card">
+      <!--
+        CONVENTION : vue depuis l'avant du patient (vue antérieure)
+        → côté droit du patient = GAUCHE sur le schéma
+        → côté gauche du patient = DROITE sur le schéma
+        Viewbox large pour que les étiquettes externes aient de la place
+      -->
+      <svg id="heart-svg" viewBox="-60 0 820 700" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="hl" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="6" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#dbeafe"/>
+            <stop offset="100%" stop-color="#93c5fd"/>
+          </linearGradient>
+          <linearGradient id="gRed" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stop-color="#fee2e2"/>
+            <stop offset="100%" stop-color="#fca5a5"/>
+          </linearGradient>
+        </defs>
+
+        <!-- ═══════════════════════════════════ -->
+        <!--  VAISSEAUX (dessinés en premier)   -->
+        <!-- ═══════════════════════════════════ -->
+
+        <!-- VCS (en haut à droite anatomique = gauche schéma) -->
+        <rect class="s" data-id="vcs"
+          x="330" y="20" width="46" height="100" rx="16"
+          fill="#93c5fd" stroke="#3b82f6" stroke-width="3"/>
+
+        <!-- VCI (en bas) -->
+        <rect class="s" data-id="vci"
+          x="262" y="535" width="46" height="100" rx="16"
+          fill="#93c5fd" stroke="#3b82f6" stroke-width="3"/>
+
+        <!-- AORTE — ascendante + crosse bien visible -->
+        <path class="s" data-id="aorte"
+          d="M 212 188 L 212 100 Q 212 46 252 32 Q 300 16 334 40 Q 366 62 358 112"
+          stroke="#b91c1c" stroke-width="34" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- intérieur aorte -->
+        <path d="M 212 188 L 212 100 Q 212 46 252 32 Q 300 16 334 40 Q 366 62 358 112"
+          stroke="#fca5a5" stroke-width="20" fill="none" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+
+        <!-- ARTÈRE PULMONAIRE -->
+        <path class="s" data-id="artpulm"
+          d="M 302 185 L 302 115 Q 302 66 338 54 Q 380 40 400 72 L 418 106"
+          stroke="#1d4ed8" stroke-width="28" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- intérieur art pulm -->
+        <path d="M 302 185 L 302 115 Q 302 66 338 54 Q 380 40 400 72 L 418 106"
+          stroke="#bfdbfe" stroke-width="16" fill="none" stroke-linecap="round" stroke-linejoin="round" pointer-events="none"/>
+
+        <!-- VEINES PULM GAUCHES (côté gauche anatomique = droite schéma) -->
+        <path class="s" data-id="vpg"
+          d="M 500 268 Q 542 260 548 290 Q 554 320 520 332"
+          stroke="#c2410c" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M 500 268 Q 542 260 548 290 Q 554 320 520 332"
+          stroke="#fed7aa" stroke-width="11" fill="none" stroke-linecap="round" pointer-events="none"/>
+
+        <!-- VEINES PULM DROITES (côté droit anatomique = gauche schéma) -->
+        <path class="s" data-id="vpd"
+          d="M 108 268 Q 64 260 58 290 Q 52 320 88 332"
+          stroke="#c2410c" stroke-width="20" fill="none" stroke-linecap="round"/>
+        <path d="M 108 268 Q 64 260 58 290 Q 52 320 88 332"
+          stroke="#fed7aa" stroke-width="11" fill="none" stroke-linecap="round" pointer-events="none"/>
+
+        <!-- ═══════════════════════════════════ -->
+        <!--  CAVITÉS CARDIAQUES               -->
+        <!-- ═══════════════════════════════════ -->
+
+        <!-- OREILLETTE DROITE (anatomique) = GAUCHE sur schéma côté bleu -->
+        <path class="s" data-id="od"
+          d="M 108 148
+             Q 70 155 55 200
+             Q 38 250 52 310
+             Q 65 360 108 370
+             L 155 374 L 175 368
+             L 175 148 Z"
+          fill="url(#gBlue)" stroke="#3b82f6" stroke-width="3"/>
+
+        <!-- OREILLETTE GAUCHE (anatomique) = DROITE sur schéma côté rouge -->
+        <path class="s" data-id="og"
+          d="M 500 148
+             Q 540 155 555 200
+             Q 572 250 558 310
+             Q 545 360 500 370
+             L 455 374 L 435 368
+             L 435 148 Z"
+          fill="url(#gRed)" stroke="#dc2626" stroke-width="3"/>
+
+        <!-- SEPTUM INTERAURICULAIRE -->
+        <rect x="172" y="155" width="264" height="218" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2.5" rx="3" pointer-events="none"/>
+        [data-theme="dark"] .sep{fill:#1e293b;stroke:#475569;}
+        <text x="304" y="270" text-anchor="middle" font-size="11" fill="#64748b" font-weight="800" pointer-events="none" font-family="Arial,sans-serif" transform="rotate(-90 304 270)">Septum inter-auriculaire</text>
+
+        <!-- VENTRICULE DROIT (anatomique) = GAUCHE sur schéma -->
+        <path class="s" data-id="vd"
+          d="M 172 373
+             Q 120 380 96 412
+             Q 65 450 68 512
+             Q 70 560 108 585
+             Q 142 604 190 606
+             L 270 606 L 295 595
+             L 295 373 Z"
+          fill="url(#gBlue)" stroke="#3b82f6" stroke-width="3"/>
+
+        <!-- VENTRICULE GAUCHE (anatomique) = DROITE sur schéma -->
+        <path class="s" data-id="vg"
+          d="M 436 373
+             Q 490 380 514 412
+             Q 546 450 542 512
+             Q 540 560 502 585
+             Q 468 604 420 606
+             L 340 606 L 315 595
+             L 315 373 Z"
+          fill="url(#gRed)" stroke="#dc2626" stroke-width="3"/>
+
+        <!-- SEPTUM INTERVENTRICULAIRE -->
+        <rect x="292" y="373" width="28" height="232" fill="#e2e8f0" stroke="#94a3b8" stroke-width="2.5" rx="3" pointer-events="none"/>
+        <text x="306" y="494" text-anchor="middle" font-size="11" fill="#64748b" font-weight="800" pointer-events="none" font-family="Arial,sans-serif" transform="rotate(-90 306 494)">Septum inter-ventriculaire</text>
+
+        <!-- ═══════════════════════════════════ -->
+        <!--  VALVES                           -->
+        <!-- ═══════════════════════════════════ -->
+
+        <!-- TRICUSPIDE OD→VD (gauche schéma) -->
+        <ellipse class="s" data-id="tricuspide"
+          cx="175" cy="372" rx="42" ry="13"
+          fill="#fbbf24" stroke="#d97706" stroke-width="3"/>
+        <text x="175" y="376" text-anchor="middle" font-size="10" fill="#78350f" font-weight="900" pointer-events="none" font-family="Arial,sans-serif">TRICUSPIDE</text>
+
+        <!-- MITRALE OG→VG (droite schéma) -->
+        <ellipse class="s" data-id="mitrale"
+          cx="433" cy="372" rx="42" ry="13"
+          fill="#f97316" stroke="#ea580c" stroke-width="3"/>
+        <text x="433" y="376" text-anchor="middle" font-size="10" fill="#7c2d12" font-weight="900" pointer-events="none" font-family="Arial,sans-serif">MITRALE</text>
+
+        <!-- PULMONAIRE VD→art.pulm (gauche haut) -->
+        <ellipse class="s" data-id="valvpulm"
+          cx="302" cy="188" rx="28" ry="11"
+          fill="#1d4ed8" stroke="#1e40af" stroke-width="2.5"/>
+        <text x="302" y="192" text-anchor="middle" font-size="9" fill="#fff" font-weight="900" pointer-events="none" font-family="Arial,sans-serif">PULMONAIRE</text>
+
+        <!-- AORTIQUE VG→aorte (droite haut) -->
+        <ellipse class="s" data-id="aortique"
+          cx="212" cy="190" rx="28" ry="11"
+          fill="#dc2626" stroke="#b91c1c" stroke-width="2.5"/>
+        <text x="212" y="194" text-anchor="middle" font-size="9" fill="#fff" font-weight="900" pointer-events="none" font-family="Arial,sans-serif">AORTIQUE</text>
+
+        <!-- ═══════════════════════════════════ -->
+        <!--  SYSTÈME DE CONDUCTION           -->
+        <!-- ═══════════════════════════════════ -->
+
+        <!-- Nœud SA -->
+        <circle class="s" data-id="noeudsa"
+          cx="56" cy="190" r="20"
+          fill="#a855f7" stroke="#7c3aed" stroke-width="2.5"/>
+        <text x="56" y="193" text-anchor="middle" font-size="9" fill="#fff" font-weight="900" pointer-events="none" font-family="Arial,sans-serif">SA</text>
+
+        <!-- Nœud AV -->
+        <circle class="s" data-id="noeudav"
+          cx="172" cy="370" r="16"
+          fill="#7c3aed" stroke="#6d28d9" stroke-width="2.5"/>
+        <text x="172" y="374" text-anchor="middle" font-size="8.5" fill="#fff" font-weight="900" pointer-events="none" font-family="Arial,sans-serif">AV</text>
+
+        <!-- Faisceau His discret -->
+        <path d="M 172 386 L 172 420 L 130 555 M 172 420 L 220 548"
+          stroke="#a855f7" stroke-width="2" fill="none" stroke-dasharray="7,5" opacity="0.4" pointer-events="none"/>
+
+        <!-- ═══════════════════════════════════ -->
+        <!--  CORONAIRES                       -->
+        <!-- ═══════════════════════════════════ -->
+
+        <!-- IVA -->
+        <path class="s" data-id="iva"
+          d="M 270 208 Q 268 310 272 420 Q 274 480 280 548"
+          stroke="#16a34a" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+        <!-- Circonflexe -->
+        <path class="s" data-id="circonflexe"
+          d="M 545 220 Q 572 268 575 332 Q 577 390 548 432"
+          stroke="#15803d" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="9,5"/>
+
+        <!-- Coronaire droite -->
+        <path class="s" data-id="corondroite"
+          d="M 62 220 Q 32 268 28 332 Q 26 390 52 432"
+          stroke="#0284c7" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="9,5"/>
+
+        <!-- ═══════════════════════════════════ -->
+        <!--  ÉTIQUETTES — toutes à l'extérieur -->
+        <!--  avec lignes de renvoi propres     -->
+        <!-- ═══════════════════════════════════ -->
+
+        <!-- Labels cavités (grands, centrés, bien lisibles) -->
+        <text x="100" y="272" text-anchor="middle" font-size="15" fill="#1e40af" font-weight="900" pointer-events="none" font-family="Arial,sans-serif">OD</text>
+        <text x="510" y="272" text-anchor="middle" font-size="15" fill="#991b1b" font-weight="900" pointer-events="none" font-family="Arial,sans-serif">OG</text>
+        <text x="152" y="500" text-anchor="middle" font-size="15" fill="#1e40af" font-weight="900" pointer-events="none" font-family="Arial,sans-serif">VD</text>
+        <text x="456" y="500" text-anchor="middle" font-size="15" fill="#991b1b" font-weight="900" pointer-events="none" font-family="Arial,sans-serif">VG</text>
+
+        <!-- ── ÉTIQUETTES GAUCHE (côté droit anatomique) ── -->
+
+        <!-- VCS -->
+        <line x1="330" y1="68" x2="265" y2="68" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="260" y="64" text-anchor="end" font-size="12" fill="#3b82f6" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">VCS</text>
+        <text x="260" y="79" text-anchor="end" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">(veine cave sup.)</text>
+
+        <!-- Nœud SA -->
+        <line x1="36" y1="190" x2="-20" y2="190" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="-24" y="186" text-anchor="end" font-size="12" fill="#7c3aed" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">Nœud SA</text>
+        <text x="-24" y="200" text-anchor="end" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">pace-maker ~70bpm</text>
+
+        <!-- Coronaire droite -->
+        <line x1="28" y1="332" x2="-20" y2="332" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="-24" y="328" text-anchor="end" font-size="11" fill="#0284c7" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">Coronaire droite</text>
+        <text x="-24" y="342" text-anchor="end" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">paroi inf. VG + VD</text>
+
+        <!-- V. Pulm Droites (côté droit anatomique = gauche schéma) -->
+        <line x1="58" y1="290" x2="-20" y2="450" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="-24" y="447" text-anchor="end" font-size="11" fill="#c2410c" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">V. pulm. droites</text>
+        <text x="-24" y="460" text-anchor="end" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">sang oxygéné → OG</text>
+
+        <!-- VCI -->
+        <line x1="262" y1="580" x2="-20" y2="620" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="-24" y="617" text-anchor="end" font-size="12" fill="#3b82f6" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">VCI</text>
+        <text x="-24" y="630" text-anchor="end" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">(veine cave inf.)</text>
+
+        <!-- Tricuspide (gauche schéma) -->
+        <line x1="133" y1="372" x2="-20" y2="540" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="-24" y="537" text-anchor="end" font-size="11" fill="#d97706" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">Valve Tricuspide</text>
+        <text x="-24" y="550" text-anchor="end" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">OD → VD (3 feuillets)</text>
+
+        <!-- Nœud AV -->
+        <line x1="156" y1="370" x2="-20" y2="380" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="-24" y="377" text-anchor="end" font-size="11" fill="#6d28d9" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">Nœud AV</text>
+        <text x="-24" y="390" text-anchor="end" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">délai 120-200 ms</text>
+
+        <!-- IVA -->
+        <line x1="272" y1="340" x2="-20" y2="290" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="-24" y="287" text-anchor="end" font-size="11" fill="#16a34a" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">IVA</text>
+        <text x="-24" y="300" text-anchor="end" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">paroi ant. VG + septum</text>
+
+        <!-- ── ÉTIQUETTES DROITE (côté gauche anatomique) ── -->
+
+        <!-- Aorte -->
+        <line x1="244" y1="50" x2="660" y2="50" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="664" y="46" font-size="12" fill="#b91c1c" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">Aorte</text>
+        <text x="664" y="60" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">montée + crosse</text>
+
+        <!-- Artère pulmonaire -->
+        <line x1="325" y1="72" x2="660" y2="110" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="664" y="107" font-size="12" fill="#1d4ed8" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">Artère pulmonaire</text>
+        <text x="664" y="121" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">VD → poumons (désoxygéné)</text>
+
+        <!-- Valve aortique -->
+        <line x1="240" y1="190" x2="660" y2="175" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="664" y="172" font-size="11" fill="#b91c1c" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">Valve aortique</text>
+        <text x="664" y="185" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">VG → Aorte (systole)</text>
+
+        <!-- Valve pulmonaire -->
+        <line x1="330" y1="188" x2="660" y2="218" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="664" y="215" font-size="11" fill="#1d4ed8" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">Valve pulmonaire</text>
+        <text x="664" y="228" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">VD → Art. pulm. (systole)</text>
+
+        <!-- V. Pulm Gauches (côté gauche anatomique = droite schéma) -->
+        <line x1="548" y1="290" x2="660" y2="290" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="664" y="287" font-size="11" fill="#c2410c" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">V. pulm. gauches</text>
+        <text x="664" y="300" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">sang oxygéné → OG</text>
+
+        <!-- Circonflexe -->
+        <line x1="575" y1="332" x2="660" y2="350" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="664" y="347" font-size="11" fill="#15803d" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">Circonflexe</text>
+        <text x="664" y="360" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">paroi latérale VG</text>
+
+        <!-- Mitrale -->
+        <line x1="475" y1="372" x2="660" y2="420" stroke="#64748b" stroke-width="1.3" pointer-events="none"/>
+        <text x="664" y="417" font-size="11" fill="#ea580c" font-weight="800" font-family="Arial,sans-serif" pointer-events="none">Valve Mitrale</text>
+        <text x="664" y="430" font-size="10" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">OG → VG (2 feuillets)</text>
+
+        <!-- ── INDICATION COUPE ET ORIENTATION ── -->
+        <!-- Ligne de coupe frontale -->
+        <line x1="304" y1="648" x2="304" y2="662" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4,3" pointer-events="none"/>
+        <text x="304" y="680" text-anchor="middle" font-size="11" fill="#94a3b8" font-family="Arial,sans-serif" pointer-events="none">↑ Ligne médiane du corps</text>
+
+        <!-- Côtés anatomiques -->
+        <text x="80" y="668" text-anchor="middle" font-size="12" fill="#3b82f6" font-weight="700" font-family="Arial,sans-serif" pointer-events="none">← Côté droit anatomique</text>
+        <text x="520" y="668" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="700" font-family="Arial,sans-serif" pointer-events="none">Côté gauche anatomique →</text>
+
+      </svg>
+
+      <!-- COULEURS CLÉS -->
+      <div class="color-key">
+        <div class="ck-item"><div class="ck-dot" style="background:#93c5fd"></div>Sang désoxygéné (bleu)</div>
+        <div class="ck-item"><div class="ck-dot" style="background:#fca5a5"></div>Sang oxygéné (rouge)</div>
+        <div class="ck-item"><div class="ck-dot" style="background:#fbbf24"></div>Valves AV</div>
+        <div class="ck-item"><div class="ck-dot" style="background:#a855f7"></div>Conduction</div>
+        <div class="ck-item"><div class="ck-dot" style="background:#16a34a"></div>Coronaires</div>
+        <div class="ck-item"><div class="ck-dot" style="background:#ea580c"></div>V. pulmonaires</div>
+      </div>
+    </div>
+
+    <!-- PANNEAU DROIT -->
+    <div>
+      <div class="side-card" id="sideCard">
+        <!-- EXPLORER -->
+        <div id="pExplore">
+          <div class="info-empty" id="infoEmpty">
+            <div class="info-empty-icon">👆</div>
+            <div class="info-empty-txt">Clique sur une structure pour voir sa définition et le piège PASS associé</div>
+          </div>
+          <div id="infoContent" style="display:none">
+            <div class="info-name" id="iName"></div>
+            <div class="info-tag" id="iTag"></div>
+            <div class="info-desc" id="iDesc"></div>
+            <div class="info-piege" id="iPiege"></div>
+          </div>
+        </div>
+        <!-- QUIZ -->
+        <div id="pQuiz" style="display:none">
+          <div class="quiz-prog" id="qProg"></div>
+          <div class="quiz-q" id="qQ"></div>
+          <div class="quiz-opts" id="qOpts"></div>
+          <div class="quiz-fb" id="qFb"></div>
+          <button class="quiz-next" id="qNext" onclick="nextQ()">Question suivante →</button>
+          <div class="quiz-result" id="qResult" style="display:none">
+            <div class="qr-emoji" id="qEmoji"></div>
+            <div class="qr-score" id="qScore"></div>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px;">Continue à réviser !</div>
+            <button class="qr-restart" onclick="startQuiz()">Recommencer 🔄</button>
+          </div>
+        </div>
+        <!-- LÉGENDE -->
+        <div id="pLegende" style="display:none">
+          <div class="leg-group" id="lgCavites"><div class="leg-group-title">Cavités</div><div class="leg-items" id="liCavites"></div></div>
+          <div class="leg-group" id="lgVaisseaux"><div class="leg-group-title">Vaisseaux</div><div class="leg-items" id="liVaisseaux"></div></div>
+          <div class="leg-group" id="lgValves"><div class="leg-group-title">Valves & Conduction</div><div class="leg-items" id="liValves"></div></div>
+          <div class="leg-group" id="lgCoronaires"><div class="leg-group-title">Coronaires</div><div class="leg-items" id="liCoronaires"></div></div>
+        </div>
+      </div>
+
+      <!-- RESSOURCES -->
+      <div class="ressources">
+        <div class="res-title">📚 Pour aller plus loin</div>
+        <div class="res-item">🎨 <a href="https://www.kenhub.com/fr/library/anatomie/le-coeur" target="_blank">Kenhub</a><span>— schémas pro interactifs, gratuit</span></div>
+        <div class="res-item">📖 <span><strong>Netter</strong> — atlas anatomique de référence</span></div>
+        <div class="res-item">🎬 <a href="https://www.youtube.com/results?search_query=anatomie+coeur+PASS" target="_blank">YouTube</a><span>— "anatomie cœur PASS"</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">Constance</div>
+  <div class="footer-copy">© Constance | @constance.cgh · Programme PASS gratuit</div>
+</footer>
+
+<script>
+function toggleTheme(){var h=document.documentElement,b=document.getElementById('themeBtn');if(h.dataset.theme==='light'){h.dataset.theme='dark';b.textContent='☀️';}else{h.dataset.theme='light';b.textContent='🌙';}}
+
+var D={
+  od:{name:'Oreillette Droite',cat:'cavite',col:'#3b82f6',tag:'Cavité · Sang désoxygéné',
+    desc:'Reçoit le sang <strong>désoxygéné</strong> via la <strong>VCS</strong> (moitié haute) et la <strong>VCI</strong> (moitié basse). Se contracte pour envoyer le sang dans le VD via la valve tricuspide.',
+    piege:'Côté DROIT = sang Bleu (Désoxygéné). Mémo : D comme Droit = Désoxygéné = bleu.'},
+  og:{name:'Oreillette Gauche',cat:'cavite',col:'#dc2626',tag:'Cavité · Sang oxygéné',
+    desc:'Reçoit le sang <strong>oxygéné</strong> via les <strong>4 veines pulmonaires</strong>. Seule oreillette recevant du sang oxygéné. Envoie dans le VG via la valve mitrale.',
+    piege:'Les veines pulmonaires = SEULES veines du corps transportant du sang OXYGÉNÉ. Piège classique QCM.'},
+  vd:{name:'Ventricule Droit',cat:'cavite',col:'#3b82f6',tag:'Cavité · Sang désoxygéné',
+    desc:'Pompe le sang désoxygéné vers les poumons via l\'artère pulmonaire. Paroi <strong>moins épaisse</strong> que le VG (résistances pulmonaires basses).',
+    piege:'VD mince = basse pression. En HTAP chronique, le VD se dilate et s\'hypertrophie → cœur pulmonaire.'},
+  vg:{name:'Ventricule Gauche',cat:'cavite',col:'#dc2626',tag:'Cavité · Sang oxygéné',
+    desc:'Pompe le sang oxygéné vers tout le corps via l\'aorte. Paroi <strong>3-4× plus épaisse</strong> que le VD. <strong>FE normale ≥ 55%</strong>. Reçoit l\'OG via la valve mitrale.',
+    piege:'FE < 40% = IC systolique → IEC + bêtabloquants. FE normale avec symptômes = IC à FE préservée (HFpEF).'},
+  mitrale:{name:'Valve Mitrale',cat:'valve',col:'#f97316',tag:'Valve AV · 2 feuillets (bicuspide)',
+    desc:'Sépare <strong>OG et VG</strong>. <strong>2 feuillets</strong>. Ouvre en diastole, ferme en systole. La plus touchée en pathologie.',
+    piege:'Insuffisance mitrale = souffle systolique en jet de vapeur irradiant en aisselle. Cause principale : prolapsus valvulaire mitral.'},
+  tricuspide:{name:'Valve Tricuspide',cat:'valve',col:'#fbbf24',tag:'Valve AV · 3 feuillets',
+    desc:'Sépare <strong>OD et VD</strong>. <strong>3 feuillets</strong>. Ouvre en diastole, ferme en systole. Insuffisance tricuspide : HTAP ou endocardite.',
+    piege:'Mémo : Tricuspide = Trois feuillets, côté Droit. Souffle augmente à l\'INSPIRATION (signe de Rivero-Carvallo).'},
+  aortique:{name:'Valve Aortique',cat:'valve',col:'#b91c1c',tag:'Valve sigmoïde · 3 cusps · Systole',
+    desc:'Entre <strong>VG et aorte</strong>. <strong>3 cusps</strong>. Ouvre en systole. Sténose aortique = valvulopathie la plus fréquente chez le sujet âgé.',
+    piege:'Valves SIGMOÏDES (aortique + pulmonaire) s\'ouvrent en SYSTOLE. Valves AV (mitrale + tricuspide) s\'ouvrent en DIASTOLE.'},
+  valvpulm:{name:'Valve Pulmonaire',cat:'valve',col:'#1d4ed8',tag:'Valve sigmoïde · 3 cusps · Systole',
+    desc:'Entre <strong>VD et artère pulmonaire</strong>. <strong>3 cusps</strong>. Ouvre en systole. Rarement atteinte chez l\'adulte.',
+    piege:'Sténose pulmonaire congénitale dans la tétralogie de Fallot. Le souffle se majore à l\'inspiration.'},
+  aorte:{name:'Aorte',cat:'vaisseau',col:'#b91c1c',tag:'Artère · Sang oxygéné',
+    desc:'Naît du VG. <strong>Ascendante → crosse</strong> (troncs supra-aortiques) <strong>→ thoracique → abdominale</strong>. Pression systolique : 120 mmHg.',
+    piege:'Dissection aortique type A (aorte ascendante) = urgence chirurgicale. Douleur déchirante irradiant dans le dos.'},
+  artpulm:{name:'Artère Pulmonaire',cat:'vaisseau',col:'#1d4ed8',tag:'Artère · Sang DÉSOXYGÉNÉ',
+    desc:'Seule artère transportant du sang <strong>désoxygéné</strong>. Naît du VD, bifurque vers D et G. Pression normale basse : <strong>25/10 mmHg</strong>.',
+    piege:'EXCEPTION MAJEURE : artère pulmonaire = désoxygéné. Veines pulmonaires = oxygéné. L\'inverse du reste du corps.'},
+  vcs:{name:'Veine Cave Supérieure (VCS)',cat:'vaisseau',col:'#3b82f6',tag:'Veine · Sang désoxygéné',
+    desc:'Ramène le sang désoxygéné de la <strong>moitié supérieure</strong> (tête, cou, membres supérieurs) vers l\'OD.',
+    piege:'Syndrome cave supérieur (compression par tumeur) → œdème en pèlerine + circulation collatérale thoracique.'},
+  vci:{name:'Veine Cave Inférieure (VCI)',cat:'vaisseau',col:'#6366f1',tag:'Veine · Sang désoxygéné',
+    desc:'Ramène le sang désoxygéné de la <strong>moitié inférieure</strong> (membres inf., abdomen, pelvis) vers l\'OD.',
+    piege:'VCI dilatée non collabante à l\'écho = signe de surcharge du cœur droit (HTAP, tamponnade, IC droite).'},
+  vpg:{name:'Veines Pulmonaires Gauches',cat:'vaisseau',col:'#c2410c',tag:'Veines · Sang OXYGÉNÉ → OG',
+    desc:'2 veines pulmonaires gauches transportant le sang <strong>oxygéné</strong> des poumons gauches vers l\'OG.',
+    piege:'Seules veines du corps transportant du sang oxygéné — piège classique. Total : 4 veines pulmonaires → OG.'},
+  vpd:{name:'Veines Pulmonaires Droites',cat:'vaisseau',col:'#c2410c',tag:'Veines · Sang OXYGÉNÉ → OG',
+    desc:'2 veines pulmonaires droites transportant le sang <strong>oxygéné</strong> des poumons droits vers l\'OG.',
+    piege:'Rétrécissement mitral sévère → OG ne se vide pas → pression OG ↑ → congestion veines pulmonaires → OAP.'},
+  noeudsa:{name:'Nœud Sinusal (SA)',cat:'valve',col:'#a855f7',tag:'Conduction · Pace-maker naturel ~70bpm',
+    desc:'<strong>Pace-maker naturel</strong> du cœur. Situé dans l\'OD près de la VCS. Génère ~70 bpm et l\'onde P à l\'ECG.',
+    piege:'Hiérarchie de sécurité : SA (70bpm) > AV (40-50) > Purkinje (20-30). Chaque niveau prend le relais si le précédent défaille.'},
+  noeudav:{name:'Nœud Auriculo-Ventriculaire (AV)',cat:'valve',col:'#7c3aed',tag:'Conduction · Délai 120-200 ms',
+    desc:'Seul point de passage électrique entre oreillettes et ventricules. Impose un <strong>délai de 120-200 ms</strong> pour le remplissage ventriculaire.',
+    piege:'BAV 3 (bloc complet) = nœud AV bloqué → FC 30-40 bpm → syncopes d\'Adams-Stokes → pacemaker en urgence.'},
+  iva:{name:'IVA — Interventriculaire Antérieure',cat:'coronaire',col:'#16a34a',tag:'Coronaire · Branche gauche',
+    desc:'Branche de la coronaire gauche. Irrigue la <strong>paroi antérieure du VG</strong> et le <strong>septum interventriculaire</strong>.',
+    piege:'"Widow maker" : occlusion de l\'IVA = STEMI antérieur. ECG : sus-ST V1-V4. Coronarographie urgente < 90 min.'},
+  circonflexe:{name:'Artère Circonflexe',cat:'coronaire',col:'#15803d',tag:'Coronaire · Branche gauche',
+    desc:'2e branche de la coronaire gauche. Irrigue la <strong>paroi latérale du VG</strong>.',
+    piege:'Occlusion = STEMI latéral (sus-ST D1, aVL, V5-V6). Représentée en pointillés car peu visible en vue antérieure.'},
+  corondroite:{name:'Artère Coronaire Droite',cat:'coronaire',col:'#0284c7',tag:'Coronaire · Branche droite',
+    desc:'Irrigue la <strong>paroi inférieure du VG</strong>, le VD, et dans 60% des cas le nœud SA et le nœud AV.',
+    piege:'Occlusion = STEMI inférieur (sus-ST II, III, aVF) + risque BAV si nœud AV irrigué. Possible extension au VD.'},
+};
+
+var QZ=[
+  {q:"Quelle valve sépare l'Oreillette Gauche du Ventricule Gauche ?",opts:["Valve Tricuspide","Valve Mitrale (bicuspide, 2 feuillets)","Valve Aortique","Valve Pulmonaire"],a:1,exp:"Mitrale = OG→VG (2 feuillets). Tricuspide = OD→VD (3 feuillets). Aortique = VG→Aorte. Pulmonaire = VD→Art.pulm.",hi:"mitrale"},
+  {q:"L'artère pulmonaire transporte :",opts:["Du sang oxygéné comme les autres artères","Du sang désoxygéné du VD vers les poumons — seule exception dans le corps","Du sang des poumons vers le cœur","Du sang oxygéné vers les poumons"],a:1,exp:"EXCEPTION MAJEURE : artère pulmonaire = désoxygéné. Veines pulmonaires = oxygéné. L'inverse de partout ailleurs.",hi:"artpulm"},
+  {q:"Les 4 veines pulmonaires se jettent dans :",opts:["L'Oreillette Droite","Le Ventricule Gauche","L'Oreillette Gauche","La Veine Cave Inférieure"],a:2,exp:"4 veines pulmonaires → OG. Elles transportent du sang OXYGÉNÉ — seules veines à faire ça dans l'organisme.",hi:"og"},
+  {q:"Le nœud sinusal génère une fréquence de :",opts:["30-40 bpm (Purkinje)","40-50 bpm (nœud AV)","~70 bpm (pace-maker naturel)","100-120 bpm"],a:2,exp:"Nœud SA ~70 bpm. Hiérarchie : SA > AV > Purkinje. Chaque niveau prend le relais si le précédent défaille.",hi:"noeudsa"},
+  {q:"Valves sigmoïdes vs valves AV — lesquelles s'ouvrent en systole ?",opts:["Les valves AV (mitrale + tricuspide)","Les valves sigmoïdes (aortique + pulmonaire)","Les deux en même temps","Aucune, elles restent fixes"],a:1,exp:"Sigmoïdes (aortique + pulmonaire) s'ouvrent en SYSTOLE (éjection). AV (mitrale + tricuspide) en DIASTOLE (remplissage). Fondamental.",hi:"aortique"},
+  {q:"L'IVA irrigue :",opts:["La paroi inférieure du VG","La paroi antérieure du VG + le septum interventriculaire","La paroi latérale du VG","Le VD seul"],a:1,exp:"IVA = paroi ANTÉRIEURE du VG + SEPTUM. 'Widow maker' = son occlusion. STEMI antérieur. Urgence < 90 min.",hi:"iva"},
+  {q:"La paroi du VG est plus épaisse que celle du VD car :",opts:["Le VG est plus gros","Il doit vaincre les résistances systémiques (≈5× les résistances pulmonaires)","La valve mitrale est plus grande","Il reçoit plus de sang"],a:1,exp:"VG → corps entier (hautes pressions) → paroi épaisse. VD → poumons (basses pressions) → paroi mince.",hi:"vg"},
+  {q:"Le délai au nœud AV (120-200 ms) correspond à :",opts:["L'onde P à l'ECG","L'espace PR à l'ECG — temps de conduction OA→V","Le complexe QRS","L'onde T"],a:1,exp:"Délai AV = espace PR à l'ECG. Permet la systole auriculaire et le remplissage ventriculaire complet avant la systole.",hi:"noeudav"},
+];
+
+var mode='explore', qs=null;
+var structs=document.querySelectorAll('.s');
+
+structs.forEach(function(el){
+  el.style.cursor='pointer';
+  el.addEventListener('click',function(e){
+    e.stopPropagation();
+    var id=el.getAttribute('data-id');
+    if(mode==='explore')showInfo(id);
+    if(mode==='legende')legHL(id);
+    hl(id);
+  });
+  el.addEventListener('mouseenter',function(){el.style.filter='brightness(1.1)';});
+  el.addEventListener('mouseleave',function(){el.style.filter='';});
+});
+document.addEventListener('click',function(){
+  if(mode!=='explore')return;
+  resetHL();
+  document.getElementById('infoEmpty').style.display='block';
+  document.getElementById('infoContent').style.display='none';
+});
+function hl(id){structs.forEach(function(s){s.style.opacity=s.getAttribute('data-id')===id?'1':'0.22';s.style.filter=s.getAttribute('data-id')===id?'url(#hl)':'';});}
+function resetHL(){structs.forEach(function(s){s.style.opacity='';s.style.filter='';});}
+function showInfo(id){
+  var d=D[id];if(!d)return;
+  document.getElementById('infoEmpty').style.display='none';
+  document.getElementById('infoContent').style.display='block';
+  document.getElementById('iName').textContent=d.name;
+  var t=document.getElementById('iTag');
+  t.textContent=d.tag;t.style.cssText='background:'+d.col+'15;color:'+d.col+';border:1px solid '+d.col+'35;';
+  document.getElementById('iDesc').innerHTML=d.desc;
+  document.getElementById('iPiege').textContent='⚡ Piège PASS — '+d.piege;
+}
+function setMode(m){
+  mode=m;
+  ['Explore','Quiz','Legende'].forEach(function(x){document.getElementById('btn'+x).classList.toggle('active',x.toLowerCase()===m);});
+  document.getElementById('pExplore').style.display=m==='explore'?'block':'none';
+  document.getElementById('pQuiz').style.display=m==='quiz'?'block':'none';
+  document.getElementById('pLegende').style.display=m==='legende'?'block':'none';
+  resetHL();
+  if(m==='quiz')startQuiz();
+  if(m==='legende')buildLeg();
+  if(m==='explore'){document.getElementById('infoEmpty').style.display='block';document.getElementById('infoContent').style.display='none';}
+}
+function startQuiz(){
+  document.getElementById('qResult').style.display='none';
+  qs={idx:0,score:0,q:QZ.slice().sort(function(){return Math.random()-.5;})};renderQ();
+}
+function renderQ(){
+  if(qs.idx>=qs.q.length){endQuiz();return;}
+  var q=qs.q[qs.idx];
+  document.getElementById('qProg').textContent='Q'+(qs.idx+1)+'/'+qs.q.length+' · Score : '+qs.score;
+  document.getElementById('qQ').textContent=q.q;
+  document.getElementById('qFb').className='quiz-fb';document.getElementById('qFb').textContent='';
+  document.getElementById('qNext').className='quiz-next';
+  if(q.hi)hl(q.hi);
+  document.getElementById('qOpts').innerHTML=q.opts.map(function(o,i){
+    return '<button class="qopt" onclick="ans('+i+')">'+o+'</button>';}).join('');
+}
+function ans(i){
+  var q=qs.q[qs.idx];
+  document.querySelectorAll('.qopt').forEach(function(o){o.disabled=true;});
+  var ok=i===q.a;if(ok)qs.score++;
+  document.querySelectorAll('.qopt')[i].classList.add(ok?'ok':'ko');
+  if(!ok)document.querySelectorAll('.qopt')[q.a].classList.add('ok');
+  var fb=document.getElementById('qFb');
+  fb.textContent=(ok?'✓ Correct ! ':'✗ Incorrect. ')+q.exp;
+  fb.className='quiz-fb show '+(ok?'ok':'ko');
+  document.getElementById('qNext').className='quiz-next show';
+  document.getElementById('qProg').textContent='Q'+(qs.idx+1)+'/'+qs.q.length+' · Score : '+qs.score;
+}
+function nextQ(){qs.idx++;renderQ();}
+function endQuiz(){
+  resetHL();
+  var pct=Math.round(qs.score/qs.q.length*100);
+  document.getElementById('qOpts').innerHTML='';
+  document.getElementById('qFb').className='quiz-fb';document.getElementById('qNext').className='quiz-next';
+  document.getElementById('qResult').style.display='block';
+  document.getElementById('qEmoji').textContent=pct>=80?'🏆':pct>=60?'💪':'📚';
+  document.getElementById('qScore').textContent=qs.score+'/'+qs.q.length+' ('+pct+'%)';
+  document.getElementById('qProg').textContent='';document.getElementById('qQ').textContent='';
+}
+function buildLeg(){
+  var map={cavite:'liCavites',vaisseau:'liVaisseaux',valve:'liValves',coronaire:'liCoronaires'};
+  Object.entries(map).forEach(function(e){
+    var cat=e[0],elId=e[1];
+    document.getElementById(elId).innerHTML=Object.entries(D).filter(function(d){return d[1].cat===cat;}).map(function(d){
+      var id=d[0],info=d[1];
+      return '<div class="leg-item" id="li-'+id+'" onclick="legClic(\''+id+'\')">'
+        +'<div class="leg-dot" style="background:'+info.col+'"></div>'
+        +'<div class="leg-name">'+info.name+'</div></div>';
+    }).join('');
+  });
+}
+function legClic(id){
+  document.querySelectorAll('.leg-item').forEach(function(l){l.classList.remove('active');});
+  var li=document.getElementById('li-'+id);if(li)li.classList.add('active');
+  hl(id);
+}
+function legHL(id){legClic(id);}
+</script>
+</body>
+</html>

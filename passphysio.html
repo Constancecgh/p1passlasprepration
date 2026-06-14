@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Physiologie PASS — Constance</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+[data-theme="light"]{--bg:#f0fdf4;--surface:#fff;--border:#bbf7d0;--accent:#059669;--accent2:#0284c7;--text:#1e1b18;--muted:#6b7280;--progress-track:rgba(0,0,0,0.07);--toggle-bg:#bbf7d0;--card-hover:#ecfdf5;}
+[data-theme="dark"]{--bg:#020d07;--surface:#061410;--border:#064e3b;--accent:#34d399;--accent2:#38bdf8;--text:#e2e8f0;--muted:#64748b;--progress-track:rgba(255,255,255,0.06);--toggle-bg:#064e3b;--card-hover:#0a1f18;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;min-height:100vh;transition:background .3s,color .3s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:rgba(240,253,244,0.90);}
+[data-theme="dark"] nav{background:rgba(2,13,7,0.90);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--accent);text-decoration:none;}
+.nav-back{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;}
+.nav-back:hover{color:var(--text);}
+.theme-toggle{background:var(--toggle-bg);border:1px solid var(--border);border-radius:100px;padding:5px 12px;cursor:pointer;font-size:14px;color:var(--muted);user-select:none;}
+header{padding:100px 52px 48px;border-bottom:1px solid var(--border);max-width:1000px;margin:0 auto;}
+.badge{display:inline-block;background:rgba(5,150,105,.07);border:1px solid rgba(5,150,105,.2);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:20px;}
+h1{font-family:'Libre Baskerville',serif;font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;}
+h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.subtitle{margin-top:12px;color:var(--muted);font-size:15px;max-width:520px;line-height:1.75;}
+.global-prog{margin-top:24px;max-width:420px;}
+.global-prog-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px;}
+.global-prog-track{height:5px;background:var(--progress-track);border-radius:100px;overflow:hidden;}
+.global-prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:100px;transition:width .5s;}
+main{padding:48px 52px;max-width:1000px;margin:0 auto;}
+.section-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;font-weight:700;}
+.chapters-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+.ch-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;text-decoration:none;display:block;transition:all .22s;position:relative;}
+.ch-card:hover{border-color:rgba(5,150,105,.4);background:var(--card-hover);transform:translateY(-2px);}
+.ch-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.ch-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.ch-num{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.12em;text-transform:uppercase;}
+.ch-title{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.ch-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px;}
+.ch-prog{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
+.ch-prog-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.ch-prog-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);width:50px;flex-shrink:0;}
+.ch-prog-track{flex:1;height:3px;background:var(--progress-track);border-radius:100px;overflow:hidden;}
+.ch-prog-fill-read{height:100%;background:var(--accent2);border-radius:100px;transition:width .5s;width:0%;}
+.ch-prog-fill-quiz{height:100%;background:var(--accent);border-radius:100px;transition:width .5s;width:0%;}
+.ch-prog-pct{font-size:10px;font-weight:700;color:var(--muted);width:28px;text-align:right;flex-shrink:0;}
+.ch-arrow{position:absolute;bottom:20px;right:20px;font-size:14px;color:var(--muted);transition:all .2s;}
+.ch-card:hover .ch-arrow{transform:translateX(3px);color:var(--accent);}
+footer{border-top:1px solid var(--border);padding:24px 52px;max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:48px;}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--accent);}
+.footer-copy{font-size:11px;color:var(--muted);}
+@media(max-width:600px){header{padding:80px 20px 32px;}main{padding:32px 20px;}footer{padding:20px;flex-direction:column;text-align:center;}nav{padding:.9rem 1.2rem;}.chapters-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Constance</a>
+  <a class="nav-back" href="index.html">← Programme PASS</a>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+</nav>
+<header>
+  <div class="badge">Programme Stratégique PASS</div>
+  <h1>Physiologie<br><span>5 chapitres.</span></h1>
+  <p class="subtitle">Cardiaque, respiratoire, rénale, digestive et endocrinienne — les fonctions du corps humain expliquées et reliées à la pathologie.</p>
+  <div class="global-prog">
+    <div class="global-prog-label"><span>Maîtrise globale</span><span id="globalPct">–</span></div>
+    <div class="global-prog-track"><div class="global-prog-fill" id="globalBar" style="width:0%"></div></div>
+  </div>
+</header>
+<main>
+  <p class="section-label">Chapitres — cliquer pour ouvrir</p>
+  <div class="chapters-grid">
+    <a class="ch-card" href="passphysiocardio.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(239,68,68,.12)">❤️</div><span class="ch-num">Chapitre 01</span></div>
+      <div class="ch-title">Physiologie Cardiaque</div>
+      <div class="ch-desc">Cycle cardiaque, PA, ECG, Frank-Starling, microcirculation.</div>
+      <div class="ch-prog">
+        <div class="ch-prog-row"><span class="ch-prog-label">Lues</span><div class="ch-prog-track"><div class="ch-prog-fill-read" id="read-cardio"></div></div><span class="ch-prog-pct" id="pct-read-cardio">0%</span></div>
+        <div class="ch-prog-row"><span class="ch-prog-label">Quiz</span><div class="ch-prog-track"><div class="ch-prog-fill-quiz" id="quiz-cardio"></div></div><span class="ch-prog-pct" id="pct-quiz-cardio">0%</span></div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+    <a class="ch-card" href="passphysiorespir.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(14,165,233,.12)">🫁</div><span class="ch-num">Chapitre 02</span></div>
+      <div class="ch-title">Physiologie Respiratoire</div>
+      <div class="ch-desc">Volumes, échanges gazeux, acido-basique, compliance, V/Q.</div>
+      <div class="ch-prog">
+        <div class="ch-prog-row"><span class="ch-prog-label">Lues</span><div class="ch-prog-track"><div class="ch-prog-fill-read" id="read-respir"></div></div><span class="ch-prog-pct" id="pct-read-respir">0%</span></div>
+        <div class="ch-prog-row"><span class="ch-prog-label">Quiz</span><div class="ch-prog-track"><div class="ch-prog-fill-quiz" id="quiz-respir"></div></div><span class="ch-prog-pct" id="pct-quiz-respir">0%</span></div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+    <a class="ch-card" href="passphysiorein.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(168,85,247,.12)">🫘</div><span class="ch-num">Chapitre 03</span></div>
+      <div class="ch-title">Physiologie Rénale</div>
+      <div class="ch-desc">DFG, tubule, Na⁺/K⁺, osmolarité, miction.</div>
+      <div class="ch-prog">
+        <div class="ch-prog-row"><span class="ch-prog-label">Lues</span><div class="ch-prog-track"><div class="ch-prog-fill-read" id="read-rein"></div></div><span class="ch-prog-pct" id="pct-read-rein">0%</span></div>
+        <div class="ch-prog-row"><span class="ch-prog-label">Quiz</span><div class="ch-prog-track"><div class="ch-prog-fill-quiz" id="quiz-rein"></div></div><span class="ch-prog-pct" id="pct-quiz-rein">0%</span></div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+    <a class="ch-card" href="passphysiodigest.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(245,158,11,.12)">🫶</div><span class="ch-num">Chapitre 04</span></div>
+      <div class="ch-title">Physiologie Digestive</div>
+      <div class="ch-desc">Digestion, absorption, hormones GI, foie, microbiote.</div>
+      <div class="ch-prog">
+        <div class="ch-prog-row"><span class="ch-prog-label">Lues</span><div class="ch-prog-track"><div class="ch-prog-fill-read" id="read-digest"></div></div><span class="ch-prog-pct" id="pct-read-digest">0%</span></div>
+        <div class="ch-prog-row"><span class="ch-prog-label">Quiz</span><div class="ch-prog-track"><div class="ch-prog-fill-quiz" id="quiz-digest"></div></div><span class="ch-prog-pct" id="pct-quiz-digest">0%</span></div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+    <a class="ch-card" href="passphysioendo.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(99,102,241,.12)">🔬</div><span class="ch-num">Chapitre 05</span></div>
+      <div class="ch-title">Physiologie Endocrinienne</div>
+      <div class="ch-desc">Axe hypothalamo-hypophysaire, thyroïde, diabète, cortisol, calcémie.</div>
+      <div class="ch-prog">
+        <div class="ch-prog-row"><span class="ch-prog-label">Lues</span><div class="ch-prog-track"><div class="ch-prog-fill-read" id="read-endo"></div></div><span class="ch-prog-pct" id="pct-read-endo">0%</span></div>
+        <div class="ch-prog-row"><span class="ch-prog-label">Quiz</span><div class="ch-prog-track"><div class="ch-prog-fill-quiz" id="quiz-endo"></div></div><span class="ch-prog-pct" id="pct-quiz-endo">0%</span></div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+  </div>
+</main>
+<footer>
+  <div class="footer-logo">Constance</div>
+  <div class="footer-copy">© Constance | @constance.cgh · Programme PASS gratuit</div>
+</footer>
+<script>
+function toggleTheme(){var h=document.documentElement,b=document.getElementById('themeBtn');if(h.dataset.theme==='light'){h.dataset.theme='dark';b.textContent='☀️';}else{h.dataset.theme='light';b.textContent='🌙';}}
+var CHAPTERS=[
+  {id:'cardio',rk:'physio_cardio_read',mk:'physio_cardio_mastery',total:5},
+  {id:'respir',rk:'physio_respir_read',mk:'physio_respir_mastery',total:5},
+  {id:'rein',  rk:'physio_rein_read',  mk:'physio_rein_mastery',  total:5},
+  {id:'digest',rk:'physio_digest_read',mk:'physio_digest_mastery',total:5},
+  {id:'endo',  rk:'physio_endo_read',  mk:'physio_endo_mastery',  total:5},
+];
+function loadProgress(){
+  var totalOk=0,totalPossible=0;
+  CHAPTERS.forEach(function(ch){
+    var read=JSON.parse(localStorage.getItem(ch.rk)||'[]');
+    var rPct=Math.round(read.length/ch.total*100);
+    var rb=document.getElementById('read-'+ch.id),rp=document.getElementById('pct-read-'+ch.id);
+    if(rb)rb.style.width=rPct+'%'; if(rp)rp.textContent=rPct+'%';
+    var m=JSON.parse(localStorage.getItem(ch.mk)||'{}');
+    var vals=Object.values(m);
+    var ok=vals.filter(function(v){return v==='ok';}).length;
+    var mPct=vals.length>0?Math.round(ok/vals.length*100):0;
+    var qb=document.getElementById('quiz-'+ch.id),qp=document.getElementById('pct-quiz-'+ch.id);
+    if(qb)qb.style.width=mPct+'%'; if(qp)qp.textContent=mPct+'%';
+    totalOk+=ok; totalPossible+=ch.total;
+  });
+  var gPct=totalPossible>0?Math.round(totalOk/totalPossible*100):0;
+  var gb=document.getElementById('globalBar'),gp=document.getElementById('globalPct');
+  if(gb)gb.style.width=gPct+'%'; if(gp)gp.textContent=gPct+'% maîtrisé';
+}
+window.addEventListener('DOMContentLoaded',loadProgress);
+</script>
+</body>
+</html>

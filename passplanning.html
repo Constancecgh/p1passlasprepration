@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Mon Planning PASS — Constance</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+[data-theme="light"]{--bg:#f8f7f4;--surface:#fff;--border:#e8e0d4;--accent:#059669;--accent2:#0284c7;--accent3:#d97706;--text:#1e1b18;--muted:#6b7280;--progress-track:rgba(0,0,0,0.07);--toggle-bg:#e8e0d4;--card:#fff;--tag-bg:rgba(5,150,105,0.07);}
+[data-theme="dark"]{--bg:#0a0a0f;--surface:#13131a;--border:#1e1e2e;--accent:#4ade80;--accent2:#38bdf8;--accent3:#fbbf24;--text:#e2e8f0;--muted:#64748b;--progress-track:rgba(255,255,255,0.06);--toggle-bg:#1e1e2e;--card:#13131a;--tag-bg:rgba(74,222,128,0.07);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;min-height:100vh;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:rgba(248,247,244,.92);}
+[data-theme="dark"] nav{background:rgba(10,10,15,.92);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--accent);text-decoration:none;}
+.nav-back{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;}
+.nav-back:hover{color:var(--text);}
+.theme-toggle{background:var(--toggle-bg);border:1px solid var(--border);border-radius:100px;padding:5px 12px;cursor:pointer;font-size:13px;color:var(--muted);}
+
+header{padding:90px 48px 40px;max-width:860px;margin:0 auto;border-bottom:1px solid var(--border);}
+h1{font-family:'Libre Baskerville',serif;font-size:clamp(28px,4vw,44px);font-weight:700;line-height:1.1;margin-bottom:10px;}
+.header-sub{color:var(--muted);font-size:15px;line-height:1.7;max-width:520px;}
+
+/* FORMULAIRE */
+.form-wrap{max-width:860px;margin:0 auto;padding:40px 48px;}
+.form-section{margin-bottom:36px;}
+.form-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;display:block;}
+.form-title{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;margin-bottom:6px;}
+.form-hint{font-size:13px;color:var(--muted);margin-bottom:16px;}
+
+/* DURÉE */
+.duree-grid{display:flex;gap:10px;flex-wrap:wrap;}
+.duree-btn{padding:10px 20px;border:1.5px solid var(--border);border-radius:100px;cursor:pointer;font-size:13px;font-weight:600;background:var(--surface);color:var(--muted);transition:all .18s;font-family:'Source Serif 4',serif;}
+.duree-btn:hover{border-color:var(--accent);color:var(--accent);}
+.duree-btn.selected{background:var(--accent);border-color:var(--accent);color:#fff;}
+
+/* HEURES */
+.heures-wrap{display:flex;align-items:center;gap:16px;}
+.heures-input{width:80px;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:16px;font-weight:700;text-align:center;background:var(--surface);color:var(--text);font-family:'Source Serif 4',serif;}
+.heures-input:focus{outline:none;border-color:var(--accent);}
+.heures-label{font-size:13px;color:var(--muted);}
+
+/* MATIÈRES */
+.matieres-checkboxes{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;}
+.mat-check{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:all .18s;background:var(--surface);}
+.mat-check:hover{border-color:var(--accent);}
+.mat-check.selected{border-color:var(--accent);background:var(--tag-bg);}
+.mat-check input{display:none;}
+.mat-check-box{width:18px;height:18px;border-radius:5px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .18s;}
+.mat-check.selected .mat-check-box{background:var(--accent);border-color:var(--accent);color:#fff;}
+.mat-check-icon{font-size:16px;}
+.mat-check-name{font-size:13px;font-weight:500;color:var(--text);}
+
+.select-all-wrap{margin-bottom:12px;display:flex;gap:10px;}
+.select-btn{font-size:12px;font-weight:600;color:var(--accent);background:none;border:1px solid var(--border);border-radius:100px;padding:4px 12px;cursor:pointer;font-family:'Source Serif 4',serif;transition:all .18s;}
+.select-btn:hover{border-color:var(--accent);}
+
+/* GENERATE BTN */
+.generate-wrap{margin-top:40px;text-align:center;}
+.generate-btn{padding:16px 48px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:'Source Serif 4',serif;transition:all .2s;letter-spacing:.04em;}
+.generate-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(5,150,105,.25);}
+
+/* PLANNING GÉNÉRÉ */
+#planning-output{max-width:860px;margin:0 auto;padding:0 48px 80px;display:none;}
+.planning-header{padding:32px 0 24px;border-top:1px solid var(--border);}
+.planning-title{font-family:'Libre Baskerville',serif;font-size:22px;font-weight:700;margin-bottom:6px;}
+.planning-sub{font-size:13px;color:var(--muted);}
+.planning-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+.action-btn{padding:9px 18px;border:1px solid var(--border);border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;background:var(--surface);color:var(--muted);font-family:'Source Serif 4',serif;transition:all .2s;}
+.action-btn:hover{border-color:var(--accent);color:var(--accent);}
+.action-btn.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
+
+/* SEMAINES */
+.semaine-block{margin-bottom:28px;}
+.semaine-header{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+.semaine-num{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);background:var(--tag-bg);padding:4px 12px;border-radius:100px;}
+.semaine-titre{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;}
+
+.jours-grid{display:flex;flex-direction:column;gap:8px;}
+.jour-row{display:flex;gap:12px;align-items:flex-start;padding:14px 18px;background:var(--card);border:1px solid var(--border);border-radius:12px;transition:all .2s;}
+.jour-row:hover{border-color:rgba(5,150,105,.3);}
+.jour-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);min-width:70px;flex-shrink:0;padding-top:2px;}
+.jour-tasks{display:flex;flex-direction:column;gap:6px;flex:1;}
+.jour-task{display:flex;align-items:center;gap:8px;}
+.jour-task-icon{font-size:14px;flex-shrink:0;}
+.jour-task-text{font-size:13px;color:var(--text);flex:1;}
+.jour-task-link{font-size:11px;font-weight:700;color:var(--accent);text-decoration:none;letter-spacing:.06em;flex-shrink:0;}
+.jour-task-link:hover{text-decoration:underline;}
+.jour-repos{font-size:13px;color:var(--muted);font-style:italic;}
+.jour-task-dur{font-size:11px;color:var(--muted);background:var(--tag-bg);padding:2px 8px;border-radius:100px;flex-shrink:0;}
+
+/* PROGRESS EXPORT */
+.export-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;margin-top:28px;text-align:center;}
+.export-icon{font-size:2rem;margin-bottom:10px;}
+.export-title{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;margin-bottom:6px;}
+.export-sub{font-size:13px;color:var(--muted);line-height:1.6;}
+
+@media(max-width:600px){header,.form-wrap,#planning-output{padding-left:16px;padding-right:16px;}header{padding-top:72px;}nav{padding:.85rem 1.2rem;}.matieres-checkboxes{grid-template-columns:1fr 1fr;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Constance</a>
+  <a class="nav-back" href="index.html">← Dashboard</a>
+  <button class="theme-toggle" onclick="var h=document.documentElement;h.dataset.theme=h.dataset.theme==='dark'?'light':'dark'">🌙</button>
+</nav>
+
+<header>
+  <h1>Mon planning<br>pour s'avancer.</h1>
+  <p class="header-sub">Dis-moi combien de temps tu as, quelles matières tu veux couvrir, et combien d'heures par jour tu peux travailler. Je te génère un planning jour par jour, stratégique et réaliste.</p>
+</header>
+
+<div class="form-wrap">
+
+  <!-- ÉTAPE 1 : DURÉE -->
+  <div class="form-section">
+    <span class="form-label">Étape 1</span>
+    <div class="form-title">Combien de temps as-tu ?</div>
+    <div class="form-hint">Choisis la durée de ta préparation.</div>
+    <div class="duree-grid">
+      <button class="duree-btn" onclick="selectDuree(this,7)">1 semaine</button>
+      <button class="duree-btn" onclick="selectDuree(this,14)">2 semaines</button>
+      <button class="duree-btn selected" onclick="selectDuree(this,30)">1 mois</button>
+      <button class="duree-btn" onclick="selectDuree(this,60)">2 mois</button>
+      <button class="duree-btn" onclick="selectDuree(this,90)">3 mois (été complet)</button>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 2 : HEURES -->
+  <div class="form-section">
+    <span class="form-label">Étape 2</span>
+    <div class="form-title">Combien d'heures par jour ?</div>
+    <div class="form-hint">Sois réaliste — mieux vaut 2h régulières que 6h 1 fois par semaine.</div>
+    <div class="heures-wrap">
+      <input type="number" class="heures-input" id="heuresInput" value="2" min="1" max="8">
+      <span class="heures-label">heures de travail par jour (hors repos)</span>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 3 : MATIÈRES -->
+  <div class="form-section">
+    <span class="form-label">Étape 3</span>
+    <div class="form-title">Quelles matières veux-tu couvrir ?</div>
+    <div class="form-hint">Sélectionne les matières que tu veux inclure dans ton planning.</div>
+    <div class="select-all-wrap">
+      <button class="select-btn" onclick="selectAll()">Tout sélectionner</button>
+      <button class="select-btn" onclick="deselectAll()">Tout désélectionner</button>
+    </div>
+    <div class="matieres-checkboxes" id="matieres-list"></div>
+  </div>
+
+  <div class="generate-wrap">
+    <button class="generate-btn" onclick="generatePlanning()">🗓️ Générer mon planning →</button>
+  </div>
+</div>
+
+<!-- PLANNING OUTPUT -->
+<div id="planning-output">
+  <div class="planning-header">
+    <div class="planning-title" id="planning-title">Mon planning PASS</div>
+    <div class="planning-sub" id="planning-sub"></div>
+    <div class="planning-actions">
+      <button class="action-btn primary" onclick="window.print()">🖨️ Imprimer</button>
+      <button class="action-btn" onclick="copyPlanning()">📋 Copier le texte</button>
+      <button class="action-btn" onclick="document.getElementById('planning-output').style.display='none';window.scrollTo(0,400)">↑ Modifier</button>
+    </div>
+  </div>
+  <div id="planning-content"></div>
+  <div class="export-card">
+    <div class="export-icon">📲</div>
+    <div class="export-title">Suis ta progression en temps réel</div>
+    <div class="export-sub">Le planning est là, les fiches sont là. Il ne reste plus qu'à commencer.<br>Abonne-toi sur Instagram et TikTok pour des conseils stratégiques chaque semaine.</div>
+    <div style="display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap;">
+      <a href="https://www.instagram.com/constance.cgh" target="_blank" style="padding:9px 20px;background:var(--accent);color:#fff;border-radius:10px;text-decoration:none;font-size:12px;font-weight:700;">Instagram @constance.cgh</a>
+      <a href="index.html" style="padding:9px 20px;background:var(--surface);border:1px solid var(--border);color:var(--text);border-radius:10px;text-decoration:none;font-size:12px;font-weight:700;">Accéder aux fiches →</a>
+    </div>
+  </div>
+</div>
+
+<script>
+var MATIERES = [
+  {id:'biolcell',  nom:'Biologie Cellulaire', icon:'🔬', chapitres:[
+    {t:'Structure cellulaire',       url:'passbiolcellcellule.html',       dur:1.5},
+    {t:'Organites cellulaires',      url:'passbiolcellorganites.html',     dur:1.5},
+    {t:'Cycle cellulaire et mitose', url:'passbiolcellcycle.html',         dur:1.5},
+    {t:'Signalisation cellulaire',   url:'passbiolcellsignalisation.html', dur:2},
+    {t:'Immunité',                   url:'passbiolcellimmunite.html',      dur:2},
+  ]},
+  {id:'biolmol', nom:'Biologie Moléculaire', icon:'🧬', chapitres:[
+    {t:'Génome et ADN',              url:'passbiolmolgenome.html',         dur:1.5},
+    {t:'Transcription',              url:'passbiolmoltranscription.html',  dur:1.5},
+    {t:'Traduction',                 url:'passbiolmoltraduction.html',     dur:1.5},
+    {t:'Oncogènes et cycle',         url:'passbiolmolcycle.html',          dur:1.5},
+    {t:'Techniques de bio mol',      url:'passbiolmoltechniques.html',     dur:1.5},
+  ]},
+  {id:'biochimie', nom:'Biochimie', icon:'⚗️', chapitres:[
+    {t:'Glucides',                   url:'passbiochimiegluci.html',        dur:1.5},
+    {t:'Lipides',                    url:'passbiochimielipides.html',      dur:1.5},
+    {t:'Acides aminés',              url:'passbiochimieaa.html',           dur:1.5},
+    {t:'Protéines',                  url:'passbiochimieproteines.html',    dur:2},
+    {t:'Enzymes',                    url:'passbiochimieenzymes.html',      dur:1.5},
+    {t:'ADN et réplication',         url:'passbiochimieadn.html',          dur:1.5},
+  ]},
+  {id:'histologie', nom:'Histologie', icon:'🩺', chapitres:[
+    {t:'Tissu épithélial',           url:'passhistologieepithelium.html',  dur:1.5},
+    {t:'Tissu conjonctif',           url:'passhistologieconjonctif.html',  dur:1.5},
+    {t:'Tissu musculaire',           url:'passhistologiemusculaire.html',  dur:1.5},
+    {t:'Tissu nerveux',              url:'passhistologienerveux.html',     dur:1.5},
+    {t:'Sang',                       url:'passhistologiesang.html',        dur:1.5},
+  ]},
+  {id:'physio', nom:'Physiologie', icon:'💓', chapitres:[
+    {t:'Physiologie cardiaque',      url:'passphysiocardio.html',          dur:2},
+    {t:'Physiologie respiratoire',   url:'passphysiorespir.html',          dur:1.5},
+    {t:'Physiologie rénale',         url:'passphysiorein.html',            dur:2},
+    {t:'Physiologie digestive',      url:'passphysiodigest.html',          dur:1.5},
+    {t:'Physiologie endocrine',      url:'passphysioendo.html',            dur:1.5},
+  ]},
+  {id:'pharma', nom:'Pharmacologie', icon:'💊', chapitres:[
+    {t:'Pharmacocinétique',          url:'passpharmapk.html',              dur:1.5},
+    {t:'Pharmacodynamie',            url:'passpharmapd.html',              dur:1.5},
+    {t:'Pharmaco cardio',            url:'passpharmacardio.html',          dur:1.5},
+    {t:'Pharmaco neuro',             url:'passpharmaneuro.html',           dur:1.5},
+    {t:'Antibiotiques',              url:'passpharmaabc.html',             dur:1.5},
+  ]},
+  {id:'biorepr', nom:'Bio. Reproduction', icon:'🤰', chapitres:[
+    {t:'Gamétogenèse',               url:'passbioreprGametogenese.html',   dur:1.5},
+    {t:'Fécondation',                url:'passbioreprFecondation.html',    dur:1.5},
+    {t:'Embryogenèse',               url:'passbioreprEmbryogenese.html',   dur:1.5},
+    {t:'Grossesse et placenta',      url:'passbioreprGrossesse.html',      dur:1.5},
+    {t:'Pathologies',                url:'passbioreprPathologies.html',    dur:1.5},
+  ]},
+  {id:'chimiegen', nom:'Chimie Générale', icon:'⚛️', chapitres:[
+    {t:'Structure atomique',         url:'passchimiegenatome.html',        dur:1.5},
+    {t:'Liaisons chimiques',         url:'passchimiegenliaisons.html',     dur:1.5},
+    {t:'Thermochimie',               url:'passchimiegenthermo.html',       dur:1.5},
+    {t:'Acides-bases',               url:'passchimiegenacidebase.html',    dur:2},
+  ]},
+  {id:'chimieorga', nom:'Chimie Organique', icon:'🧪', chapitres:[
+    {t:'Représentation',             url:'passchimieorgarepr.html',        dur:1.5},
+    {t:'Stéréochimie',               url:'passchimieorgastereo.html',      dur:2},
+    {t:'Réactions organiques',       url:'passchimieorgareactions.html',   dur:2},
+    {t:'Fonctions organiques',       url:'passchimieorgafonctions.html',   dur:1.5},
+  ]},
+  {id:'stats', nom:'Statistiques & Santé Publique', icon:'📊', chapitres:[
+    {t:'Épidémiologie',              url:'passstatsepi.html',              dur:1.5},
+    {t:'Biostatistiques',            url:'passstatsbiostat.html',          dur:1.5},
+    {t:'Prévention',                 url:'passstatsprevention.html',       dur:1.5},
+    {t:'Lecture critique',           url:'passstatslca.html',              dur:1.5},
+    {t:'Grandes problématiques',     url:'passstatssante.html',            dur:1.5},
+  ]},
+  {id:'maths', nom:'Maths essentielles', icon:'📐', chapitres:[
+    {t:'Fonctions et dérivées',      url:'passmathsfonctions.html',        dur:1.5},
+    {t:'Logarithmes et exp',         url:'passmathslogexp.html',           dur:1.5},
+    {t:'Trigonométrie',              url:'passmathstrigon.html',           dur:1.5},
+    {t:'Équations et systèmes',      url:'passmathsequations.html',        dur:1.5},
+    {t:'Suites et probabilités',     url:'passmathssuites.html',           dur:1.5},
+  ]},
+];
+
+var selectedDuree = 30;
+var selectedMatieres = new Set(MATIERES.map(function(m){return m.id;}));
+
+// Construire les checkboxes
+var list = document.getElementById('matieres-list');
+MATIERES.forEach(function(m){
+  var div = document.createElement('div');
+  div.className = 'mat-check selected';
+  div.id = 'check-'+m.id;
+  div.onclick = function(){ toggleMat(m.id); };
+  div.innerHTML = '<div class="mat-check-box">✓</div><span class="mat-check-icon">'+m.icon+'</span><span class="mat-check-name">'+m.nom+'</span>';
+  list.appendChild(div);
+});
+
+function selectDuree(btn, jours){
+  document.querySelectorAll('.duree-btn').forEach(function(b){ b.classList.remove('selected'); });
+  btn.classList.add('selected');
+  selectedDuree = jours;
+}
+
+function toggleMat(id){
+  var el = document.getElementById('check-'+id);
+  if(selectedMatieres.has(id)){
+    selectedMatieres.delete(id);
+    el.classList.remove('selected');
+    el.querySelector('.mat-check-box').textContent = '';
+  } else {
+    selectedMatieres.add(id);
+    el.classList.add('selected');
+    el.querySelector('.mat-check-box').textContent = '✓';
+  }
+}
+
+function selectAll(){
+  MATIERES.forEach(function(m){
+    selectedMatieres.add(m.id);
+    var el = document.getElementById('check-'+m.id);
+    el.classList.add('selected');
+    el.querySelector('.mat-check-box').textContent = '✓';
+  });
+}
+
+function deselectAll(){
+  MATIERES.forEach(function(m){
+    selectedMatieres.delete(m.id);
+    var el = document.getElementById('check-'+m.id);
+    el.classList.remove('selected');
+    el.querySelector('.mat-check-box').textContent = '';
+  });
+}
+
+var JOURS = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+
+function generatePlanning(){
+  var heures = parseFloat(document.getElementById('heuresInput').value) || 2;
+  var matieresSel = MATIERES.filter(function(m){ return selectedMatieres.has(m.id); });
+
+  if(matieresSel.length === 0){
+    alert('Sélectionne au moins une matière !');
+    return;
+  }
+
+  // Collecter tous les chapitres
+  var allChapitres = [];
+  matieresSel.forEach(function(m){
+    m.chapitres.forEach(function(ch){
+      allChapitres.push({
+        mat: m.nom,
+        icon: m.icon,
+        titre: ch.t,
+        url: ch.url,
+        dur: ch.dur
+      });
+    });
+  });
+
+  // Calculer les jours disponibles (6 jours/semaine, 1 jour de repos)
+  var joursTotal = selectedDuree;
+  var joursDispos = Math.floor(joursTotal * 6/7); // 6 jours travail / 7
+
+  // Répartir les chapitres sur les jours
+  // Un jour = heures disponibles
+  var planning = []; // array de jours : {jour, semaine, tasks:[]}
+  var chIdx = 0;
+  var jourCount = 0;
+  var semaine = 1;
+  var jourSemaine = 0; // 0=lundi...
+
+  for(var d = 0; d < joursTotal; d++){
+    var dow = d % 7;
+    var isRepos = (dow === 6); // Dimanche = repos
+
+    if(isRepos){
+      planning.push({
+        label: 'Dimanche',
+        semaine: Math.floor(d/7)+1,
+        repos: true,
+        tasks: []
+      });
+    } else {
+      var tasks = [];
+      var heuresRestantes = heures;
+
+      // Remplir le jour
+      while(heuresRestantes > 0 && chIdx < allChapitres.length){
+        var ch = allChapitres[chIdx];
+        if(ch.dur <= heuresRestantes){
+          tasks.push(ch);
+          heuresRestantes -= ch.dur;
+          chIdx++;
+        } else {
+          // Chapitre trop long pour ce qui reste
+          if(tasks.length === 0){
+            // Prendre quand même (sinon blocage)
+            tasks.push(ch);
+            chIdx++;
+          }
+          break;
+        }
+      }
+
+      // Si plus de chapitres : révision / QCM
+      if(tasks.length === 0 && chIdx >= allChapitres.length){
+        tasks.push({
+          mat: 'Révision',
+          icon: '🎯',
+          titre: 'QCM global — entraînement toutes matières',
+          url: 'passqcmglobal.html',
+          dur: heures,
+          isRevision: true
+        });
+      }
+
+      planning.push({
+        label: JOURS[dow],
+        semaine: Math.floor(d/7)+1,
+        repos: false,
+        tasks: tasks
+      });
+    }
+  }
+
+  // Grouper par semaine
+  var semaines = {};
+  planning.forEach(function(j){
+    if(!semaines[j.semaine]) semaines[j.semaine] = [];
+    semaines[j.semaine].push(j);
+  });
+
+  // Construire le HTML
+  var dureeLabel = {7:'1 semaine',14:'2 semaines',30:'1 mois',60:'2 mois',90:'3 mois'}[selectedDuree] || selectedDuree+' jours';
+  document.getElementById('planning-title').textContent = 'Mon planning PASS — '+dureeLabel;
+  document.getElementById('planning-sub').textContent =
+    matieresSel.length+' matière'+(matieresSel.length>1?'s':'')+' · '+allChapitres.length+' chapitres · '+heures+'h/jour · '+(chIdx >= allChapitres.length ? 'Tout le programme couvert ✅' : chIdx+' chapitres sur '+allChapitres.length);
+
+  var html = '';
+  var nbSemaines = Object.keys(semaines).length;
+
+  Object.keys(semaines).forEach(function(s){
+    var jours = semaines[s];
+    var matsWeek = [];
+    jours.forEach(function(j){ j.tasks.forEach(function(t){ if(matsWeek.indexOf(t.mat)<0) matsWeek.push(t.mat); }); });
+
+    html += '<div class="semaine-block">';
+    html += '<div class="semaine-header"><span class="semaine-num">Semaine '+s+' / '+nbSemaines+'</span><span class="semaine-titre">'+matsWeek.slice(0,3).join(' · ')+(matsWeek.length>3?' · ...' : '')+'</span></div>';
+    html += '<div class="jours-grid">';
+
+    jours.forEach(function(j){
+      html += '<div class="jour-row">';
+      html += '<div class="jour-label">'+j.label+'</div>';
+      html += '<div class="jour-tasks">';
+      if(j.repos){
+        html += '<div class="jour-repos">🛋️ Repos — récupération et assimilation</div>';
+      } else if(j.tasks.length === 0){
+        html += '<div class="jour-repos">✅ Programme terminé — QCM global de révision</div>';
+      } else {
+        j.tasks.forEach(function(t){
+          html += '<div class="jour-task">';
+          html += '<span class="jour-task-icon">'+t.icon+'</span>';
+          html += '<span class="jour-task-text">'+t.mat+' — <strong>'+t.titre+'</strong></span>';
+          html += '<span class="jour-task-dur">'+t.dur+'h</span>';
+          html += '<a class="jour-task-link" href="'+t.url+'">Ouvrir →</a>';
+          html += '</div>';
+        });
+      }
+      html += '</div></div>';
+    });
+
+    html += '</div></div>';
+  });
+
+  document.getElementById('planning-content').innerHTML = html;
+  var out = document.getElementById('planning-output');
+  out.style.display = 'block';
+  out.scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function copyPlanning(){
+  var text = document.getElementById('planning-title').textContent + '\n\n';
+  document.querySelectorAll('.semaine-block').forEach(function(s){
+    text += s.querySelector('.semaine-titre').textContent + '\n';
+    s.querySelectorAll('.jour-row').forEach(function(j){
+      var label = j.querySelector('.jour-label').textContent;
+      var tasks = j.querySelectorAll('.jour-task-text');
+      var repos = j.querySelector('.jour-repos');
+      text += '  '+label+' : ';
+      if(repos) text += repos.textContent;
+      else tasks.forEach(function(t,i){ text += (i>0?', ':'')+t.textContent; });
+      text += '\n';
+    });
+    text += '\n';
+  });
+  navigator.clipboard.writeText(text).then(function(){
+    alert('Planning copié dans le presse-papier !');
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Révisions Chimie — PASS/LAS — Constance</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+[data-theme="light"]{--bg:#f0fdf9;--surface:#fff;--border:#99f6e4;--accent:#0d9488;--accent2:#0891b2;--text:#1e1b18;--muted:#6b7280;--tag-bg:rgba(13,148,136,0.07);--progress-track:rgba(0,0,0,0.07);--toggle-bg:#99f6e4;--formula-bg:rgba(13,148,136,0.05);--formula-border:rgba(13,148,136,0.18);--med-bg:rgba(8,145,178,0.05);--med-border:rgba(8,145,178,0.18);--key-bg:rgba(13,148,136,0.03);}
+[data-theme="dark"]{--bg:#080f0e;--surface:#0d1a18;--border:#134e4a;--accent:#2dd4bf;--accent2:#38bdf8;--text:#e2e8f0;--muted:#64748b;--tag-bg:rgba(45,212,191,0.08);--progress-track:rgba(255,255,255,0.06);--toggle-bg:#134e4a;--formula-bg:rgba(45,212,191,0.05);--formula-border:rgba(45,212,191,0.2);--med-bg:rgba(56,189,248,0.05);--med-border:rgba(56,189,248,0.18);--key-bg:rgba(45,212,191,0.04);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;min-height:100vh;transition:background .3s,color .3s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:rgba(240,253,249,0.92);}
+[data-theme="dark"] nav{background:rgba(8,15,14,0.92);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--accent);text-decoration:none;}
+.nav-back{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-back:hover{color:var(--text);}
+.theme-toggle{background:var(--toggle-bg);border:1px solid var(--border);border-radius:100px;padding:5px 12px;cursor:pointer;font-size:14px;color:var(--muted);user-select:none;}
+
+header{padding:100px 52px 36px;border-bottom:1px solid var(--border);max-width:860px;margin:0 auto;}
+.badge{display:inline-block;background:rgba(13,148,136,.08);border:1px solid rgba(13,148,136,.2);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:4px 14px;border-radius:100px;margin-bottom:14px;}
+h1{font-family:'Libre Baskerville',serif;font-size:clamp(26px,4vw,42px);font-weight:700;line-height:1.1;margin-bottom:8px;}
+.sub{color:var(--muted);font-size:13px;line-height:1.7;max-width:560px;}
+
+.prog-wrap{max-width:860px;margin:0 auto;padding:20px 52px 0;}
+.prog-row{display:flex;align-items:center;gap:12px;}
+.prog-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.prog-track{flex:1;height:5px;background:var(--progress-track);border-radius:100px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:100px;transition:width .5s ease;}
+.prog-pct{font-size:13px;font-weight:700;color:var(--accent);white-space:nowrap;}
+
+main{max-width:860px;margin:0 auto;padding:28px 52px 60px;}
+
+.ch-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;margin-bottom:12px;overflow:hidden;transition:box-shadow .2s;}
+.ch-card.mastered{box-shadow:0 0 0 2px var(--accent);}
+.ch-head{display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer;user-select:none;}
+.ch-check{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;transition:all .2s;color:transparent;background:transparent;cursor:pointer;}
+.ch-card.mastered .ch-check{background:var(--accent);border-color:var(--accent);color:#fff;}
+.ch-num{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);flex-shrink:0;width:24px;}
+.ch-title{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;flex:1;line-height:1.3;}
+.ch-arrow{font-size:18px;color:var(--muted);transition:transform .25s;flex-shrink:0;line-height:1;}
+.ch-card.open .ch-arrow{transform:rotate(90deg);}
+.ch-body{display:none;padding:0 24px 24px 60px;border-top:1px solid var(--border);}
+.ch-card.open .ch-body{display:block;}
+
+.def{font-size:14px;line-height:1.85;color:var(--text);margin-top:18px;}
+.def strong{color:var(--accent);font-weight:700;}
+
+.formulas{margin-top:16px;background:var(--formula-bg);border:1px solid var(--formula-border);border-radius:12px;padding:16px 20px;}
+.formulas-label{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+.formula-line{display:flex;align-items:baseline;gap:16px;padding:8px 0;border-bottom:1px solid var(--formula-border);}
+.formula-line:last-child{border-bottom:none;padding-bottom:0;}
+.formula-expr{font-family:'Libre Baskerville',serif;font-size:16px;font-style:italic;color:var(--accent2);min-width:200px;flex-shrink:0;line-height:1.5;}
+.formula-desc{font-size:12px;color:var(--muted);line-height:1.6;}
+
+.med-box{margin-top:14px;padding:14px 16px;background:var(--med-bg);border:1px solid var(--med-border);border-radius:10px;font-size:13px;line-height:1.75;color:var(--text);}
+.med-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);margin-bottom:6px;}
+
+.key-box{margin-top:12px;padding:12px 16px;background:var(--key-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;font-size:13px;line-height:1.7;color:var(--muted);}
+.key-box strong{color:var(--text);}
+
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;}
+.tag{font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--tag-bg);color:var(--accent);border:1px solid var(--formula-border);}
+
+@media(max-width:600px){
+  header,.prog-wrap,main{padding-left:18px;padding-right:18px;}
+  header{padding-top:80px;}
+  .ch-body{padding-left:18px;}
+  .formula-line{flex-direction:column;gap:4px;}
+  .formula-expr{min-width:unset;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Constance</a>
+  <a class="nav-back" href="index.html">← Dashboard</a>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+</nav>
+
+<header>
+  <div class="badge">Révisions Terminale → PASS / LAS</div>
+  <h1>Chimie — Chapitres clés</h1>
+  <p class="sub">Les notions de chimie du lycée indispensables, réexpliquées avec leur sens médical concret. Coche quand tu peux l'expliquer à voix haute sans regarder.</p>
+</header>
+
+<div class="prog-wrap">
+  <div class="prog-row">
+    <span class="prog-label">Progression</span>
+    <div class="prog-track"><div class="prog-fill" id="globalFill" style="width:0%"></div></div>
+    <span class="prog-pct" id="globalPct">0 / 6</span>
+  </div>
+</div>
+
+<main>
+
+<!-- CH 01 -->
+<div class="ch-card" id="card0">
+  <div class="ch-head" onclick="toggle(0)">
+    <div class="ch-check" id="chk0" onclick="event.stopPropagation();mark(0)"></div>
+    <div class="ch-num">01</div>
+    <div class="ch-title">Acides, bases et pH</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      Selon la théorie de <strong>Brønsted-Lowry</strong>, un acide est une espèce capable de <strong>donner un proton H<sup>+</sup></strong> et une base est capable d'en <strong>recevoir un</strong>. À chaque acide correspond une base conjuguée et vice versa. Le <strong>pH</strong> mesure l'acidité d'une solution : plus le pH est bas, plus la solution est acide.
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Formules du programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">pH = −log([H<sub>3</sub>O<sup>+</sup>])</div>
+        <div class="formula-desc">Le pH est l'opposé du logarithme décimal de la concentration en ions oxonium. [H<sub>3</sub>O<sup>+</sup>] s'exprime en mol/L.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">pH = pKa + log([A<sup>−</sup>]/[AH])</div>
+        <div class="formula-desc">Équation de Henderson-Hasselbalch. Valable pour un couple acide AH / base conjuguée A<sup>−</sup>. Très utilisée pour calculer le pH des solutions tampons.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">pKa = −log(Ka)</div>
+        <div class="formula-desc">Ka est la constante d'acidité du couple. Plus le pKa est petit, plus l'acide est fort (il donne facilement son H<sup>+</sup>).</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">pH + pOH = 14 (à 25°C)</div>
+        <div class="formula-desc">Relation entre pH et pOH dans l'eau à 25°C. pOH = −log([HO<sup>−</sup>]).</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>À retenir :</strong> à pH = pKa, la moitié de l'acide est sous forme AH et l'autre moitié sous forme A<sup>−</sup>. Si pH &lt; pKa → forme acide majoritaire. Si pH &gt; pKa → forme basique majoritaire.
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      Le sang est maintenu à pH = 7,40 grâce au <strong>système tampon bicarbonate</strong> (pKa = 6,1). Un pH &lt; 7,35 = <strong>acidose</strong>, un pH &gt; 7,45 = <strong>alcalose</strong> — les deux sont des urgences vitales. Même 0,1 unité de pH suffit à provoquer des arythmies cardiaques graves.
+    </div>
+    <div class="tags"><span class="tag">pH sanguin</span><span class="tag">Tampon bicarbonate</span><span class="tag">Acidose/Alcalose</span></div>
+  </div>
+</div>
+
+<!-- CH 02 -->
+<div class="ch-card" id="card1">
+  <div class="ch-head" onclick="toggle(1)">
+    <div class="ch-check" id="chk1" onclick="event.stopPropagation();mark(1)"></div>
+    <div class="ch-num">02</div>
+    <div class="ch-title">Force des acides et des bases</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      La <strong>force d'un acide</strong> mesure sa capacité à céder un proton H<sup>+</sup> en solution aqueuse. Un <strong>acide fort</strong> se dissocie totalement (HCl, HNO<sub>3</sub>, H<sub>2</sub>SO<sub>4</sub>). Un <strong>acide faible</strong> se dissocie partiellement — il existe un équilibre entre la forme AH et la forme A<sup>−</sup>, décrit par la constante Ka.
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Formules du programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">Ka = [A<sup>−</sup>][H<sub>3</sub>O<sup>+</sup>] / [AH]</div>
+        <div class="formula-desc">Constante d'acidité. Plus Ka est grand (pKa petit), plus l'acide est fort et se dissocie facilement.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">Taux de dissociation τ = [A<sup>−</sup>] / C</div>
+        <div class="formula-desc">Fraction de l'acide qui s'est dissociée. C = concentration initiale en acide. τ = 1 pour un acide fort, τ &lt; 1 pour un acide faible.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">pH = ½ (pKa − log C)</div>
+        <div class="formula-desc">pH d'une solution d'acide faible de concentration C (approximation valable si τ &lt; 5%).</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>Acides forts courants :</strong> HCl (acide chlorhydrique), HNO<sub>3</sub> (acide nitrique), H<sub>2</sub>SO<sub>4</sub> (acide sulfurique). Leur pKa est très négatif. <strong>Acides faibles courants :</strong> CH<sub>3</sub>COOH (acide acétique, pKa = 4,8), H<sub>2</sub>CO<sub>3</sub> (acide carbonique, pKa = 6,1), NH<sub>4</sub><sup>+</sup> (pKa = 9,2).
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      L'aspirine (pKa = 3,5) est non ionisée dans l'estomac acide → elle traverse facilement la muqueuse et est absorbée. Dans le sang (pH = 7,4), elle est ionisée → reste piégée dans le compartiment vasculaire. Ce principe gouverne l'absorption de <strong>tous</strong> les médicaments.
+    </div>
+    <div class="tags"><span class="tag">Pharmacologie</span><span class="tag">Absorption</span><span class="tag">pKa médicaments</span></div>
+  </div>
+</div>
+
+<!-- CH 03 -->
+<div class="ch-card" id="card2">
+  <div class="ch-head" onclick="toggle(2)">
+    <div class="ch-check" id="chk2" onclick="event.stopPropagation();mark(2)"></div>
+    <div class="ch-num">03</div>
+    <div class="ch-title">Titrage pH-métrique et conductimétrique</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      Le <strong>titrage</strong> (ou dosage par étalonnage) consiste à déterminer la concentration d'une espèce inconnue en la faisant réagir avec une espèce de concentration connue, appelée le <strong>titrant</strong>. Le <strong>point d'équivalence</strong> est le moment où les quantités de matière de l'acide et de la base sont en proportions stœchiométriques exactes.
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Formules du programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">n(acide) = n(base) à l'équivalence</div>
+        <div class="formula-desc">Relation stœchiométrique à l'équivalence pour un couple acide/base monoacide-monobase. n = C × V (concentration × volume).</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">C<sub>a</sub> × V<sub>a</sub> = C<sub>b</sub> × V<sub>b</sub></div>
+        <div class="formula-desc">Égalité des quantités de matière à l'équivalence. C<sub>a</sub> et V<sub>a</sub> pour l'acide, C<sub>b</sub> et V<sub>b</sub> pour la base.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">pH équivalence = 7 (acide fort / base forte)</div>
+        <div class="formula-desc">À l'équivalence d'un titrage acide fort / base forte, le pH vaut exactement 7 à 25°C. Pour un acide faible / base forte, le pH est supérieur à 7 à l'équivalence.</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>Comment repérer l'équivalence :</strong> sur la courbe pH = f(V versé), c'est le point d'inflexion (la pente est maximale). En conductimétrie, c'est le changement de pente de la courbe de conductance. À mi-équivalence (V = V<sub>éq</sub>/2), on a pH = pKa pour un acide faible.
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      La <strong>gazométrie artérielle</strong> — l'examen de référence pour les troubles acido-basiques — mesure directement le pH, la pression en CO<sub>2</sub> et en O<sub>2</sub> du sang. Les poches de perfusion (sérum physiologique, Ringer lactate) sont titrées industriellement pour être exactement au pH du sang.
+    </div>
+    <div class="tags"><span class="tag">Dosage biologique</span><span class="tag">Gazométrie</span><span class="tag">Labo clinique</span></div>
+  </div>
+</div>
+
+<!-- CH 04 -->
+<div class="ch-card" id="card3">
+  <div class="ch-head" onclick="toggle(3)">
+    <div class="ch-check" id="chk3" onclick="event.stopPropagation();mark(3)"></div>
+    <div class="ch-num">04</div>
+    <div class="ch-title">Évolution spontanée d'un système chimique</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      Un système chimique évolue spontanément dans le sens qui lui permet d'atteindre l'<strong>équilibre</strong>. Le sens d'évolution est prédit par la comparaison entre le <strong>quotient de réaction Q<sub>r</sub></strong> (état actuel du système) et la <strong>constante d'équilibre K</strong> (état à l'équilibre).
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Formules du programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">Q<sub>r</sub> &lt; K → sens direct</div>
+        <div class="formula-desc">Le système évolue dans le sens direct (de gauche à droite tel qu'écrit) pour augmenter Q<sub>r</sub> jusqu'à K.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">Q<sub>r</sub> &gt; K → sens indirect</div>
+        <div class="formula-desc">Le système évolue dans le sens indirect (de droite à gauche) pour diminuer Q<sub>r</sub> jusqu'à K.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">Q<sub>r</sub> = K → équilibre</div>
+        <div class="formula-desc">Le système est à l'équilibre, les concentrations n'évoluent plus macroscopiquement.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">K = [produits]<sup>stœchio</sup> / [réactifs]<sup>stœchio</sup></div>
+        <div class="formula-desc">Expression de la constante d'équilibre à partir des concentrations à l'équilibre, élevées à leurs coefficients stœchiométriques.</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>Principe de Le Chatelier :</strong> si on perturbe un système à l'équilibre (ajout d'un réactif, changement de pression, changement de température), il réagit de façon à s'opposer à cette perturbation et retrouver un nouvel équilibre.
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      La fixation de l'O<sub>2</sub> sur l'hémoglobine est un équilibre : dans les poumons (beaucoup d'O<sub>2</sub>) l'équilibre se déplace vers la fixation, dans les tissus (peu d'O<sub>2</sub>) il se déplace vers la libération. <strong>Le Chatelier</strong> à l'œuvre dans chaque globule rouge, 70 fois par minute.
+    </div>
+    <div class="tags"><span class="tag">Équilibre chimique</span><span class="tag">Hémoglobine</span><span class="tag">Le Chatelier</span></div>
+  </div>
+</div>
+
+<!-- CH 05 -->
+<div class="ch-card" id="card4">
+  <div class="ch-head" onclick="toggle(4)">
+    <div class="ch-check" id="chk4" onclick="event.stopPropagation();mark(4)"></div>
+    <div class="ch-num">05</div>
+    <div class="ch-title">Évolution d'un système — cinétique chimique</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      La <strong>cinétique chimique</strong> étudie la <strong>vitesse</strong> à laquelle une réaction se produit, et les facteurs qui l'influencent. Contrairement à la thermodynamique qui dit si une réaction est possible, la cinétique dit à quelle vitesse elle se produit réellement. Une réaction peut être thermodynamiquement favorable mais cinétiquement très lente.
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Formules du programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">v = −d[réactif]/dt</div>
+        <div class="formula-desc">Vitesse de réaction = diminution de la concentration du réactif par unité de temps. Unité : mol·L<sup>−1</sup>·s<sup>−1</sup>.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">t<sub>½</sub> = ln2 / k (ordre 1)</div>
+        <div class="formula-desc">Demi-vie pour une réaction d'ordre 1 : temps pour que la concentration du réactif diminue de moitié. k = constante de vitesse.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">ln[A] = ln[A]<sub>0</sub> − k·t (ordre 1)</div>
+        <div class="formula-desc">Loi intégrée d'ordre 1 : la concentration décroît de façon exponentielle. [A]<sub>0</sub> = concentration initiale.</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>Facteurs influençant la vitesse :</strong> température (loi d'Arrhenius : T ↑ → k ↑ → vitesse ↑), concentration des réactifs, présence d'un catalyseur (abaisse l'énergie d'activation sans être consommé), état physique (surface de contact).
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      Le paracétamol a une demi-vie de 2 heures — donc toutes les 2h, la moitié de la dose est éliminée. C'est pour ça qu'on le prend toutes les 6h (après 3 demi-vies, il reste moins de 15%). En cas d'insuffisance rénale ou hépatique, k diminue → t<sub>½</sub> augmente → risque de <strong>surdosage</strong> avec les doses habituelles.
+    </div>
+    <div class="tags"><span class="tag">Pharmacocinétique</span><span class="tag">Demi-vie médicament</span><span class="tag">Cinétique ordre 1</span></div>
+  </div>
+</div>
+
+<!-- CH 06 -->
+<div class="ch-card" id="card5">
+  <div class="ch-head" onclick="toggle(5)">
+    <div class="ch-check" id="chk5" onclick="event.stopPropagation();mark(5)"></div>
+    <div class="ch-num">06</div>
+    <div class="ch-title">Synthèse en chimie organique</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      La <strong>synthèse organique</strong> consiste à construire une molécule cible à partir de réactifs de départ, en utilisant une succession de réactions chimiques. Une bonne synthèse est <strong>sélective</strong> (réagit sur le bon site), <strong>stéréospécifique</strong> (donne le bon énantiomère), et <strong>efficace</strong> (rendement élevé, peu d'étapes). Les grandes familles de réactions sont les substitutions, les additions et les éliminations.
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Notions clés du programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">Rendement = n<sub>obtenu</sub> / n<sub>théorique</sub> × 100%</div>
+        <div class="formula-desc">Pourcentage de produit effectivement obtenu par rapport à la quantité maximale théorique. Un bon rendement dépasse 70%.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">Substitution nucléophile (SN)</div>
+        <div class="formula-desc">Un nucléophile (riche en électrons) remplace un groupe partant sur un carbone. SN2 : attaque directe avec inversion de configuration. SN1 : passage par un carbocation intermédiaire.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">Addition sur C=C ou C=O</div>
+        <div class="formula-desc">Ouverture de la double liaison par ajout de deux fragments. Addition électrophile sur les alcènes, addition nucléophile sur les carbonyles (aldéhydes, cétones).</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">Élimination → double liaison</div>
+        <div class="formula-desc">Départ d'un groupe partant et d'un proton sur le carbone adjacent → formation d'une liaison C=C. Réaction inverse de l'addition.</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>Techniques de synthèse à connaître :</strong> chauffage à reflux (réaction dans un solvant porté à ébullition sans perte de matière), extraction liquide-liquide (séparation par densité et solubilité), recristallisation (purification d'un solide), chromatographie sur couche mince (CCM, vérification de pureté).
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      La thalidomide prescrite contre les nausées de grossesse dans les années 60 était un mélange des deux énantiomères — l'un était actif, l'autre <strong>tératogène</strong>. Résultat : des milliers de bébés avec des malformations. Depuis, toute molécule chirale doit être testée et synthétisée sous forme <strong>énantiopure</strong>.
+    </div>
+    <div class="tags"><span class="tag">Médicaments</span><span class="tag">Stéréochimie</span><span class="tag">Industrie pharmaceutique</span></div>
+  </div>
+</div>
+
+</main>
+
+<div style="max-width:860px;margin:0 auto;padding:0 52px 40px;display:flex;justify-content:flex-start;">
+  <a href="passrevisionphysique.html" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;padding:10px 20px;border:1px solid var(--border);border-radius:100px;transition:all .2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+    ← Physique
+  </a>
+</div>
+
+<footer style="border-top:1px solid var(--border);padding:24px 52px;max-width:860px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+  <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--accent)">Constance</div>
+  <div style="font-size:11px;color:var(--muted)">© Constance | @constance.cgh · PASS gratuit</div>
+</footer>
+
+<script>
+const KEY = 'revision_chimie_done';
+const TOTAL = 6;
+var done = JSON.parse(localStorage.getItem(KEY) || '[]');
+
+function applyState() {
+  for (var i = 0; i < TOTAL; i++) {
+    var card = document.getElementById('card' + i);
+    var chk = document.getElementById('chk' + i);
+    if (!card || !chk) continue;
+    if (done.includes(i)) {
+      card.classList.add('mastered');
+      chk.textContent = '✓';
+    } else {
+      card.classList.remove('mastered');
+      chk.textContent = '';
+    }
+  }
+  var pct = Math.round(done.length / TOTAL * 100);
+  document.getElementById('globalFill').style.width = pct + '%';
+  document.getElementById('globalPct').textContent = done.length + ' / ' + TOTAL;
+}
+
+function mark(i) {
+  var idx = done.indexOf(i);
+  if (idx === -1) done.push(i);
+  else done.splice(idx, 1);
+  localStorage.setItem(KEY, JSON.stringify(done));
+  applyState();
+}
+
+function toggle(i) {
+  document.getElementById('card' + i).classList.toggle('open');
+}
+
+function toggleTheme() {
+  var h = document.documentElement, b = document.getElementById('themeBtn');
+  if (h.dataset.theme === 'light') { h.dataset.theme = 'dark'; b.textContent = '☀️'; }
+  else { h.dataset.theme = 'light'; b.textContent = '🌙'; }
+}
+
+window.addEventListener('DOMContentLoaded', applyState);
+</script>
+</body>
+</html>

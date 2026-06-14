@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Structure de l'Atome — Chimie Générale PASS — Constance</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  [data-theme="dark"]{--bg:#0a0a10;--surface:#111118;--border:#1e1e2e;--accent:#818cf8;--accent2:#a78bfa;--accent3:#f472b6;--text:#e2e8f0;--muted:#64748b;--warn:#fbbf24;--item-text:#cbd5e1;--def-bg:rgba(129,140,248,0.06);--def-border:rgba(129,140,248,0.2);--ex-bg:rgba(251,191,36,0.05);--ex-border:rgba(251,191,36,0.2);--ex-color:#fde68a;--formula-bg:rgba(167,139,250,0.08);--formula-border:rgba(167,139,250,0.3);--formula-color:#c4b5fd;--progress-track:rgba(255,255,255,0.06);--toggle-bg:#1e1e2e;--quiz-bg:#0d0d14;--quiz-opt:rgba(255,255,255,0.03);--quiz-opt-hover:rgba(255,255,255,0.07);--correct:rgba(129,140,248,0.12);--correct-border:#818cf8;--wrong:rgba(244,114,182,0.12);--wrong-border:#f472b6;--tip-bg:rgba(129,140,248,0.06);--tip-border:rgba(129,140,248,0.2);--tip-color:#a5b4fc;--notion-bg:#111118;--notion-border:#1e1e2e;}
+  [data-theme="light"]{--bg:#f5f5ff;--surface:#fff;--border:#e0e0f0;--accent:#4f46e5;--accent2:#7c3aed;--accent3:#db2777;--text:#1e1b18;--muted:#6b7280;--warn:#d97706;--item-text:#374151;--def-bg:rgba(79,70,229,0.04);--def-border:rgba(79,70,229,0.15);--ex-bg:rgba(217,119,6,0.05);--ex-border:rgba(217,119,6,0.18);--ex-color:#92400e;--formula-bg:rgba(124,58,237,0.06);--formula-border:rgba(124,58,237,0.22);--formula-color:#5b21b6;--progress-track:rgba(0,0,0,0.07);--toggle-bg:#e0e0f0;--quiz-bg:#ebebff;--quiz-opt:rgba(0,0,0,0.02);--quiz-opt-hover:rgba(0,0,0,0.05);--correct:rgba(79,70,229,0.08);--correct-border:#4f46e5;--wrong:rgba(219,39,119,0.08);--wrong-border:#db2777;--tip-bg:rgba(79,70,229,0.05);--tip-border:rgba(79,70,229,0.2);--tip-color:#3730a3;--notion-bg:#fff;--notion-border:#e0e0f0;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;min-height:100vh;transition:background .3s,color .3s;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:rgba(245,245,255,0.88);}
+  [data-theme="dark"] nav{background:rgba(10,10,16,0.88);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--accent);text-decoration:none;}
+  .nav-back{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+  .nav-back:hover{color:var(--text);}
+  .theme-toggle{background:var(--toggle-bg);border:1px solid var(--border);border-radius:100px;padding:5px 12px;cursor:pointer;font-size:14px;color:var(--muted);transition:all .2s;user-select:none;line-height:1;}
+  .theme-toggle:hover{border-color:var(--accent);color:var(--text);}
+  header{padding:100px 52px 40px;border-bottom:1px solid var(--border);max-width:800px;margin:0 auto;}
+  .breadcrumb{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;}
+  .breadcrumb a{color:var(--muted);text-decoration:none;}
+  .breadcrumb a:hover{color:var(--accent);}
+  .ch-badge{display:inline-block;background:rgba(79,70,229,.08);border:1px solid rgba(79,70,229,.2);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:14px;}
+  h1{font-family:'Libre Baskerville',serif;font-size:clamp(28px,4.5vw,48px);font-weight:700;line-height:1.1;}
+  .ch-subtitle{margin-top:8px;color:var(--muted);font-size:14px;}
+  .progress-wrap{margin-top:22px;max-width:320px;display:flex;flex-direction:column;gap:12px;}
+  .prog-row{display:flex;flex-direction:column;gap:5px;}
+  .prog-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;}
+  .prog-track{height:4px;background:var(--progress-track);border-radius:100px;overflow:hidden;}
+  .prog-fill{height:100%;border-radius:100px;transition:width .4s ease;}
+  .fill-read{background:var(--accent2);}
+  .mastery-bar{display:flex;height:4px;border-radius:100px;overflow:hidden;gap:2px;}
+  .bar-ok{background:var(--accent);transition:flex .5s;flex:0;}
+  .bar-ko{background:var(--accent3);transition:flex .5s;flex:0;}
+  .bar-grey{background:var(--progress-track);transition:flex .5s;flex:1;}
+  .legend-row{display:flex;gap:14px;margin-top:5px;}
+  .leg{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);}
+  .leg-dot{width:7px;height:7px;border-radius:50%;}
+  main{padding:48px 52px;max-width:800px;margin:0 auto;}
+  .section-sep{display:flex;align-items:center;gap:14px;margin:40px 0 22px;}
+  .section-sep-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;}
+  .section-sep-line{flex:1;height:1px;background:var(--border);}
+  .sep-priority .section-sep-label{color:var(--accent3);}
+  .sep-important .section-sep-label{color:var(--warn);}
+  .sep-base .section-sep-label{color:var(--accent2);}
+  .notion{background:var(--notion-bg);border:1px solid var(--notion-border);border-radius:14px;padding:22px 24px;margin-bottom:12px;border-left:4px solid transparent;transition:opacity .2s;}
+  .notion.priority{border-left-color:var(--accent3);}
+  .notion.important{border-left-color:var(--warn);}
+  .notion.base{border-left-color:var(--accent2);}
+  .notion.read{opacity:.55;}
+  .notion.mastered{box-shadow:0 0 0 1.5px var(--accent);}
+  .notion.to-review{box-shadow:0 0 0 1.5px var(--accent3);}
+  .notion-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:10px;}
+  .notion-left{display:flex;align-items:flex-start;gap:10px;flex:1;}
+  .check-btn{width:20px;height:20px;border-radius:5px;border:2px solid var(--border);flex-shrink:0;margin-top:2px;font-size:11px;font-weight:700;transition:all .2s;color:transparent;cursor:pointer;background:transparent;user-select:none;display:flex;align-items:center;justify-content:center;}
+  .notion.read .check-btn{background:var(--accent2);border-color:var(--accent2);color:#fff;}
+  .quiz-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;flex-shrink:0;margin-top:3px;display:none;}
+  .quiz-badge.show{display:inline-block;}
+  .quiz-badge.ok{background:rgba(79,70,229,.1);color:var(--accent);}
+  .quiz-badge.ko{background:rgba(244,114,182,.1);color:var(--accent3);}
+  .notion-title{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;color:var(--text);}
+  .notion-def{font-size:14px;line-height:1.75;color:var(--item-text);}
+  .notion-def strong{color:var(--text);font-weight:700;}
+  .def-box{margin-top:14px;padding:14px 16px;background:var(--def-bg);border:1px solid var(--def-border);border-radius:10px;font-size:13px;line-height:1.7;color:var(--item-text);}
+  .def-box strong{color:var(--text);}
+  .def-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+  .formula-box{margin-top:12px;padding:14px 18px;background:var(--formula-bg);border:1px solid var(--formula-border);border-radius:10px;text-align:center;}
+  .formula-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--formula-color);opacity:.7;margin-bottom:6px;}
+  .formula-main{font-size:16px;color:var(--formula-color);font-family:'Libre Baskerville',serif;font-style:italic;line-height:1.6;}
+  .formula-detail{font-size:11px;color:var(--formula-color);opacity:.65;margin-top:5px;}
+  .example-box{margin-top:12px;padding:13px 16px;background:var(--ex-bg);border:1px solid var(--ex-border);border-radius:10px;font-size:13px;line-height:1.65;color:var(--ex-color);}
+  .example-box::before{content:"💡 Application — ";font-weight:700;}
+  .example-box strong{font-weight:700;}
+  .tip-box{margin-top:32px;padding:14px 16px;background:var(--tip-bg);border:1px solid var(--tip-border);border-radius:10px;font-size:13px;color:var(--tip-color);line-height:1.65;}
+  .tip-box::before{content:"🎯 Conseil strat — ";font-weight:700;}
+  .quiz-section{margin-top:48px;padding-top:32px;border-top:1px solid var(--border);}
+  .quiz-title{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;margin-bottom:20px;}
+  .quiz-title::before{content:"🎯 Quiz — ";}
+  .quiz-card{background:var(--quiz-bg);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px;}
+  .quiz-q{font-size:14px;line-height:1.65;color:var(--item-text);margin-bottom:14px;font-weight:500;}
+  .quiz-options{display:flex;flex-direction:column;gap:8px;}
+  .quiz-opt{padding:11px 15px;background:var(--quiz-opt);border:1px solid var(--border);border-radius:9px;font-size:13px;cursor:pointer;transition:all .15s;color:var(--item-text);text-align:left;font-family:'Source Serif 4',serif;line-height:1.4;}
+  .quiz-opt:hover:not(:disabled){background:var(--quiz-opt-hover);border-color:var(--muted);}
+  .quiz-opt.correct{background:var(--correct);border-color:var(--correct-border);color:var(--accent);}
+  .quiz-opt.wrong{background:var(--wrong);border-color:var(--wrong-border);color:var(--accent3);}
+  .quiz-opt:disabled{cursor:default;}
+  .quiz-feedback{font-size:13px;line-height:1.55;padding:11px 14px;border-radius:9px;margin-top:8px;display:none;}
+  .quiz-feedback.show{display:block;}
+  .quiz-feedback.ok{background:var(--correct);color:var(--accent);border:1px solid var(--correct-border);}
+  .quiz-feedback.ko{background:var(--wrong);color:var(--accent3);border:1px solid var(--wrong-border);}
+  .quiz-next{margin-top:10px;background:none;border:1px solid var(--border);border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Source Serif 4',serif;transition:all .2s;display:none;}
+  .quiz-next.show{display:inline-block;}
+  .quiz-next:hover{border-color:var(--accent);color:var(--accent);}
+  .quiz-score{font-size:12px;color:var(--muted);margin-top:10px;font-weight:600;}
+  .ch-nav{display:flex;justify-content:space-between;margin-top:48px;padding-top:28px;border-top:1px solid var(--border);}
+  .ch-nav a{font-size:13px;color:var(--muted);text-decoration:none;font-weight:600;transition:color .2s;}
+  .ch-nav a:hover{color:var(--accent);}
+  footer{border-top:1px solid var(--border);padding:24px 52px;max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:48px;}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--accent);}
+  .footer-copy{font-size:11px;color:var(--muted);}
+  @media(max-width:600px){header,main,footer{padding-left:20px;padding-right:20px;}header{padding-top:80px;}nav{padding:.9rem 1.2rem;}footer{flex-direction:column;text-align:center;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Constance</a>
+  <a class="nav-back" href="passchimiegen.html">← Chimie Générale</a>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+</nav>
+<header>
+  <div class="breadcrumb"><a href="passchimiegen.html">Chimie Générale</a> · Chapitre 01</div>
+  <div class="ch-badge">Chapitre 01</div>
+  <h1>Structure de l'Atome</h1>
+  <div class="ch-subtitle">Noyau · Électrons · Orbitales · Configuration électronique · Tableau périodique</div>
+  <div class="progress-wrap">
+    <div class="prog-row">
+      <div class="prog-label"><span>Notions lues</span><span id="readCount">0 / 6</span></div>
+      <div class="prog-track"><div class="prog-fill fill-read" id="readBar" style="width:0%"></div></div>
+    </div>
+    <div class="prog-row">
+      <div class="prog-label"><span>Maîtrise quiz</span><span id="masteryCount">Fais le quiz ↓</span></div>
+      <div class="mastery-bar"><div class="bar-ok" id="barOk"></div><div class="bar-ko" id="barKo"></div><div class="bar-grey" id="barGrey"></div></div>
+      <div class="legend-row">
+        <div class="leg"><div class="leg-dot" style="background:var(--accent)"></div>Maîtrisé</div>
+        <div class="leg"><div class="leg-dot" style="background:var(--accent3)"></div>À revoir</div>
+        <div class="leg"><div class="leg-dot" style="background:var(--progress-track)"></div>Non testé</div>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+
+<div class="section-sep sep-priority"><div class="section-sep-label">🔴 Incontournables</div><div class="section-sep-line"></div></div>
+<div class="notion priority" id="n0"><div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk0" onclick="toggleRead(0)"></div><div class="notion-title">Composition de l'atome</div></div><div class="quiz-badge" id="qbadge0"></div></div><div class="notion-def">L'<strong>atome</strong> est constitué d'un <strong>noyau</strong> (protons + neutrons) entouré d'<strong>électrons</strong> sur des couches (orbitales). Le <strong>numéro atomique Z</strong> = nombre de protons = nombre d'électrons dans un atome neutre. Le <strong>nombre de masse A</strong> = protons + neutrons.</div><div class="def-box"><div class="def-label">Définitions essentielles</div><strong>Isotopes</strong> : même Z, différent A (même nombre de protons, nombre de neutrons différent). Ex : ¹²C et ¹⁴C.<br><strong>Ions</strong> : atome ayant perdu (cation, charge +) ou gagné (anion, charge −) des électrons.<br><strong>Masse atomique</strong> : exprimée en unités de masse atomique (uma) ou Da (dalton). 1 uma = 1/12 masse du ¹²C.</div><div class="formula-box"><div class="formula-label">Formule clé</div><div class="formula-main">Notation : ᴬ_Z X — ex : ¹⁶₈O = oxygène, Z=8 protons, A=16, 8 neutrons</div><div class="formula-detail">Neutrons = A − Z · Électrons (atome neutre) = Z</div></div><div class="example-box">Le <strong>carbone 14</strong> (¹⁴C, Z=6, A=14) est un isotope radioactif du carbone — même propriétés chimiques que ¹²C (même Z=6) mais noyau instable. Utilisé en datation radiocarbone et en médecine nucléaire (marquage de molécules biologiques).</div></div>
+<div class="notion priority" id="n1"><div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk1" onclick="toggleRead(1)"></div><div class="notion-title">Configuration électronique</div></div><div class="quiz-badge" id="qbadge1"></div></div><div class="notion-def">Les électrons occupent des <strong>orbitales atomiques</strong> organisées en couches (n=1,2,3...) et sous-couches (s, p, d, f). Règle de remplissage : <strong>règle de Klechkowski</strong> (ordre croissant d'énergie), <strong>règle de Hund</strong> (orbitales dégénérées remplies une par une), <strong>principe de Pauli</strong> (max 2 électrons par orbitale, spins opposés).</div><div class="def-box"><div class="def-label">Capacité des sous-couches</div><strong>s</strong> : 1 orbitale, 2 électrons max.<br><strong>p</strong> : 3 orbitales, 6 électrons max.<br><strong>d</strong> : 5 orbitales, 10 électrons max.<br><strong>f</strong> : 7 orbitales, 14 électrons max.<br><br>Ordre de remplissage : 1s, 2s, 2p, 3s, 3p, 4s, 3d, 4p, 5s, 4d, 5p...</div><div class="example-box">Carbone (Z=6) : 1s² 2s² 2p². Les 2 électrons de la sous-couche 2p occupent 2 orbitales différentes (règle de Hund) → carbone peut former 4 liaisons (valence 4). Fondamental pour comprendre la chimie organique.</div></div>
+<div class="notion priority" id="n2"><div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk2" onclick="toggleRead(2)"></div><div class="notion-title">Tableau périodique — périodes et groupes</div></div><div class="quiz-badge" id="qbadge2"></div></div><div class="notion-def">Le tableau périodique est organisé en <strong>périodes</strong> (lignes, même couche externe) et <strong>groupes</strong> (colonnes, même configuration électronique externe = même valence). Les propriétés évoluent de façon <strong>périodique</strong>.</div><div class="def-box"><div class="def-label">Évolutions dans le tableau</div><strong>Rayon atomique</strong> : ↑ en descendant (couches supplémentaires), ↓ de G à D (Z augmente, attire plus les électrons).<br><strong>Électronégativité</strong> : ↑ de G à D et ↑ de bas en haut. F = plus électronégatif (4,0). Cs = moins électronégatif.<br><strong>Énergie d'ionisation</strong> : ↑ de G à D et ↑ de bas en haut.</div><div class="example-box"><strong>Na</strong> (groupe 1, 1 électron de valence) a une faible énergie d'ionisation → perd facilement 1 électron → forme Na⁺. <strong>Cl</strong> (groupe 17, 7 électrons de valence) est très électronégatif → capte facilement 1 électron → forme Cl⁻. Na⁺ + Cl⁻ → NaCl (sel de table).</div></div>
+
+<div class="section-sep sep-important"><div class="section-sep-label">🟡 Importants</div><div class="section-sep-line"></div></div>
+<div class="notion important" id="n3"><div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk3" onclick="toggleRead(3)"></div><div class="notion-title">Notion de valence et électrons de valence</div></div><div class="quiz-badge" id="qbadge3"></div></div><div class="notion-def">Les <strong>électrons de valence</strong> sont les électrons de la couche externe — ils déterminent la réactivité chimique et le nombre de liaisons possibles. La <strong>valence</strong> = nombre de liaisons qu'un atome peut former.</div><div class="def-box"><div class="def-label">Valences à connaître en biochimie</div><strong>H</strong> : valence 1 · <strong>C</strong> : valence 4 · <strong>N</strong> : valence 3 (ou 4 si chargé) · <strong>O</strong> : valence 2 · <strong>P</strong> : valence 5 · <strong>S</strong> : valence 2 ou 6.<br>Ces 6 atomes (CHNOPS) constituent 99% des biomolécules.</div><div class="example-box">La molécule d'<strong>ADN</strong> est construite uniquement à partir de C, H, N, O, P. L'<strong>hémoglobine</strong> contient en plus du Fe (fer). Comprendre les valences permet de vérifier si une formule chimique est cohérente.</div></div>
+<div class="notion important" id="n4"><div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk4" onclick="toggleRead(4)"></div><div class="notion-title">Radioactivité et applications médicales</div></div><div class="quiz-badge" id="qbadge4"></div></div><div class="notion-def">Les <strong>noyaux instables</strong> se désintègrent spontanément en émettant des rayonnements (α, β, γ). La <strong>demi-vie</strong> t½ est le temps pour que la moitié des noyaux se désintègre. Cette notion est identique à celle vue en biophysique.</div><div class="example-box">En médecine nucléaire : ¹³¹I (t½=8j) pour la thyroïde, ⁹⁹ᵐTc (t½=6h) pour la scintigraphie, ¹⁸F (t½=110min) pour la TEP. En biologie moléculaire : le ³²P (t½=14j) est utilisé pour marquer les acides nucléiques dans les expériences de biologie moléculaire.</div></div>
+
+<div class="section-sep sep-base"><div class="section-sep-label">🔵 Base</div><div class="section-sep-line"></div></div>
+<div class="notion base" id="n5"><div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk5" onclick="toggleRead(5)"></div><div class="notion-title">Spectroscopie et quantification de l'énergie</div></div><div class="quiz-badge" id="qbadge5"></div></div><div class="notion-def">L'énergie des électrons est <strong>quantifiée</strong> — elle ne peut prendre que des valeurs discrètes. Quand un électron absorbe ou émet de l'énergie, il passe d'un niveau à un autre. C'est la base de la <strong>spectroscopie</strong> (UV, visible, IR, RMN) utilisée en chimie analytique et en médecine (IRM).</div><div class="formula-box"><div class="formula-label">À retenir</div><div class="formula-main">L'énergie d'un photon ∝ fréquence ν · ∝ 1/longueur d'onde λ</div><div class="formula-detail">UV (λ court → E élevée → ionisant) · Visible → excitation · IR → chaleur · RX → très ionisant</div></div></div><div class="example-box">La <strong>spectrophotométrie UV-visible</strong> mesure l'absorbance d'une solution à une longueur d'onde donnée → dosage de protéines (280 nm), d'ADN (260 nm), de NADH (340 nm). La loi de Beer-Lambert (A = ε·l·c) est le fondement de toutes les mesures quantitatives en biochimie.</div></div>
+
+<div class="tip-box">La configuration électronique est la base de toute la chimie. Retiens surtout les valences de CHNOPS — elles te serviront en chimie organique et en biochimie tout au long de l'année.</div>
+<div class="quiz-section">
+  <div class="quiz-title">Structure de l'Atome</div>
+  <button onclick="initQuiz();this.style.display='none';" id="startQuizBtn" style="width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Source Serif 4',serif;margin-bottom:12px;">🎯 Lancer le quiz</button><div id="quiz-container"></div>
+  <div class="quiz-score" id="quiz-score"></div>
+</div>
+<a href="passchimiegenqcm.html" style="display:flex;align-items:center;justify-content:space-between;background:rgba(79,70,229,0.05);border:1px solid rgba(79,70,229,0.2);border-radius:12px;padding:16px 20px;text-decoration:none;margin-top:16px;transition:all .2s;" onmouseover="this.style.borderColor='rgba(79,70,229,0.5)'" onmouseout="this.style.borderColor='rgba(79,70,229,0.2)'">
+  <div><div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;">🎯 Entraînement complet</div><div style="font-size:14px;font-weight:600;color:var(--text);">QCM Chimie Générale — tous chapitres</div></div>
+  <div style="font-size:16px;color:var(--accent);">→</div>
+</a>
+<div class="ch-nav"><span></span><a href="passchimiegenliaisons.html">Chapitre 02 — Liaisons chimiques →</a></div>
+</main>
+<footer>
+  <div class="footer-logo">Constance</div>
+  <div class="footer-copy">© Constance | @constance.cgh · Programme PASS gratuit</div>
+</footer>
+<script>const TOTAL=6;const SR='chimgen_atome_read';const SM='chimgen_atome_mastery';
+var rs=JSON.parse(localStorage.getItem(SR)||'[]');
+function toggleRead(i){var x=rs.indexOf(i);if(x===-1)rs.push(i);else rs.splice(x,1);localStorage.setItem(SR,JSON.stringify(rs));applyRead();}
+function applyRead(){for(var i=0;i<TOTAL;i++){var n=document.getElementById('n'+i),b=document.getElementById('chk'+i);if(!n||!b)continue;if(rs.includes(i)){n.classList.add('read');b.textContent='✓';}else{n.classList.remove('read');b.textContent='';}}var d=rs.length;document.getElementById('readCount').textContent=d+' / '+TOTAL;document.getElementById('readBar').style.width=Math.round(d/TOTAL*100)+'%';}
+var mastery=JSON.parse(localStorage.getItem(SM)||'{}');
+function applyMastery(){var ok=0,ko=0;for(var i=0;i<TOTAL;i++){var n=document.getElementById('n'+i),b=document.getElementById('qbadge'+i);if(!n||!b)continue;n.classList.remove('mastered','to-review');b.className='quiz-badge';b.textContent='';if(mastery[i]==='ok'){n.classList.add('mastered');b.className='quiz-badge show ok';b.textContent='✓ Maîtrisé';ok++;}else if(mastery[i]==='ko'){n.classList.add('to-review');b.className='quiz-badge show ko';b.textContent='✗ À revoir';ko++;}}var g=TOTAL-ok-ko;document.getElementById('barOk').style.flex=ok;document.getElementById('barKo').style.flex=ko;document.getElementById('barGrey').style.flex=Math.max(g,.2);if(ok+ko>0)document.getElementById('masteryCount').textContent=ok+' ✓ · '+ko+' ✗ · '+g+' non testés';}
+var quizData=[{"ni": 0, "q": "Un atome de carbone ¹²C (Z=6, A=12) possède :", "opts": ["6 protons, 6 neutrons, 6 électrons", "6 protons, 12 neutrons, 6 électrons", "12 protons, 6 neutrons, 12 électrons", "6 protons, 6 neutrons, 12 électrons"], "a": 0, "exp": "Z=6 → 6 protons. Neutrons = A-Z = 12-6 = 6. Atome neutre → électrons = protons = 6. Le ¹⁴C a 6p + 8n (isotope radioactif utilisé en datation)."}, {"ni": 1, "q": "La configuration électronique de l'azote (Z=7) est :", "opts": ["1s² 2s² 2p⁵", "1s² 2s² 2p³", "1s² 2s⁴ 2p¹", "1s² 2s² 2p² 3s¹"], "a": 1, "exp": "N (Z=7) : 1s²(2) + 2s²(4) + 2p³(7). Les 3 électrons 2p occupent 3 orbitales séparées (règle de Hund) → valence 3. L'azote peut former 3 liaisons (NH₃) ou 4 si chargé (NH₄⁺)."}, {"ni": 2, "q": "L'électronégativité dans le tableau périodique :", "opts": ["Augmente en descendant et de droite à gauche", "Augmente en montant et de gauche à droite (max = Fluor)", "Est identique dans un même groupe", "Ne varie pas avec la position"], "a": 1, "exp": "Électronégativité ↑ en montant dans un groupe (moins d'écrantage) et ↑ de gauche à droite (Z augmente). Fluor = plus électronégatif (4,0). Important pour prévoir la polarité des liaisons."}, {"ni": 3, "q": "Les atomes CHNOPS sont essentiels en biochimie car :", "opts": ["Ce sont les plus lourds", "Ils constituent 99% des biomolécules (ADN, protéines, lipides)", "Ils sont tous radioactifs", "Ils forment uniquement des liaisons ioniques"], "a": 1, "exp": "CHNOPS (Carbone, Hydrogène, Azote, Oxygène, Phosphore, Soufre) = 99% des molécules du vivant. C (valence 4) = squelette carboné. N et O = fonctions chimiques. P = ADN + ATP. S = ponts disulfure des protéines."}, {"ni": 4, "q": "La spectrophotométrie à 260 nm est utilisée pour doser :", "opts": ["Les protéines", "Les lipides", "L'ADN et l'ARN (bases azotées absorbent à 260 nm)", "Le glucose"], "a": 2, "exp": "Bases azotées (A, T, G, C, U) absorbent à 260 nm. Protéines (tryptophane, tyrosine) absorbent à 280 nm. Rapport DO260/DO280 > 1,8 → ADN pur. < 1,8 → contamination protéique. Fondamental en biologie moléculaire."}, {"ni": 5, "q": "Deux isotopes d'un même élément ont :", "opts": ["Le même nombre de neutrons", "Le même nombre de protons (Z) mais des nombres de neutrons différents", "Des propriétés chimiques très différentes", "Des masses atomiques identiques"], "a": 1, "exp": "Isotopes = même Z (même élément, mêmes propriétés chimiques) + A différent (neutrons différents). ¹²C et ¹⁴C : mêmes réactions chimiques, mais ¹⁴C est radioactif (noyau instable car trop de neutrons)."}];var qs=null;
+function initQuiz(){if(qs)return;qs={idx:0,score:0};var sb=document.getElementById("startQuizBtn");if(sb)sb.style.display="none";renderQ();}
+function renderQ(){var c=document.getElementById('quiz-container');if(qs.idx>=quizData.length){c.innerHTML='<div class="quiz-card" style="text-align:center;padding:28px"><div style="font-size:40px;margin-bottom:12px">'+(qs.score>=Math.ceil(quizData.length*.8)?'🏆':qs.score>=Math.ceil(quizData.length*.6)?'💪':'📚')+'</div><div style="font-family:serif;font-size:22px;font-weight:700">'+qs.score+' / '+quizData.length+'</div></div>';document.getElementById('quiz-score').textContent='';return;}var q=quizData[qs.idx];c.innerHTML='<div class="quiz-card"><div class="quiz-q">Q'+(qs.idx+1)+'/'+quizData.length+' — '+q.q+'</div><div class="quiz-options">'+q.opts.map(function(o,i){return'<button class="quiz-opt" onclick="answer('+i+')">'+o+'</button>';}).join('')+'</div><div class="quiz-feedback" id="qfb"></div><button class="quiz-next" id="qnext" onclick="nextQ()">Question suivante →</button></div>';document.getElementById('quiz-score').textContent='Score : '+qs.score+' / '+qs.idx;}
+function answer(i){var q=quizData[qs.idx];document.querySelectorAll('.quiz-opt').forEach(function(o){o.disabled=true;});var ok=i===q.a;if(ok){qs.score++;document.querySelectorAll('.quiz-opt')[i].classList.add('correct');}else{document.querySelectorAll('.quiz-opt')[i].classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.a].classList.add('correct');}document.getElementById('qfb').textContent=(ok?'✓ Correct ! ':'✗ Incorrect. ')+q.exp;document.getElementById('qfb').className='quiz-feedback show '+(ok?'ok':'ko');document.getElementById('qnext').className='quiz-next show';document.getElementById('quiz-score').textContent='Score : '+qs.score+' / '+(qs.idx+1);mastery[q.ni]=ok?'ok':'ko';localStorage.setItem(SM,JSON.stringify(mastery));applyMastery();}
+function nextQ(){qs.idx++;renderQ();}
+function toggleTheme(){var h=document.documentElement,b=document.getElementById('themeBtn');if(h.dataset.theme==='light'){h.dataset.theme='dark';b.textContent='☀️';}else{h.dataset.theme='light';b.textContent='🌙';}}
+window.addEventListener('DOMContentLoaded',function(){applyRead();applyMastery();setTimeout(function(){initQuiz();},300);});
+var obs=new IntersectionObserver(function(e){if(e[0].isIntersecting)initQuiz();},{threshold:0.1});
+obs.observe(document.querySelector('.quiz-section'));</script>
+</body>
+</html>

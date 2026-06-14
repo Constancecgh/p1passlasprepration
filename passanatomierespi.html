@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Système Respiratoire - Anatomie PASS - Constance</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  [data-theme="dark"]{--bg:#0a0a0f;--surface:#13131a;--border:#1e1e2e;--accent:#60a5fa;--accent2:#a78bfa;--accent3:#f472b6;--text:#e2e8f0;--muted:#64748b;--warn:#fbbf24;--item-text:#cbd5e1;--def-bg:rgba(96,165,250,0.05);--def-border:rgba(96,165,250,0.18);--ex-bg:rgba(251,191,36,0.05);--ex-border:rgba(251,191,36,0.2);--ex-color:#fde68a;--formula-bg:rgba(167,139,250,0.08);--formula-border:rgba(167,139,250,0.3);--formula-color:#c4b5fd;--progress-track:rgba(255,255,255,0.06);--toggle-bg:#1e1e2e;--quiz-bg:#0f0f18;--quiz-opt:rgba(255,255,255,0.03);--quiz-opt-hover:rgba(255,255,255,0.07);--correct:rgba(96,165,250,0.12);--correct-border:#60a5fa;--wrong:rgba(244,114,182,0.12);--wrong-border:#f472b6;--tip-bg:rgba(96,165,250,0.06);--tip-border:rgba(96,165,250,0.2);--tip-color:#93c5fd;--notion-bg:#13131a;--notion-border:#1e1e2e;}
+  [data-theme="light"]{--bg:#f0f6ff;--surface:#fff;--border:#dbeafe;--accent:#2563eb;--accent2:#7c3aed;--accent3:#db2777;--text:#1e1b18;--muted:#6b7280;--warn:#d97706;--item-text:#374151;--def-bg:rgba(37,99,235,0.04);--def-border:rgba(37,99,235,0.15);--ex-bg:rgba(217,119,6,0.05);--ex-border:rgba(217,119,6,0.18);--ex-color:#92400e;--formula-bg:rgba(124,58,237,0.06);--formula-border:rgba(124,58,237,0.22);--formula-color:#5b21b6;--progress-track:rgba(0,0,0,0.07);--toggle-bg:#dbeafe;--quiz-bg:#eff6ff;--quiz-opt:rgba(0,0,0,0.02);--quiz-opt-hover:rgba(0,0,0,0.05);--correct:rgba(37,99,235,0.08);--correct-border:#2563eb;--wrong:rgba(219,39,119,0.08);--wrong-border:#db2777;--tip-bg:rgba(37,99,235,0.05);--tip-border:rgba(37,99,235,0.2);--tip-color:#1e40af;--notion-bg:#fff;--notion-border:#dbeafe;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;min-height:100vh;transition:background .3s,color .3s;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:rgba(10,10,15,0.85);}
+  [data-theme="light"] nav{background:rgba(240,246,255,0.88);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--accent);text-decoration:none;}
+  .nav-back{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+  .nav-back:hover{color:var(--text);}
+  .theme-toggle{background:var(--toggle-bg);border:1px solid var(--border);border-radius:100px;padding:5px 12px;cursor:pointer;font-size:14px;color:var(--muted);transition:all .2s;user-select:none;line-height:1;}
+  .theme-toggle:hover{border-color:var(--accent);color:var(--text);}
+  header{padding:100px 52px 40px;border-bottom:1px solid var(--border);max-width:800px;margin:0 auto;}
+  .breadcrumb{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;}
+  .breadcrumb a{color:var(--muted);text-decoration:none;}
+  .breadcrumb a:hover{color:var(--accent);}
+  .ch-badge{display:inline-block;background:rgba(96,165,250,.08);border:1px solid rgba(96,165,250,.2);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:14px;}
+  h1{font-family:'Libre Baskerville',serif;font-size:clamp(28px,4.5vw,48px);font-weight:700;line-height:1.1;}
+  .ch-subtitle{margin-top:8px;color:var(--muted);font-size:14px;}
+  .progress-wrap{margin-top:22px;max-width:320px;display:flex;flex-direction:column;gap:12px;}
+  .prog-row{display:flex;flex-direction:column;gap:5px;}
+  .prog-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;}
+  .prog-track{height:4px;background:var(--progress-track);border-radius:100px;overflow:hidden;}
+  .prog-fill{height:100%;border-radius:100px;transition:width .4s ease;}
+  .fill-read{background:var(--accent2);}
+  .mastery-bar{display:flex;height:4px;border-radius:100px;overflow:hidden;gap:2px;}
+  .bar-ok{background:var(--accent);transition:flex .5s ease;flex:0;}
+  .bar-ko{background:var(--accent3);transition:flex .5s ease;flex:0;}
+  .bar-grey{background:var(--progress-track);transition:flex .5s ease;flex:1;}
+  .legend-row{display:flex;gap:14px;margin-top:5px;}
+  .leg{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);}
+  .leg-dot{width:7px;height:7px;border-radius:50%;}
+  main{padding:48px 52px;max-width:800px;margin:0 auto;}
+  .section-sep{display:flex;align-items:center;gap:14px;margin:40px 0 22px;}
+  .section-sep-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;}
+  .section-sep-line{flex:1;height:1px;background:var(--border);}
+  .sep-priority .section-sep-label{color:var(--accent3);}
+  .sep-important .section-sep-label{color:var(--warn);}
+  .sep-base .section-sep-label{color:var(--accent2);}
+  .notion{background:var(--notion-bg);border:1px solid var(--notion-border);border-radius:14px;padding:22px 24px;margin-bottom:12px;border-left:4px solid transparent;transition:opacity .2s;}
+  .notion.priority{border-left-color:var(--accent3);}
+  .notion.important{border-left-color:var(--warn);}
+  .notion.base{border-left-color:var(--accent2);}
+  .notion.read{opacity:.55;}
+  .notion.mastered{box-shadow:0 0 0 1.5px var(--accent);}
+  .notion.to-review{box-shadow:0 0 0 1.5px var(--accent3);}
+  .notion-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:10px;}
+  .notion-left{display:flex;align-items:flex-start;gap:10px;flex:1;}
+  .check-btn{width:20px;height:20px;border-radius:5px;border:2px solid var(--border);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;transition:all .2s;color:transparent;cursor:pointer;background:transparent;user-select:none;}
+  .notion.read .check-btn{background:var(--accent2);border-color:var(--accent2);color:#fff;}
+  .quiz-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;flex-shrink:0;margin-top:3px;display:none;}
+  .quiz-badge.show{display:inline-block;}
+  .quiz-badge.ok{background:rgba(96,165,250,.12);color:var(--accent);}
+  .quiz-badge.ko{background:rgba(244,114,182,.12);color:var(--accent3);}
+  .notion-title{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;color:var(--text);}
+  .notion-def{font-size:14px;line-height:1.75;color:var(--item-text);}
+  .notion-def strong{color:var(--text);font-weight:700;}
+  .def-box{margin-top:14px;padding:14px 16px;background:var(--def-bg);border:1px solid var(--def-border);border-radius:10px;font-size:13px;line-height:1.7;color:var(--item-text);}
+  .def-box strong{color:var(--text);font-weight:700;}
+  .def-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}
+  .formula-box{margin-top:12px;padding:14px 18px;background:var(--formula-bg);border:1px solid var(--formula-border);border-radius:10px;text-align:center;}
+  .formula-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--formula-color);opacity:.7;margin-bottom:6px;}
+  .formula-main{font-size:14px;color:var(--formula-color);font-family:'Libre Baskerville',serif;font-style:italic;line-height:1.6;}
+  .formula-detail{font-size:11px;color:var(--formula-color);opacity:.65;margin-top:5px;}
+  .example-box{margin-top:12px;padding:13px 16px;background:var(--ex-bg);border:1px solid var(--ex-border);border-radius:10px;font-size:13px;line-height:1.65;color:var(--ex-color);}
+  .example-box::before{content:"🏥 Clinique — ";font-weight:700;}
+  .example-box strong{font-weight:700;}
+  .tip-box{margin-top:32px;padding:14px 16px;background:var(--tip-bg);border:1px solid var(--tip-border);border-radius:10px;font-size:13px;color:var(--tip-color);line-height:1.65;}
+  .tip-box::before{content:"💡 Conseil strat — ";font-weight:700;}
+  .quiz-section{margin-top:48px;padding-top:32px;border-top:1px solid var(--border);}
+  .quiz-title{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;margin-bottom:20px;}
+  .quiz-title::before{content:"🎯 Quiz — ";}
+  .quiz-card{background:var(--quiz-bg);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px;}
+  .quiz-q{font-size:14px;line-height:1.65;color:var(--item-text);margin-bottom:14px;font-weight:500;}
+  .quiz-options{display:flex;flex-direction:column;gap:8px;margin-bottom:10px;}
+  .quiz-opt{padding:11px 15px;background:var(--quiz-opt);border:1px solid var(--border);border-radius:9px;font-size:13px;cursor:pointer;transition:all .15s;color:var(--item-text);text-align:left;font-family:'Source Serif 4',serif;line-height:1.4;}
+  .quiz-opt:hover:not(:disabled){background:var(--quiz-opt-hover);border-color:var(--muted);}
+  .quiz-opt.correct{background:var(--correct);border-color:var(--correct-border);color:var(--accent);}
+  .quiz-opt.wrong{background:var(--wrong);border-color:var(--wrong-border);color:var(--accent3);}
+  .quiz-opt:disabled{cursor:default;}
+  .quiz-feedback{font-size:13px;line-height:1.55;padding:11px 14px;border-radius:9px;margin-top:6px;display:none;}
+  .quiz-feedback.show{display:block;}
+  .quiz-feedback.ok{background:var(--correct);color:var(--accent);border:1px solid var(--correct-border);}
+  .quiz-feedback.ko{background:var(--wrong);color:var(--accent3);border:1px solid var(--wrong-border);}
+  .quiz-next{margin-top:10px;background:none;border:1px solid var(--border);border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Source Serif 4',serif;transition:all .2s;display:none;}
+  .quiz-next.show{display:inline-block;}
+  .quiz-next:hover{border-color:var(--accent);color:var(--accent);}
+  .quiz-score{font-size:12px;color:var(--muted);margin-top:10px;font-weight:600;}
+  .ch-nav{display:flex;justify-content:space-between;margin-top:48px;padding-top:28px;border-top:1px solid var(--border);}
+  .ch-nav a{font-size:13px;color:var(--muted);text-decoration:none;font-weight:600;transition:color .2s;}
+  .ch-nav a:hover{color:var(--accent);}
+  footer{border-top:1px solid var(--border);padding:24px 52px;max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:48px;}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--accent);}
+  .footer-copy{font-size:11px;color:var(--muted);}
+  @media(max-width:600px){header,main,footer{padding-left:20px;padding-right:20px;}header{padding-top:80px;}nav{padding:.9rem 1.2rem;}footer{flex-direction:column;text-align:center;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Constance</a>
+  <a class="nav-back" href="passanatomie.html">← Anatomie</a>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+</nav>
+<header>
+  <div class="breadcrumb"><a href="passanatomie.html">Anatomie</a> · Chapitre 02</div>
+  <div class="ch-badge">Chapitre 02 · Priorité max</div>
+  <h1>Système Respiratoire</h1>
+  <div class="ch-subtitle">Voies aériennes · Arbre bronchique · Alvéoles · Plèvre · Muscles respiratoires</div>
+  <div class="progress-wrap">
+    <div class="prog-row">
+      <div class="prog-label"><span>Notions lues</span><span id="readCount">0 / 8</span></div>
+      <div class="prog-track"><div class="prog-fill fill-read" id="readBar" style="width:0%"></div></div>
+    </div>
+    <div class="prog-row">
+      <div class="prog-label"><span>Maîtrise quiz</span><span id="masteryCount">Fais le quiz ↓</span></div>
+      <div class="mastery-bar"><div class="bar-ok" id="barOk"></div><div class="bar-ko" id="barKo"></div><div class="bar-grey" id="barGrey"></div></div>
+      <div class="legend-row">
+        <div class="leg"><div class="leg-dot" style="background:var(--accent)"></div>Maîtrisé</div>
+        <div class="leg"><div class="leg-dot" style="background:var(--accent3)"></div>À revoir</div>
+        <div class="leg"><div class="leg-dot" style="background:var(--progress-track)"></div>Non testé</div>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+
+<div class="section-sep sep-priority"><div class="section-sep-label">🔴 Incontournables</div><div class="section-sep-line"></div></div>
+
+<div class="notion priority" id="n0">
+  <div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk0" onclick="toggleRead(0)"></div><div class="notion-title">Voies aériennes supérieures</div></div><div class="quiz-badge" id="qbadge0"></div></div>
+  <div class="notion-def">Fosses nasales (filtration, humidification, réchauffement) → <strong>pharynx</strong> (carrefour aéro-digestif) → <strong>larynx</strong> (l'<strong>épiglotte</strong> bascule lors de la déglutition pour protéger les voies aériennes ; la <strong>glotte</strong> = cordes vocales) → <strong>trachée</strong> (10-12 cm, se bifurque à la <strong>carène</strong> en T4-T5).</div>
+  <div class="example-box">L'<strong>épiglottite aiguë</strong> (H. influenzae type b) → obstruction brutale des voies aériennes → urgence ORL absolue. Clinique : dysphagie sévère, hypersalivation, stridor, position en trépied.</div>
+</div>
+
+<div class="notion priority" id="n1">
+  <div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk1" onclick="toggleRead(1)"></div><div class="notion-title">L'arbre bronchique et l'asymétrie droite/gauche</div></div><div class="quiz-badge" id="qbadge1"></div></div>
+  <div class="notion-def">La trachée se bifurque en <strong>2 bronches souches</strong>. La bronche <strong>droite</strong> est plus verticale et plus courte → les corps étrangers inhalés vont préférentiellement à droite. <strong>3 lobes à droite</strong> (sup., moyen, inf.), <strong>2 lobes à gauche</strong> (sup. + inf.) car le cœur occupe l'espace gauche.</div>
+  <div class="def-box">
+    <div class="def-label">Division de l'arbre bronchique</div>
+    Trachée → bronches souches → bronches lobaires → <strong>bronches segmentaires</strong> (10 segments/poumon) → bronchioles → <strong>alvéoles</strong>. La bronche, l'artère pulmonaire et les veines pulmonaires forment le <strong>hile</strong> de chaque poumon.
+  </div>
+  <div class="example-box">Un enfant inhale une pièce → se loge dans la <strong>bronche souche droite</strong> (plus verticale). Clinique : wheezing unilatéral droit, atélectasie lobaire droite à la radio. Traitement : bronchoscopie en urgence pour extraction.</div>
+</div>
+
+<div class="notion priority" id="n2">
+  <div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk2" onclick="toggleRead(2)"></div><div class="notion-title">L'alvéole pulmonaire</div></div><div class="quiz-badge" id="qbadge2"></div></div>
+  <div class="notion-def">Unité fonctionnelle des échanges gazeux. <strong>Pneumocytes type I</strong> (90% de la surface) : échanges gazeux par diffusion. <strong>Pneumocytes type II</strong> (10%) : produisent le <strong>surfactant</strong> (phospholipides réduisant la tension superficielle → empêche le collapsus alvéolaire). Membrane alvéolo-capillaire très fine (~0,2 µm).</div>
+  <div class="example-box">Chez les <strong>prématurés &lt; 32 SA</strong>, la production de surfactant est insuffisante → <strong>maladie des membranes hyalines</strong> → syndrome de détresse respiratoire néonatale. Traitement préventif : corticoïdes anténataux pour accélérer la maturation pulmonaire.</div>
+</div>
+
+<div class="notion priority" id="n3">
+  <div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk3" onclick="toggleRead(3)"></div><div class="notion-title">La plèvre</div></div><div class="quiz-badge" id="qbadge3"></div></div>
+  <div class="notion-def"><strong>Feuillet viscéral</strong> (colle au poumon) + <strong>feuillet pariétal</strong> (tapisse le thorax). La <strong>cavité pleurale</strong> entre les deux est virtuelle, à pression négative (~-5 cmH₂O). Elle contient normalement &lt;5 mL de liquide lubrifiant. Un <strong>pneumothorax</strong> = entrée d'air → pression devient positive → poumon se collabe.</div>
+  <div class="example-box"><strong>Pneumothorax spontané</strong> : homme grand jeune fumeur, rupture d'une bulle apicale. Clinique : douleur thoracique + dyspnée brutale + abolition du murmure vésiculaire. Radio : hyperclarté sans trame vasculaire. Traitement : exsufflation si &gt;20% ou mal toléré.</div>
+</div>
+
+<div class="section-sep sep-important"><div class="section-sep-label">🟡 Importants</div><div class="section-sep-line"></div></div>
+
+<div class="notion important" id="n4">
+  <div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk4" onclick="toggleRead(4)"></div><div class="notion-title">Les lobes pulmonaires</div></div><div class="quiz-badge" id="qbadge4"></div></div>
+  <div class="notion-def"><strong>Poumon droit</strong> : 3 lobes (supérieur, moyen, inférieur), 2 scissures. <strong>Poumon gauche</strong> : 2 lobes (supérieur et inférieur), 1 scissure. La <strong>lingula</strong> = partie inférieure du lobe supérieur gauche, homologue du lobe moyen droit.</div>
+  <div class="example-box">Les pneumonies touchent préférentiellement le <strong>lobe inférieur droit</strong> chez les patients alités. La pneumonie du lobe moyen droit peut comprimer les ganglions hilaires → atélectasie récidivante → bronchectasies.</div>
+</div>
+
+<div class="notion important" id="n5">
+  <div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk5" onclick="toggleRead(5)"></div><div class="notion-title">Muscles respiratoires</div></div><div class="quiz-badge" id="qbadge5"></div></div>
+  <div class="notion-def"><strong>Inspiration</strong> : <strong>diaphragme</strong> (principal, s'aplatit → augmente le volume thoracique) + intercostaux externes. <strong>Expiration normale</strong> : passive (élasticité). <strong>Expiration forcée</strong> : intercostaux internes + abdominaux.</div>
+  <div class="formula-box">
+    <div class="formula-label">Le diaphragme — 3 orifices</div>
+    <div class="formula-main">T8 : VCI · T10 : œsophage + nerf vague (X) · T12 : aorte</div>
+    <div class="formula-detail">Innervation : nerfs phréniques C3-C4-C5 · Mémo : C3-4-5 keeps the diaphragm alive</div>
+  </div>
+  <div class="example-box">La <strong>paralysie diaphragmatique unilatérale</strong> (lésion du nerf phrénique : trauma, tumeur apicale, chirurgie médiastinale) → ascension de l'hémi-diaphragme paralysé visible à la radio thoracique. Souvent asymptomatique au repos.</div>
+</div>
+
+<div class="notion important" id="n6">
+  <div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk6" onclick="toggleRead(6)"></div><div class="notion-title">Le hile pulmonaire</div></div><div class="quiz-badge" id="qbadge6"></div></div>
+  <div class="notion-def">Porte d'entrée/sortie du poumon. Contient : <strong>bronche souche</strong> + <strong>artère pulmonaire</strong> + <strong>2 veines pulmonaires</strong> + vaisseaux lymphatiques + ganglions. Le hile gauche est plus haut que le droit (à cause de la crosse aortique).</div>
+  <div class="example-box">La <strong>sarcoïdose</strong> provoque une <strong>adénopathie hilaire bilatérale symétrique</strong> à la radio thoracique (stade I). Les ganglions comprimés → toux sèche rebelle. Diagnostic : granulomes non caséeux à la biopsie (bronchoscopie ou ganglion accessoire).</div>
+</div>
+
+<div class="section-sep sep-base"><div class="section-sep-label">🔵 Base</div><div class="section-sep-line"></div></div>
+
+<div class="notion base" id="n7">
+  <div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk7" onclick="toggleRead(7)"></div><div class="notion-title">Volumes pulmonaires</div></div><div class="quiz-badge" id="qbadge7"></div></div>
+  <div class="notion-def"><strong>Volume courant (VT)</strong> : ~500 mL. <strong>Capacité vitale (CV)</strong> : 4-5 L. <strong>Volume résiduel (VR)</strong> : ~1,2 L (non mobilisable). <strong>CPT</strong> = CV + VR. <strong>Rapport de Tiffeneau</strong> VEMS/CV : normal &gt;70%.</div>
+  <div class="formula-box">
+    <div class="formula-label">Syndromes spirométriques</div>
+    <div class="formula-main">Obstructif : VEMS/CV &lt; 70% (BPCO, asthme) · VR augmenté (distension)</div>
+    <div class="formula-detail">Restrictif : CV &lt; 80% prédit · VEMS/CV normal ou augmenté (fibrose pulmonaire)</div>
+  </div>
+  <div class="example-box"><strong>BPCO</strong> : VEMS/CV &lt; 70% + VR augmenté (air piégé dans les alvéoles emphysémateuses). <strong>Fibrose pulmonaire</strong> : syndrome restrictif — CV et CPT diminuées, Tiffeneau normal. Les deux causent une hypoxie mais par des mécanismes opposés.</div>
+</div>
+
+<div class="tip-box">Mémoriser l'asymétrie droite/gauche est essentiel : 3 lobes à droite, 2 à gauche, bronche droite plus verticale. Ces différences expliquent pourquoi les corps étrangers inhalés et les pneumonies d'inhalation vont préférentiellement à droite.</div>
+
+<div class="quiz-section">
+  <div class="quiz-title">Système Respiratoire</div>
+  <button onclick="initQuiz();this.style.display='none';" id="startQuizBtn" style="width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Source Serif 4',serif;margin-bottom:12px;transition:opacity .2s;">🎯 Lancer le quiz</button><div id="quiz-container"></div>
+  <div class="quiz-score" id="quiz-score"></div>
+</div>
+
+<a href="passanatomieqcm.html" style="display:flex;align-items:center;justify-content:space-between;background:rgba(96,165,250,0.06);border:1px solid rgba(96,165,250,0.22);border-radius:12px;padding:16px 20px;text-decoration:none;margin-top:16px;transition:all .2s;" onmouseover="this.style.borderColor='rgba(96,165,250,0.5)'" onmouseout="this.style.borderColor='rgba(96,165,250,0.22)'">
+  <div><div style="font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);margin-bottom:4px;">🎯 Entraînement complet</div><div style="font-size:14px;font-weight:600;color:var(--text);">QCM Anatomie — tous chapitres</div></div>
+  <div style="font-size:16px;color:var(--accent);">→</div>
+</a>
+
+<div class="ch-nav">
+  <a href="passanatomiecardio.html">← Chapitre 01 — Cardiovasculaire</a>
+  <a href="passanatomiesn.html">Chapitre 03 — Système nerveux →</a>
+</div>
+</main>
+<footer>
+  <div class="footer-logo">Constance</div>
+  <div class="footer-copy">© Constance | @constance.cgh · Programme PASS gratuit · Tous droits réservés</div>
+</footer>
+<script>
+const TOTAL=8;const SR='anat_respi_read';const SM='anat_respi_mastery';
+var readState=JSON.parse(localStorage.getItem(SR)||'[]');
+function toggleRead(i){var x=readState.indexOf(i);if(x===-1)readState.push(i);else readState.splice(x,1);localStorage.setItem(SR,JSON.stringify(readState));applyRead();}
+function applyRead(){for(var i=0;i<TOTAL;i++){var n=document.getElementById('n'+i),b=document.getElementById('chk'+i);if(!n||!b)continue;if(readState.includes(i)){n.classList.add('read');b.textContent='✓';}else{n.classList.remove('read');b.textContent='';}}var d=readState.length;document.getElementById('readCount').textContent=d+' / '+TOTAL;document.getElementById('readBar').style.width=Math.round(d/TOTAL*100)+'%';}
+var mastery=JSON.parse(localStorage.getItem(SM)||'{}');
+function applyMastery(){var ok=0,ko=0;for(var i=0;i<TOTAL;i++){var n=document.getElementById('n'+i),b=document.getElementById('qbadge'+i);if(!n||!b)continue;n.classList.remove('mastered','to-review');b.className='quiz-badge';b.textContent='';if(mastery[i]==='ok'){n.classList.add('mastered');b.className='quiz-badge show ok';b.textContent='✓ Maîtrisé';ok++;}else if(mastery[i]==='ko'){n.classList.add('to-review');b.className='quiz-badge show ko';b.textContent='✗ À revoir';ko++;}}var g=TOTAL-ok-ko;document.getElementById('barOk').style.flex=ok;document.getElementById('barKo').style.flex=ko;document.getElementById('barGrey').style.flex=Math.max(g,.2);if(ok+ko>0)document.getElementById('masteryCount').textContent=ok+' ✓ · '+ko+' ✗ · '+g+' non testés';}
+var quizData=[
+  {ni:0,q:"Quel organe protège les voies aériennes lors de la déglutition :",opts:["Le pharynx","Les cordes vocales","L'épiglotte","La trachée"],a:2,exp:"L'épiglotte bascule en arrière lors de la déglutition pour couvrir l'entrée du larynx. Sa dysfonction → fausses routes → pneumonie d'inhalation."},
+  {ni:1,q:"Un corps étranger inhalé va préférentiellement dans :",opts:["La bronche souche gauche","La bronche souche droite (plus verticale et courte)","La trachée","Les deux également"],a:1,exp:"La bronche droite est plus verticale et fait un angle plus faible avec la trachée → corps étrangers et pneumonies d'inhalation préférentiellement à droite."},
+  {ni:2,q:"Les pneumocytes de type II produisent :",opts:["De l'oxygène","Le surfactant réduisant la tension superficielle alvéolaire","De l'hémoglobine","Du CO2"],a:1,exp:"Pneumocytes II = surfactant → tension superficielle réduite → alvéoles stables. Pneumocytes I = échanges gazeux. Prématuré sans surfactant → maladie des membranes hyalines."},
+  {ni:3,q:"Le pneumothorax se manifeste par :",opts:["Matité et râles","Hyperclarté + abolition du murmure vésiculaire du côté atteint","Opacité lobaire + fièvre","Épanchement bilateral"],a:1,exp:"Air dans la cavité pleurale → hyperclarté (pas de trame vasculaire), tympanisme, abolition du MV. Sous tension → déviation médiastinale → urgence absolue."},
+  {ni:4,q:"Le poumon gauche a 2 lobes car :",opts:["Il est plus petit anatomiquement","Le cœur, décalé à gauche, réduit l'espace disponible","Il produit plus de surfactant","Sa vascularisation est différente"],a:1,exp:"Le cœur occupe une partie de l'espace thoracique gauche → poumon gauche = 2 lobes + lingula. Poumon droit = 3 lobes car plus de place."},
+  {ni:5,q:"Le nerf phrénique (diaphragme) naît de :",opts:["C1-C2","C3-C4-C5","T1-T2","L1-L2"],a:1,exp:"Mémo : C3-4-5 keeps the diaphragm alive. Lésion → paralysie diaphragmatique → hémidiaphragme ascensionné à la radio. Cause : trauma, tumeur apicale, chirurgie médiastinale."},
+  {ni:6,q:"L'adénopathie hilaire bilatérale symétrique à la radio thoracique évoque :",opts:["Une tuberculose","Une sarcoïdose","Une embolie pulmonaire","Un cancer bronchique bilateral"],a:1,exp:"Adénopathie hilaire bilatérale symétrique = sarcoïdose stade I. Tuberculose → adénopathies unilatérales ou médiastinales. Diagnostic : granulomes non caséeux à la biopsie."},
+  {ni:7,q:"Dans la BPCO, la spirométrie montre :",opts:["CV diminuée + Tiffeneau normal","VEMS diminué + VEMS/CV < 70% + VR augmenté","VEMS et CV diminués proportionnellement","DLCO normal"],a:1,exp:"BPCO = syndrome obstructif : VEMS/CV < 70%, VR augmenté (air piégé). Fibrose = restrictif (CV diminuée, Tiffeneau normal). Les deux causent une hypoxie mais par mécanismes opposés."},
+];
+var qs=null;
+function initQuiz(){if(qs)return;qs={idx:0,score:0};var sb=document.getElementById("startQuizBtn");if(sb)sb.style.display="none";renderQ();}
+function renderQ(){var c=document.getElementById('quiz-container');if(qs.idx>=quizData.length){c.innerHTML='<div class="quiz-card" style="text-align:center;padding:28px"><div style="font-size:40px;margin-bottom:12px">'+(qs.score>=6?'🏆':qs.score>=4?'💪':'📚')+'</div><div style="font-family:serif;font-size:22px;font-weight:700">'+qs.score+' / '+quizData.length+'</div></div>';document.getElementById('quiz-score').textContent='';return;}var q=quizData[qs.idx];c.innerHTML='<div class="quiz-card"><div class="quiz-q">Q'+(qs.idx+1)+'/'+quizData.length+' — '+q.q+'</div><div class="quiz-options">'+q.opts.map(function(o,i){return'<button class="quiz-opt" onclick="answer('+i+')">'+o+'</button>';}).join('')+'</div><div class="quiz-feedback" id="qfb"></div><button class="quiz-next" id="qnext" onclick="nextQ()">Question suivante →</button></div>';document.getElementById('quiz-score').textContent='Score : '+qs.score+' / '+qs.idx;}
+function answer(i){var q=quizData[qs.idx];document.querySelectorAll('.quiz-opt').forEach(function(o){o.disabled=true;});var ok=i===q.a;if(ok){qs.score++;document.querySelectorAll('.quiz-opt')[i].classList.add('correct');}else{document.querySelectorAll('.quiz-opt')[i].classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.a].classList.add('correct');}document.getElementById('qfb').textContent=(ok?'✓ Correct ! ':'✗ Incorrect. ')+q.exp;document.getElementById('qfb').className='quiz-feedback show '+(ok?'ok':'ko');document.getElementById('qnext').className='quiz-next show';document.getElementById('quiz-score').textContent='Score : '+qs.score+' / '+(qs.idx+1);mastery[q.ni]=ok?'ok':'ko';localStorage.setItem(SM,JSON.stringify(mastery));applyMastery();}
+function nextQ(){qs.idx++;renderQ();}
+function toggleTheme(){var h=document.documentElement,b=document.getElementById('themeBtn');if(h.dataset.theme==='light'){h.dataset.theme='dark';b.textContent='☀️';}else{h.dataset.theme='light';b.textContent='🌙';}}
+window.addEventListener('DOMContentLoaded',function(){applyRead();applyMastery();setTimeout(function(){initQuiz();},300);});
+var obs=new IntersectionObserver(function(e){if(e[0].isIntersecting)initQuiz();},{threshold:0.1});
+obs.observe(document.querySelector('.quiz-section'));
+</script>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Tissus Épithéliaux — Histologie PASS — Constance</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>  [data-theme="light"]{--bg:#fdf2f8;--surface:#fff;--border:#fbcfe8;--accent:#db2777;--accent2:#7c3aed;--accent3:#be185d;--text:#1e1b18;--muted:#6b7280;--warn:#d97706;--item-text:#374151;--def-bg:rgba(219,39,119,0.04);--def-border:rgba(219,39,119,0.15);--ex-bg:rgba(217,119,6,0.05);--ex-border:rgba(217,119,6,0.18);--ex-color:#92400e;--formula-bg:rgba(124,58,237,0.05);--formula-border:rgba(124,58,237,0.2);--formula-color:#5b21b6;--progress-track:rgba(0,0,0,0.07);--toggle-bg:#fbcfe8;--quiz-bg:#fdf2f8;--quiz-opt:rgba(0,0,0,0.02);--quiz-opt-hover:rgba(0,0,0,0.05);--correct:rgba(219,39,119,0.08);--correct-border:#db2777;--wrong:rgba(124,58,237,0.08);--wrong-border:#7c3aed;--tip-bg:rgba(219,39,119,0.05);--tip-border:rgba(219,39,119,0.18);--tip-color:#9d174d;--notion-bg:#fff;--notion-border:#fbcfe8;}
+  [data-theme="dark"]{--bg:#0d080c;--surface:#160d13;--border:#2d1526;--accent:#f472b6;--accent2:#a78bfa;--accent3:#fb7185;--text:#e2e8f0;--muted:#64748b;--warn:#fbbf24;--item-text:#cbd5e1;--def-bg:rgba(244,114,182,0.05);--def-border:rgba(244,114,182,0.18);--ex-bg:rgba(251,191,36,0.05);--ex-border:rgba(251,191,36,0.2);--ex-color:#fde68a;--formula-bg:rgba(167,139,250,0.07);--formula-border:rgba(167,139,250,0.25);--formula-color:#c4b5fd;--progress-track:rgba(255,255,255,0.06);--toggle-bg:#2d1526;--quiz-bg:#0d080c;--quiz-opt:rgba(255,255,255,0.03);--quiz-opt-hover:rgba(255,255,255,0.07);--correct:rgba(244,114,182,0.12);--correct-border:#f472b6;--wrong:rgba(167,139,250,0.12);--wrong-border:#a78bfa;--tip-bg:rgba(244,114,182,0.06);--tip-border:rgba(244,114,182,0.2);--tip-color:#fbcfe8;--notion-bg:#160d13;--notion-border:#2d1526;}  *{margin:0;padding:0;box-sizing:border-box;}body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;min-height:100vh;transition:background .3s,color .3s;}nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:rgba(253,242,248,0.90);}[data-theme="dark"] nav{background:rgba(13,8,12,0.90);}.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--accent);text-decoration:none;}.nav-back{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}.nav-back:hover{color:var(--text);}.theme-toggle{background:var(--toggle-bg);border:1px solid var(--border);border-radius:100px;padding:5px 12px;cursor:pointer;font-size:14px;color:var(--muted);user-select:none;line-height:1;}.theme-toggle:hover{border-color:var(--accent);}header{padding:100px 52px 40px;border-bottom:1px solid var(--border);max-width:800px;margin:0 auto;}.breadcrumb{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;}.breadcrumb a{color:var(--muted);text-decoration:none;}.breadcrumb a:hover{color:var(--accent);}.ch-badge{display:inline-block;background:rgba(219,39,119,.08);border:1px solid rgba(219,39,119,.2);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;padding:4px 12px;border-radius:100px;margin-bottom:14px;}h1{font-family:'Libre Baskerville',serif;font-size:clamp(28px,4.5vw,48px);font-weight:700;line-height:1.1;}.ch-subtitle{margin-top:8px;color:var(--muted);font-size:14px;}.progress-wrap{margin-top:22px;max-width:320px;display:flex;flex-direction:column;gap:12px;}.prog-row{display:flex;flex-direction:column;gap:5px;}.prog-label{font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;}.prog-track{height:4px;background:var(--progress-track);border-radius:100px;overflow:hidden;}.prog-fill{height:100%;border-radius:100px;transition:width .4s ease;}.fill-read{background:var(--accent2);}.mastery-bar{display:flex;height:4px;border-radius:100px;overflow:hidden;gap:2px;}.bar-ok{background:var(--accent);transition:flex .5s;flex:0;}.bar-ko{background:var(--accent3);transition:flex .5s;flex:0;}.bar-grey{background:var(--progress-track);transition:flex .5s;flex:1;}.legend-row{display:flex;gap:14px;margin-top:5px;}.leg{display:flex;align-items:center;gap:5px;font-size:10px;color:var(--muted);}.leg-dot{width:7px;height:7px;border-radius:50%;}main{padding:48px 52px;max-width:800px;margin:0 auto;}.section-sep{display:flex;align-items:center;gap:14px;margin:40px 0 22px;}.section-sep-label{font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;}.section-sep-line{flex:1;height:1px;background:var(--border);}.sep-priority .section-sep-label{color:var(--accent3);}.sep-important .section-sep-label{color:var(--warn);}.sep-base .section-sep-label{color:var(--accent2);}.notion{background:var(--notion-bg);border:1px solid var(--notion-border);border-radius:14px;padding:22px 24px;margin-bottom:12px;border-left:4px solid transparent;transition:opacity .2s;}.notion.priority{border-left-color:var(--accent3);}.notion.important{border-left-color:var(--warn);}.notion.base{border-left-color:var(--accent2);}.notion.read{opacity:.55;}.notion.mastered{box-shadow:0 0 0 1.5px var(--accent);}.notion.to-review{box-shadow:0 0 0 1.5px var(--accent3);}.notion-top{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:10px;}.notion-left{display:flex;align-items:flex-start;gap:10px;flex:1;}.check-btn{width:20px;height:20px;border-radius:5px;border:2px solid var(--border);flex-shrink:0;margin-top:2px;font-size:11px;font-weight:700;transition:all .2s;color:transparent;cursor:pointer;background:transparent;user-select:none;display:flex;align-items:center;justify-content:center;}.notion.read .check-btn{background:var(--accent2);border-color:var(--accent2);color:#fff;}.quiz-badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:100px;flex-shrink:0;margin-top:3px;display:none;}.quiz-badge.show{display:inline-block;}.quiz-badge.ok{background:rgba(219,39,119,.1);color:var(--accent);}.quiz-badge.ko{background:rgba(124,58,237,.1);color:var(--accent2);}.notion-title{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;color:var(--text);}.notion-def{font-size:14px;line-height:1.8;color:var(--item-text);}.notion-def strong{color:var(--text);font-weight:700;}.def-box{margin-top:14px;padding:14px 16px;background:var(--def-bg);border:1px solid var(--def-border);border-radius:10px;font-size:13px;line-height:1.7;color:var(--item-text);}.def-box strong{color:var(--text);}.def-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;}.formula-box{margin-top:12px;padding:14px 18px;background:var(--formula-bg);border:1px solid var(--formula-border);border-radius:10px;text-align:center;}.formula-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--formula-color);opacity:.7;margin-bottom:6px;}.formula-main{font-size:15px;color:var(--formula-color);font-family:'Libre Baskerville',serif;font-style:italic;line-height:1.6;}.formula-detail{font-size:11px;color:var(--formula-color);opacity:.65;margin-top:5px;}.example-box{margin-top:12px;padding:13px 16px;background:var(--ex-bg);border:1px solid var(--ex-border);border-radius:10px;font-size:13px;line-height:1.65;color:var(--ex-color);}.example-box::before{content:"💡 Application clinique — ";font-weight:700;}.example-box strong{font-weight:700;}.tip-box{margin-top:32px;padding:14px 16px;background:var(--tip-bg);border:1px solid var(--tip-border);border-radius:10px;font-size:13px;color:var(--tip-color);line-height:1.65;}.tip-box::before{content:"🎯 Conseil — ";font-weight:700;}.quiz-section{margin-top:48px;padding-top:32px;border-top:1px solid var(--border);}.quiz-title{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;margin-bottom:20px;}.quiz-title::before{content:"🎯 Quiz — ";}.quiz-card{background:var(--quiz-bg);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:12px;}.quiz-q{font-size:14px;line-height:1.65;color:var(--item-text);margin-bottom:14px;font-weight:500;}.quiz-options{display:flex;flex-direction:column;gap:8px;}.quiz-opt{padding:11px 15px;background:var(--quiz-opt);border:1px solid var(--border);border-radius:9px;font-size:13px;cursor:pointer;transition:all .15s;color:var(--item-text);text-align:left;font-family:'Source Serif 4',serif;line-height:1.4;}.quiz-opt:hover:not(:disabled){background:var(--quiz-opt-hover);border-color:var(--muted);}.quiz-opt.correct{background:var(--correct);border-color:var(--correct-border);color:var(--accent);}.quiz-opt.wrong{background:var(--wrong);border-color:var(--wrong-border);color:var(--accent2);}.quiz-opt:disabled{cursor:default;}.quiz-feedback{font-size:13px;line-height:1.55;padding:11px 14px;border-radius:9px;margin-top:8px;display:none;}.quiz-feedback.show{display:block;}.quiz-feedback.ok{background:var(--correct);color:var(--accent);border:1px solid var(--correct-border);}.quiz-feedback.ko{background:var(--wrong);color:var(--accent2);border:1px solid var(--wrong-border);}.quiz-next{margin-top:10px;background:none;border:1px solid var(--border);border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;color:var(--muted);cursor:pointer;font-family:'Source Serif 4',serif;transition:all .2s;display:none;}.quiz-next.show{display:inline-block;}.quiz-next:hover{border-color:var(--accent);color:var(--accent);}.quiz-score{font-size:12px;color:var(--muted);margin-top:10px;font-weight:600;}.ch-nav{display:flex;justify-content:space-between;margin-top:48px;padding-top:28px;border-top:1px solid var(--border);}.ch-nav a{font-size:13px;color:var(--muted);text-decoration:none;font-weight:600;transition:color .2s;}.ch-nav a:hover{color:var(--accent);}footer{border-top:1px solid var(--border);padding:24px 52px;max-width:800px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:48px;}.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--accent);}.footer-copy{font-size:11px;color:var(--muted);}@media(max-width:600px){header,main,footer{padding-left:20px;padding-right:20px;}header{padding-top:80px;}nav{padding:.9rem 1.2rem;}footer{flex-direction:column;text-align:center;}}</style>
+</head>
+<body>
+<nav><a class="nav-logo" href="index.html">Constance</a><a class="nav-back" href="passhistologie.html">← Histologie</a><button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button></nav>
+<header>
+  <div class="breadcrumb"><a href="passhistologie.html">Histologie</a> · Chapitre 01</div>
+  <div class="ch-badge">Chapitre 01</div><h1>Tissus Épithéliaux</h1><div class="ch-subtitle">Classification · Lame basale · Jonctions · Glandes · Spécialisations</div>
+  <div class="progress-wrap">
+    <div class="prog-row"><div class="prog-label"><span>Notions lues</span><span id="readCount">0 / 5</span></div><div class="prog-track"><div class="prog-fill fill-read" id="readBar" style="width:0%"></div></div></div>
+    <div class="prog-row"><div class="prog-label"><span>Maîtrise quiz</span><span id="masteryCount">Fais le quiz ↓</span></div>
+      <div class="mastery-bar"><div class="bar-ok" id="barOk"></div><div class="bar-ko" id="barKo"></div><div class="bar-grey" id="barGrey"></div></div>
+      <div class="legend-row"><div class="leg"><div class="leg-dot" style="background:var(--accent)"></div>Maîtrisé</div><div class="leg"><div class="leg-dot" style="background:var(--accent3)"></div>À revoir</div><div class="leg"><div class="leg-dot" style="background:var(--progress-track)"></div>Non testé</div></div>
+    </div>
+  </div>
+</header>
+<main>
+
+<div class="section-sep sep-priority"><div class="section-sep-label">🔴 Incontournables</div><div class="section-sep-line"></div></div>
+<div class="notion priority" id="n0"><div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk0" onclick="toggleRead(0)"></div><div class="notion-title">Classification des épithéliums</div></div><div class="quiz-badge" id="qbadge0"></div></div><div class="notion-def">Un <strong>épithélium</strong> est un tissu formé de cellules jointives (sans substance intercellulaire) reposant sur une <strong>lame basale</strong>. On les classe selon deux critères : le <strong>nombre de couches</strong> (simple = une seule couche, stratifié = plusieurs couches, pseudostratifié = une couche avec noyaux à différentes hauteurs) et la <strong>forme des cellules</strong> (pavimenteux = aplati, cubique, cylindrique = prismatique).</div><!-- SCHÉMA 1 : FORMES CELLULAIRES -->
+<div style="margin-top:18px;background:var(--formula-bg);border:1px solid var(--formula-border);border-radius:12px;padding:16px 20px;">
+<div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent2);margin-bottom:14px;">① Formes cellulaires — simple vs stratifié</div>
+<svg viewBox="0 0 700 230" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+
+  <!-- SIMPLE PAVIMENTEUX -->
+  <text x="75" y="14" text-anchor="middle" font-size="9.5" font-weight="700" fill="#db2777" font-family="Arial,sans-serif">Simple pavimenteux</text>
+  <!-- Lame basale -->
+  <rect x="10" y="145" width="130" height="7" rx="2" fill="#c4b5fd" opacity="0.7"/>
+  <!-- Tissu conjonctif -->
+  <rect x="10" y="152" width="130" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="75" y="166" text-anchor="middle" font-size="8" fill="#7c3aed" font-family="Arial,sans-serif">Tissu conjonctif</text>
+  <!-- Cellules aplaties x4 -->
+  <ellipse cx="28" cy="138" rx="14" ry="6" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <ellipse cx="55" cy="138" rx="14" ry="6" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <ellipse cx="82" cy="138" rx="14" ry="6" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <ellipse cx="109" cy="138" rx="14" ry="6" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <ellipse cx="132" cy="138" rx="6" ry="6" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <!-- Noyaux aplatis -->
+  <ellipse cx="28" cy="138" rx="5" ry="2" fill="#be185d" opacity="0.6"/>
+  <ellipse cx="55" cy="138" rx="5" ry="2" fill="#be185d" opacity="0.6"/>
+  <ellipse cx="82" cy="138" rx="5" ry="2" fill="#be185d" opacity="0.6"/>
+  <ellipse cx="109" cy="138" rx="5" ry="2" fill="#be185d" opacity="0.6"/>
+  <!-- Label -->
+  <text x="75" y="192" text-anchor="middle" font-size="8" fill="#6b7280" font-family="Arial,sans-serif" font-style="italic">Endothélium, mésothélium</text>
+  <!-- Flèche hauteur -->
+  <line x1="5" y1="132" x2="5" y2="145" stroke="#db2777" stroke-width="1" marker-end="url(#arr)"/>
+  <line x1="5" y1="145" x2="5" y2="132" stroke="#db2777" stroke-width="1"/>
+  <text x="2" y="139" text-anchor="middle" font-size="7" fill="#db2777" font-family="Arial,sans-serif" transform="rotate(-90,2,139)">aplatie</text>
+
+  <!-- SIMPLE CUBIQUE -->
+  <text x="250" y="14" text-anchor="middle" font-size="9.5" font-weight="700" fill="#db2777" font-family="Arial,sans-serif">Simple cubique</text>
+  <rect x="185" y="145" width="130" height="7" rx="2" fill="#c4b5fd" opacity="0.7"/>
+  <rect x="185" y="152" width="130" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="250" y="166" text-anchor="middle" font-size="8" fill="#7c3aed" font-family="Arial,sans-serif">Tissu conjonctif</text>
+  <!-- Cellules cubiques x4 -->
+  <rect x="188" y="121" width="26" height="23" rx="3" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <rect x="215" y="121" width="26" height="23" rx="3" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <rect x="242" y="121" width="26" height="23" rx="3" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <rect x="269" y="121" width="26" height="23" rx="3" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <rect x="296" y="121" width="18" height="23" rx="3" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <!-- Noyaux ronds centraux -->
+  <circle cx="201" cy="133" r="6" fill="#be185d" opacity="0.5"/>
+  <circle cx="228" cy="133" r="6" fill="#be185d" opacity="0.5"/>
+  <circle cx="255" cy="133" r="6" fill="#be185d" opacity="0.5"/>
+  <circle cx="282" cy="133" r="6" fill="#be185d" opacity="0.5"/>
+  <!-- Accolade hauteur ≈ largeur -->
+  <text x="250" y="192" text-anchor="middle" font-size="8" fill="#6b7280" font-family="Arial,sans-serif" font-style="italic">Tubules rénaux, thyroïde</text>
+  <text x="182" y="133" text-anchor="end" font-size="7" fill="#db2777" font-family="Arial,sans-serif">≈H=L</text>
+
+  <!-- SIMPLE CYLINDRIQUE -->
+  <text x="430" y="14" text-anchor="middle" font-size="9.5" font-weight="700" fill="#db2777" font-family="Arial,sans-serif">Simple cylindrique</text>
+  <rect x="365" y="145" width="130" height="7" rx="2" fill="#c4b5fd" opacity="0.7"/>
+  <rect x="365" y="152" width="130" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="430" y="166" text-anchor="middle" font-size="8" fill="#7c3aed" font-family="Arial,sans-serif">Tissu conjonctif</text>
+  <!-- Cellules hautes x4 -->
+  <rect x="368" y="95" width="26" height="49" rx="3" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <rect x="395" y="95" width="26" height="49" rx="3" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <rect x="422" y="95" width="26" height="49" rx="3" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <rect x="449" y="95" width="26" height="49" rx="3" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <rect x="476" y="95" width="17" height="49" rx="3" fill="#fce7f3" stroke="#db2777" stroke-width="1.5"/>
+  <!-- Noyaux basaux ovales -->
+  <ellipse cx="381" cy="134" rx="7" ry="5" fill="#be185d" opacity="0.5"/>
+  <ellipse cx="408" cy="134" rx="7" ry="5" fill="#be185d" opacity="0.5"/>
+  <ellipse cx="435" cy="134" rx="7" ry="5" fill="#be185d" opacity="0.5"/>
+  <ellipse cx="462" cy="134" rx="7" ry="5" fill="#be185d" opacity="0.5"/>
+  <!-- Flèche hauteur > largeur -->
+  <text x="363" y="120" text-anchor="end" font-size="7" fill="#db2777" font-family="Arial,sans-serif">H&gt;L</text>
+  <text x="430" y="192" text-anchor="middle" font-size="8" fill="#6b7280" font-family="Arial,sans-serif" font-style="italic">Intestin grêle, estomac</text>
+
+  <!-- STRATIFIÉ PAVIMENTEUX -->
+  <text x="615" y="14" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7c3aed" font-family="Arial,sans-serif">Stratifié pavimenteux</text>
+  <rect x="550" y="145" width="130" height="7" rx="2" fill="#c4b5fd" opacity="0.7"/>
+  <rect x="550" y="152" width="130" height="22" rx="2" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+  <text x="615" y="166" text-anchor="middle" font-size="8" fill="#7c3aed" font-family="Arial,sans-serif">Tissu conjonctif</text>
+  <!-- Couche basale -->
+  <rect x="553" y="126" width="23" height="18" rx="2" fill="#f9a8d4" stroke="#db2777" stroke-width="1.3"/>
+  <rect x="577" y="126" width="23" height="18" rx="2" fill="#f9a8d4" stroke="#db2777" stroke-width="1.3"/>
+  <rect x="601" y="126" width="23" height="18" rx="2" fill="#f9a8d4" stroke="#db2777" stroke-width="1.3"/>
+  <rect x="625" y="126" width="23" height="18" rx="2" fill="#f9a8d4" stroke="#db2777" stroke-width="1.3"/>
+  <rect x="649" y="126" width="28" height="18" rx="2" fill="#f9a8d4" stroke="#db2777" stroke-width="1.3"/>
+  <circle cx="564" cy="135" r="5" fill="#be185d" opacity="0.55"/>
+  <circle cx="588" cy="135" r="5" fill="#be185d" opacity="0.55"/>
+  <circle cx="612" cy="135" r="5" fill="#be185d" opacity="0.55"/>
+  <circle cx="636" cy="135" r="5" fill="#be185d" opacity="0.55"/>
+  <!-- Couche intermédiaire -->
+  <rect x="556" y="108" width="30" height="16" rx="2" fill="#fbcfe8" stroke="#db2777" stroke-width="1"/>
+  <rect x="587" y="108" width="30" height="16" rx="2" fill="#fbcfe8" stroke="#db2777" stroke-width="1"/>
+  <rect x="618" y="108" width="30" height="16" rx="2" fill="#fbcfe8" stroke="#db2777" stroke-width="1"/>
+  <rect x="649" y="108" width="28" height="16" rx="2" fill="#fbcfe8" stroke="#db2777" stroke-width="1"/>
+  <!-- Couche superficielle aplatie -->
+  <ellipse cx="571" cy="101" rx="15" ry="5" fill="#fdf2f8" stroke="#c4b5fd" stroke-width="1"/>
+  <ellipse cx="602" cy="101" rx="15" ry="5" fill="#fdf2f8" stroke="#c4b5fd" stroke-width="1"/>
+  <ellipse cx="633" cy="101" rx="15" ry="5" fill="#fdf2f8" stroke="#c4b5fd" stroke-width="1"/>
+  <ellipse cx="660" cy="101" rx="14" ry="5" fill="#fdf2f8" stroke="#c4b5fd" stroke-width="1"/>
+  <!-- Labels couches -->
+  <text x="548" y="135" text-anchor="end" font-size="7" fill="#be185d" font-family="Arial,sans-serif">basale</text>
+  <text x="548" y="116" text-anchor="end" font-size="7" fill="#db2777" font-family="Arial,sans-serif">inter.</text>
+  <text x="548" y="101" text-anchor="end" font-size="7" fill="#7c3aed" font-family="Arial,sans-serif">superf.</text>
+  <text x="615" y="192" text-anchor="middle" font-size="8" fill="#6b7280" font-family="Arial,sans-serif" font-style="italic">Peau (kératinisé), muqueuse</text>
+
+  <!-- Légende globale -->
+  <rect x="160" y="210" width="10" height="6" rx="1" fill="#c4b5fd" opacity="0.8"/>
+  <text x="174" y="218" font-size="8" fill="#7c3aed" font-family="Arial,sans-serif">Lame basale</text>
+  <circle cx="255" cy="213" r="5" fill="#be185d" opacity="0.5"/>
+  <text x="264" y="218" font-size="8" fill="#be185d" font-family="Arial,sans-serif">Noyau</text>
+  <rect x="320" y="210" width="10" height="6" rx="1" fill="#f9a8d4"/>
+  <text x="334" y="218" font-size="8" fill="#db2777" font-family="Arial,sans-serif">Couche basale (stratifié)</text>
+</svg>
+<div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center;font-style:italic;">Noyaux en <span style="color:#be185d;font-weight:700;">rose foncé</span> — plus les cellules montent en surface, plus elles s'aplatissent</div>
+</div>
+
+<!-- SCHÉMA 2 : SPÉCIALISATIONS DE SURFACE -->
+<div style="margin-top:12px;background:var(--def-bg);border:1px solid var(--def-border);border-radius:12px;padding:16px 20px;">
+<div style="font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:14px;">② Spécialisations de la face apicale</div>
+<svg viewBox="0 0 700 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+
+  <!-- ── MICROVILLOSITÉS ── -->
+  <text x="110" y="14" text-anchor="middle" font-size="9.5" font-weight="700" fill="#db2777" font-family="Arial,sans-serif">Microvillosités</text>
+  <text x="110" y="26" text-anchor="middle" font-size="8.5" fill="#db2777" font-family="Arial,sans-serif">(bordure en brosse)</text>
+  <!-- Cellule -->
+  <rect x="40" y="90" width="140" height="65" rx="4" fill="#fce7f3" stroke="#db2777" stroke-width="1.8"/>
+  <!-- Noyau -->
+  <ellipse cx="110" cy="135" rx="28" ry="14" fill="#f9a8d4" stroke="#be185d" stroke-width="1.2"/>
+  <!-- Microvillosités (courtes, droites, serrées) -->
+  <g stroke="#db2777" stroke-width="2.2" stroke-linecap="round">
+    <line x1="50" y1="90" x2="50" y2="72"/>
+    <line x1="58" y1="90" x2="58" y2="72"/>
+    <line x1="66" y1="90" x2="66" y2="72"/>
+    <line x1="74" y1="90" x2="74" y2="72"/>
+    <line x1="82" y1="90" x2="82" y2="72"/>
+    <line x1="90" y1="90" x2="90" y2="72"/>
+    <line x1="98" y1="90" x2="98" y2="72"/>
+    <line x1="106" y1="90" x2="106" y2="72"/>
+    <line x1="114" y1="90" x2="114" y2="72"/>
+    <line x1="122" y1="90" x2="122" y2="72"/>
+    <line x1="130" y1="90" x2="130" y2="72"/>
+    <line x1="138" y1="90" x2="138" y2="72"/>
+    <line x1="146" y1="90" x2="146" y2="72"/>
+    <line x1="154" y1="90" x2="154" y2="72"/>
+    <line x1="162" y1="90" x2="162" y2="72"/>
+    <line x1="170" y1="90" x2="170" y2="72"/>
+  </g>
+  <!-- Lame basale -->
+  <rect x="40" y="155" width="140" height="7" rx="2" fill="#c4b5fd" opacity="0.7"/>
+  <!-- Dimensions annotation -->
+  <line x1="52" y1="68" x2="52" y2="90" stroke="#be185d" stroke-width="0.8" stroke-dasharray="2,2"/>
+  <text x="34" y="80" font-size="8" fill="#be185d" font-family="Arial,sans-serif">~1 µm</text>
+  <!-- Caractéristiques -->
+  <text x="110" y="178" text-anchor="middle" font-size="8.5" fill="#374151" font-family="Arial,sans-serif">Courtes · Droites · Immobiles</text>
+  <text x="110" y="190" text-anchor="middle" font-size="8.5" fill="#374151" font-family="Arial,sans-serif">Noyau d'actine F</text>
+  <text x="110" y="205" text-anchor="middle" font-size="8" fill="#db2777" font-family="Arial,sans-serif" font-weight="700">→ Absorption intestin, rein</text>
+
+  <!-- ── CILS VIBRATILES ── -->
+  <text x="350" y="14" text-anchor="middle" font-size="9.5" font-weight="700" fill="#7c3aed" font-family="Arial,sans-serif">Cils vibratiles</text>
+  <text x="350" y="26" text-anchor="middle" font-size="8.5" fill="#7c3aed" font-family="Arial,sans-serif">(épithélium respiratoire)</text>
+  <!-- Cellule -->
+  <rect x="280" y="90" width="140" height="65" rx="4" fill="#f3e8ff" stroke="#7c3aed" stroke-width="1.8"/>
+  <!-- Noyau -->
+  <ellipse cx="350" cy="135" rx="28" ry="14" fill="#e9d5ff" stroke="#7c3aed" stroke-width="1.2"/>
+  <!-- Corps basaux (base des cils) -->
+  <rect x="285" y="87" width="130" height="5" rx="1" fill="#7c3aed" opacity="0.35"/>
+  <!-- Cils (longs, courbés, espacés) -->
+  <g stroke="#7c3aed" stroke-width="2" stroke-linecap="round" fill="none">
+    <path d="M 292 87 Q 295 60 288 40"/>
+    <path d="M 304 87 Q 310 55 306 35"/>
+    <path d="M 316 87 Q 325 58 320 38"/>
+    <path d="M 328 87 Q 334 52 325 30"/>
+    <path d="M 340 87 Q 348 55 345 32"/>
+    <path d="M 352 87 Q 355 60 350 40"/>
+    <path d="M 364 87 Q 370 55 368 36"/>
+    <path d="M 376 87 Q 382 58 378 38"/>
+    <path d="M 388 87 Q 390 62 384 42"/>
+    <path d="M 400 87 Q 405 56 400 35"/>
+  </g>
+  <!-- Lame basale -->
+  <rect x="280" y="155" width="140" height="7" rx="2" fill="#c4b5fd" opacity="0.7"/>
+  <!-- Annotation longueur -->
+  <line x1="275" y1="40" x2="275" y2="87" stroke="#7c3aed" stroke-width="0.8" stroke-dasharray="2,2"/>
+  <text x="270" y="65" text-anchor="end" font-size="8" fill="#7c3aed" font-family="Arial,sans-serif">~5-7 µm</text>
+  <!-- Flèche mouvement -->
+  <path d="M 300 28 Q 325 18 350 28" stroke="#7c3aed" stroke-width="1.5" fill="none" marker-end="url(#arr2)"/>
+  <defs><marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#7c3aed"/></marker></defs>
+  <text x="350" y="178" text-anchor="middle" font-size="8.5" fill="#374151" font-family="Arial,sans-serif">Longs · Mobiles · Battement coordonné</text>
+  <text x="350" y="190" text-anchor="middle" font-size="8.5" fill="#374151" font-family="Arial,sans-serif">Structure 9+2 (axonème)</text>
+  <text x="350" y="205" text-anchor="middle" font-size="8" fill="#7c3aed" font-family="Arial,sans-serif" font-weight="700">→ Clairance mucociliaire (trachée)</text>
+
+  <!-- ── STÉRÉOCILS ── -->
+  <text x="590" y="14" text-anchor="middle" font-size="9.5" font-weight="700" fill="#d97706" font-family="Arial,sans-serif">Stéréocils</text>
+  <text x="590" y="26" text-anchor="middle" font-size="8.5" fill="#d97706" font-family="Arial,sans-serif">(cellules sensorielles)</text>
+  <!-- Cellule -->
+  <rect x="520" y="90" width="140" height="65" rx="4" fill="#fffbeb" stroke="#d97706" stroke-width="1.8"/>
+  <!-- Noyau -->
+  <ellipse cx="590" cy="135" rx="28" ry="14" fill="#fde68a" stroke="#d97706" stroke-width="1.2"/>
+  <!-- Stéréocils (longs, droits, regroupés en touffe, taille variable) -->
+  <g stroke="#d97706" stroke-width="2.5" stroke-linecap="round">
+    <line x1="545" y1="90" x2="545" y2="48"/>
+    <line x1="555" y1="90" x2="555" y2="44"/>
+    <line x1="565" y1="90" x2="565" y2="40"/>
+    <line x1="575" y1="90" x2="575" y2="37"/>
+    <line x1="585" y1="90" x2="585" y2="34"/>
+    <line x1="595" y1="90" x2="595" y2="37"/>
+    <line x1="605" y1="90" x2="605" y2="40"/>
+    <line x1="615" y1="90" x2="615" y2="44"/>
+    <line x1="625" y1="90" x2="625" y2="48"/>
+    <line x1="635" y1="90" x2="635" y2="52"/>
+  </g>
+  <!-- Trait de liaison (tip links schématique) -->
+  <polyline points="545,48 555,44 565,40 575,37 585,34 595,37 605,40 615,44 625,48 635,52" stroke="#f59e0b" stroke-width="1" fill="none" stroke-dasharray="2,2"/>
+  <!-- Lame basale -->
+  <rect x="520" y="155" width="140" height="7" rx="2" fill="#c4b5fd" opacity="0.7"/>
+  <!-- Annotation gradient -->
+  <text x="518" y="64" text-anchor="end" font-size="8" fill="#d97706" font-family="Arial,sans-serif">gradient</text>
+  <text x="518" y="74" text-anchor="end" font-size="8" fill="#d97706" font-family="Arial,sans-serif">de taille</text>
+  <text x="590" y="178" text-anchor="middle" font-size="8.5" fill="#374151" font-family="Arial,sans-serif">Longues · Droites · Immobiles</text>
+  <text x="590" y="190" text-anchor="middle" font-size="8.5" fill="#374151" font-family="Arial,sans-serif">= microvillosités géantes (actine)</text>
+  <text x="590" y="205" text-anchor="middle" font-size="8" fill="#d97706" font-family="Arial,sans-serif" font-weight="700">→ Oreille interne, épididyme</text>
+</svg>
+<div style="font-size:11px;color:var(--muted);margin-top:6px;text-align:center;font-style:italic;">Les cils vibratiles sont <strong>mobiles</strong> (dynéine) — les microvillosités et stéréocils sont <strong>immobiles</strong> (actine)</div>
+</div>
+
+<div class="def-box"><div class="def-label">Classification combinée à retenir</div><strong>Épithélium simple pavimenteux</strong> : endothélium des vaisseaux, mésothélium des séreuses (péritoine, plèvre, péricarde).<br><strong>Épithélium simple cubique</strong> : tubules rénaux, thyroïde, petits canaux excréteurs.<br><strong>Épithélium simple cylindrique</strong> : intestin grêle (avec microvillosités = bordure en brosse), estomac, vésicule biliaire.<br><strong>Épithélium pseudostratifié cylindrique cilié</strong> : voies respiratoires (trachée, bronches) — mucus + cils.<br><strong>Épithélium stratifié pavimenteux kératinisé</strong> : épiderme (peau).<br><strong>Épithélium stratifié pavimenteux non kératinisé</strong> : muqueuse buccale, œsophage, vagin.<br><strong>Urothélium (épithélium de transition)</strong> : voies urinaires — cellules en parapluie.</div><div class="example-box">Le <strong>syndrome de Kartagener</strong> (dyskinésie ciliaire primitive) illustre le rôle de l'épithélium pseudostratifié cilié respiratoire : les cils immobiles ne font pas remonter le mucus → bronchites récidivantes, sinusites chroniques, situs inversus. Diagnostic histologique : absence de bras de dynéine en microscopie électronique.</div></div>
+<div class="notion priority" id="n1"><div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk1" onclick="toggleRead(1)"></div><div class="notion-title">La lame basale — structure et rôle</div></div><div class="quiz-badge" id="qbadge1"></div></div><div class="notion-def">La <strong>lame basale</strong> (ou membrane basale) est une structure extracellulaire séparant l'épithélium du tissu conjonctif sous-jacent. Elle est composée de <strong>laminine</strong>, <strong>collagène IV</strong>, perlécane (héparane sulfate) et nidogène. Elle est visible en PAS (acide periodique-Schiff) et en immunofluorescence.</div><div class="def-box"><div class="def-label">Fonctions de la lame basale</div><strong>Ancrage</strong> : fixe les cellules épithéliales via les hémidesmosomes (intégrines → laminine).<br><strong>Filtration</strong> : rôle majeur dans le glomérule rénal (barrière de filtration).<br><strong>Guidage</strong> : guide la migration cellulaire lors de la cicatrisation et du développement.<br><strong>Signalisation</strong> : réservoir de facteurs de croissance (FGF, VEGF).<br>Coloration PAS : colore en rose les polysaccharides de la lame basale → visible entre épithélium et chorion.</div><div class="example-box">Dans le <strong>syndrome de Goodpasture</strong>, des auto-anticorps anti-collagène IV attaquent les lames basales des capillaires glomérulaires et alvéolaires → glomérulonéphrite rapidement progressive + hémorragie pulmonaire. L'immunofluorescence directe sur biopsie rénale montre un dépôt linéaire d'IgG le long de la membrane basale glomérulaire — aspect pathognomonique.</div></div>
+<div class="notion priority" id="n2"><div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk2" onclick="toggleRead(2)"></div><div class="notion-title">Les jonctions intercellulaires</div></div><div class="quiz-badge" id="qbadge2"></div></div><div class="notion-def">Les cellules épithéliales sont reliées entre elles par des <strong>jonctions intercellulaires spécialisées</strong> qui assurent la cohésion du tissu et contrôlent les échanges. De l'apex vers la base : <strong>jonctions serrées</strong> (tight junctions, occludines) → <strong>jonctions adhérentes</strong> (E-cadhérine + actine) → <strong>desmosomes</strong> (cadhérines + kératine) → <strong>jonctions communicantes</strong> (gap junctions, connexines).</div><div class="def-box"><div class="def-label">Jonctions à retenir avec leur rôle</div><strong>Jonctions serrées (ZO)</strong> : étanchéité, barrière paracellulaire, limite la diffusion lipidique entre face apicale et basolatérale → polarité cellulaire. Présentes dans l'intestin, le tubule rénal, la BHE (barrière hémato-encéphalique).<br><strong>Jonctions adhérentes (ZA)</strong> : cohésion mécanique via E-cadhérine + cytosquelette d'actine.<br><strong>Desmosomes</strong> : résistance aux forces mécaniques, importants dans la peau et le myocarde.<br><strong>Jonctions communicantes (gap)</strong> : couplage électrique et métabolique, transmission du signal entre cardiomyocytes (syncytium fonctionnel) et entre hépatocytes.</div><div class="example-box">La perte d'<strong>E-cadhérine</strong> (jonctions adhérentes) est un événement clé de la <strong>transition épithélio-mésenchymateuse (TEM)</strong> dans les cancers : les cellules perdent leur polarité et leur cohésion → invasion locale → métastases. C'est pour cela que la E-cadhérine est un <strong>suppresseur de tumeur</strong> — son gène CDH1 est fréquemment muté dans les cancers gastriques héréditaires.</div></div>
+
+<div class="section-sep sep-important"><div class="section-sep-label">🟡 Importants</div><div class="section-sep-line"></div></div>
+<div class="notion important" id="n3"><div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk3" onclick="toggleRead(3)"></div><div class="notion-title">Épithéliums glandulaires — glandes exocrines et endocrines</div></div><div class="quiz-badge" id="qbadge3"></div></div><div class="notion-def">Les <strong>épithéliums glandulaires</strong> sont spécialisés dans la sécrétion. Les <strong>glandes exocrines</strong> libèrent leurs sécrétions dans un canal (glandes salivaires, pancréas exocrine, glandes sudoripares). Les <strong>glandes endocrines</strong> sécrètent directement dans le sang sans canal (thyroïde, surrénales, ilots de Langerhans).</div><div class="def-box"><div class="def-label">Types de sécrétion des glandes exocrines</div><strong>Mérocrine (eccrine)</strong> : sécrétion par exocytose sans perte de cytoplasme — la plus commune (glandes salivaires, pancréas).<br><strong>Apocrine</strong> : perte de la partie apicale du cytoplasme avec le produit de sécrétion (glandes mammaires, glandes sudoripares apocrines axillaires).<br><strong>Holocrine</strong> : la cellule entière est détruite et constitue la sécrétion (glandes sébacées).</div><div class="example-box">Le <strong>cancer du sein</strong> prend naissance dans les glandes mammaires (épithélium glandulaire apocrine). Les récepteurs hormonaux (ER, PR) et HER2 sont des marqueurs immunohistochimiques qui guident le traitement. L'adénocarcinome canalaire in situ (DCIS) reste confiné à l'intérieur du canal glandulaire — lame basale intacte — et n'est pas encore invasif.</div></div>
+
+<div class="section-sep sep-base"><div class="section-sep-label">🔵 Base</div><div class="section-sep-line"></div></div>
+<div class="notion base" id="n4"><div class="notion-top"><div class="notion-left"><div class="check-btn" id="chk4" onclick="toggleRead(4)"></div><div class="notion-title">Spécialisations de surface — microvillosités, cils, stéréocils</div></div><div class="quiz-badge" id="qbadge4"></div></div><div class="notion-def">La face apicale des cellules épithéliales peut présenter des spécialisations adaptées à leur fonction : <strong>microvillosités</strong> (augmentent la surface d'absorption), <strong>cils vibratiles</strong> (transport du mucus), <strong>stéréocils</strong> (longues microvillosités immobiles des cellules sensorielles de l'oreille interne).</div><div class="formula-box"><div class="formula-label">À retenir</div><div class="formula-main">Surface d'absorption intestinale × 600 grâce aux plis, villosités et microvillosités</div><div class="formula-detail">Intestin grêle : plis de Kerckring → villosités → microvillosités (bordure en brosse) = surface totale ~200 m²</div></div><div class="example-box">La <strong>maladie cœliaque</strong> (intolérance au gluten) provoque une atrophie villositaire : les villosités de l'intestin grêle s'aplatissent → perte des microvillosités → réduction majeure de la surface d'absorption → malabsorption de fer, calcium, folates, vitamines liposolubles. Diagnostic histologique sur biopsie duodénale : rapport villosités/cryptes < 1 (normalement > 3).</div></div>
+
+<div class="tip-box">Les épithéliums se retiennent par la combinaison couches × forme + localisation. Mémorise : voies respi = pseudostratifié cilié, intestin = simple cylindrique, peau = stratifié pavimenteux kératinisé, vessie = urothélium. Et les jonctions serrées = étanchéité, desmosomes = résistance mécanique.</div>
+<div class="quiz-section"><div class="quiz-title">Tissus Épithéliaux</div>
+<button onclick="initQuiz();this.style.display='none';" id="startQuizBtn" style="width:100%;padding:14px;background:var(--accent);color:#fff;border:none;border-radius:12px;font-size:14px;font-weight:700;cursor:pointer;font-family:'Source Serif 4',serif;margin-bottom:12px;">🎯 Lancer le quiz</button>
+<div id="quiz-container"></div><div class="quiz-score" id="quiz-score"></div></div>
+<div class="ch-nav"><span></span><a href="passhistologieconjonctif.html">Chapitre 02 — Tissu conjonctif →</a></div>
+</main>
+<footer><div class="footer-logo">Constance</div><div class="footer-copy">© Constance | @constance.cgh · Programme PASS gratuit</div></footer>
+<script>const TOTAL=5;const SR='histo_epithel_read';const SM='histo_epithel_mastery';
+var rs=JSON.parse(localStorage.getItem(SR)||'[]');
+function toggleRead(i){var x=rs.indexOf(i);if(x===-1)rs.push(i);else rs.splice(x,1);localStorage.setItem(SR,JSON.stringify(rs));applyRead();}
+function applyRead(){for(var i=0;i<TOTAL;i++){var n=document.getElementById('n'+i),b=document.getElementById('chk'+i);if(!n||!b)continue;if(rs.includes(i)){n.classList.add('read');b.textContent='✓';}else{n.classList.remove('read');b.textContent='';}}var d=rs.length;document.getElementById('readCount').textContent=d+' / '+TOTAL;document.getElementById('readBar').style.width=Math.round(d/TOTAL*100)+'%';}
+var mastery=JSON.parse(localStorage.getItem(SM)||'{}');
+function applyMastery(){var ok=0,ko=0;for(var i=0;i<TOTAL;i++){var n=document.getElementById('n'+i),b=document.getElementById('qbadge'+i);if(!n||!b)continue;n.classList.remove('mastered','to-review');b.className='quiz-badge';b.textContent='';if(mastery[i]==='ok'){n.classList.add('mastered');b.className='quiz-badge show ok';b.textContent='✓ Maîtrisé';ok++;}else if(mastery[i]==='ko'){n.classList.add('to-review');b.className='quiz-badge show ko';b.textContent='✗ À revoir';ko++;}}var g=TOTAL-ok-ko;document.getElementById('barOk').style.flex=ok;document.getElementById('barKo').style.flex=ko;document.getElementById('barGrey').style.flex=Math.max(g,.2);if(ok+ko>0)document.getElementById('masteryCount').textContent=ok+' ✓ · '+ko+' ✗ · '+g+' non testés';}
+var quizData=[{"ni": 0, "q": "L'épithélium qui tapisse la trachée et les bronches est :", "opts": ["Simple pavimenteux", "Pseudostratifié cylindrique cilié avec cellules à mucus", "Stratifié pavimenteux kératinisé", "Simple cubique"], "a": 1, "exp": "Épithélium respiratoire = pseudostratifié cylindrique cilié + cellules caliciformes (à mucus). Les cils font remonter le mucus vers le pharynx (clairance mucociliaire). Atteint dans la mucoviscidose (mucus épais, cils bloqués) et le syndrome de Kartagener (cils immobiles)."}, {"ni": 1, "q": "La lame basale est composée principalement de :", "opts": ["Collagène I et fibronectine", "Collagène IV, laminine, perlécane et nidogène", "Élastine et collagène III", "Kératine et vimentine"], "a": 1, "exp": "Lame basale : collagène IV (réseau en treillis) + laminine (ancrage des intégrines) + perlécane (héparane sulfate, charge négative → filtration glomérulaire) + nidogène (pont entre laminine et collagène IV). Visible en PAS (rose) ou immunofluorescence."}, {"ni": 2, "q": "Les desmosomes utilisent principalement :", "opts": ["Des occludines et claudines", "Des connexines", "Des cadhérines (desmogléine/desmocolline) ancrées sur la kératine (filaments intermédiaires)", "Des intégrines ancrées sur l'actine"], "a": 2, "exp": "Desmosomes : cadhérines (desmogléine, desmocolline) → plaque dense (desmoplakine, plakoglobine) → kératine (filaments intermédiaires). Très résistants aux forces mécaniques. Ciblés dans le pemphigus vulgaire (auto-Ac anti-desmogléine 3) → bulles cutanées et muqueuses."}, {"ni": 3, "q": "Une glande sébacée sécrète selon le mode :", "opts": ["Mérocrine — exocytose sans perte cellulaire", "Apocrine — perte du cytoplasme apical", "Holocrine — la cellule entière est détruite et constitue la sécrétion", "Endocrine — libération dans le sang"], "a": 2, "exp": "Glandes sébacées = holocrines : les cellules (sébocytes) se différencient, s'accumulent de lipides, puis se lysent totalement pour libérer le sébum. À l'opposé, les glandes salivaires = mérocrines (exocytose). Les glandes mammaires = apocrines (perte apicale)."}, {"ni": 4, "q": "La maladie cœliaque provoque histologiquement :", "opts": ["Une hyperplasie villositaire", "Une atrophie villositaire avec allongement des cryptes et infiltrat lymphocytaire intraépithélial", "Une métaplasie intestinale", "Un carcinome in situ"], "a": 1, "exp": "Maladie cœliaque : atrophie villositaire totale ou subtotale + hyperplasie des cryptes + lymphocytes intraépithéliaux (LIE > 25/100 entérocytes). Rapport V/C < 1 (normal > 3). Diagnostic sur biopsie duodénale. Normalisation après régime sans gluten."}, {"ni": 5, "q": "La E-cadhérine est :", "opts": ["Une intégrine des hémidesmosomes", "La protéine des jonctions serrées", "Un suppresseur de tumeur — sa perte induit la transition épithélio-mésenchymateuse", "Une connexine des jonctions communicantes"], "a": 2, "exp": "E-cadhérine (épithéliale) : jonctions adhérentes → cohésion cellulaire + inhibition de la migration. Sa perte (mutation CDH1, méthylation) = TEM → cellules invasives → métastases. CDH1 muté dans les cancers gastriques diffus héréditaires. Marqueur de différenciation épithéliale en immunohistochimie."}];var qs=null;
+function initQuiz(){if(qs)return;qs={idx:0,score:0};var sb=document.getElementById('startQuizBtn');if(sb)sb.style.display='none';renderQ();}
+function renderQ(){var c=document.getElementById('quiz-container');if(qs.idx>=quizData.length){c.innerHTML='<div class="quiz-card" style="text-align:center;padding:28px"><div style="font-size:40px;margin-bottom:12px">'+(qs.score>=Math.ceil(quizData.length*.8)?'🏆':qs.score>=Math.ceil(quizData.length*.6)?'💪':'📚')+'</div><div style="font-family:serif;font-size:22px;font-weight:700">'+qs.score+' / '+quizData.length+'</div></div>';document.getElementById('quiz-score').textContent='';return;}var q=quizData[qs.idx];c.innerHTML='<div class="quiz-card"><div class="quiz-q">Q'+(qs.idx+1)+'/'+quizData.length+' — '+q.q+'</div><div class="quiz-options">'+q.opts.map(function(o,i){return'<button class="quiz-opt" onclick="answer('+i+')">'+o+'</button>';}).join('')+'</div><div class="quiz-feedback" id="qfb"></div><button class="quiz-next" id="qnext" onclick="nextQ()">Question suivante →</button></div>';document.getElementById('quiz-score').textContent='Score : '+qs.score+' / '+qs.idx;}
+function answer(i){var q=quizData[qs.idx];document.querySelectorAll('.quiz-opt').forEach(function(o){o.disabled=true;});var ok=i===q.a;if(ok){qs.score++;document.querySelectorAll('.quiz-opt')[i].classList.add('correct');}else{document.querySelectorAll('.quiz-opt')[i].classList.add('wrong');document.querySelectorAll('.quiz-opt')[q.a].classList.add('correct');}document.getElementById('qfb').textContent=(ok?'✓ Correct ! ':'✗ Incorrect. ')+q.exp;document.getElementById('qfb').className='quiz-feedback show '+(ok?'ok':'ko');document.getElementById('qnext').className='quiz-next show';document.getElementById('quiz-score').textContent='Score : '+qs.score+' / '+(qs.idx+1);mastery[q.ni]=ok?'ok':'ko';localStorage.setItem(SM,JSON.stringify(mastery));applyMastery();}
+function nextQ(){qs.idx++;renderQ();}
+function toggleTheme(){var h=document.documentElement,b=document.getElementById('themeBtn');if(h.dataset.theme==='light'){h.dataset.theme='dark';b.textContent='☀️';}else{h.dataset.theme='light';b.textContent='🌙';}}
+window.addEventListener('DOMContentLoaded',function(){applyRead();applyMastery();setTimeout(initQuiz,300);});</script>
+</body>
+</html>

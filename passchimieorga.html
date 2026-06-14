@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chimie Organique PASS — Constance</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  [data-theme="dark"]{--bg:#0a0c0a;--surface:#111811;--border:#1a2a1a;--accent:#4ade80;--accent2:#a78bfa;--text:#e2e8f0;--muted:#64748b;--progress-track:rgba(255,255,255,0.06);--toggle-bg:#1a2a1a;--card-hover:#141f14;}
+  [data-theme="light"]{--bg:#f0fdf4;--surface:#fff;--border:#bbf7d0;--accent:#16a34a;--accent2:#7c3aed;--text:#1e1b18;--muted:#6b7280;--progress-track:rgba(0,0,0,0.07);--toggle-bg:#bbf7d0;--card-hover:#dcfce7;}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;min-height:100vh;transition:background .3s,color .3s;}
+  nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:rgba(240,253,244,0.90);}
+  [data-theme="dark"] nav{background:rgba(10,12,10,0.90);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--accent);text-decoration:none;}
+  .nav-back{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;}
+  .nav-back:hover{color:var(--text);}
+  .theme-toggle{background:var(--toggle-bg);border:1px solid var(--border);border-radius:100px;padding:5px 12px;cursor:pointer;font-size:14px;color:var(--muted);user-select:none;}
+  .theme-toggle:hover{border-color:var(--accent);}
+  header{padding:100px 52px 48px;border-bottom:1px solid var(--border);max-width:1000px;margin:0 auto;}
+  .badge{display:inline-block;background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.2);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:20px;}
+  h1{font-family:'Libre Baskerville',serif;font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;}
+  h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+  .subtitle{margin-top:12px;color:var(--muted);font-size:15px;max-width:500px;line-height:1.75;}
+  main{padding:48px 52px;max-width:1000px;margin:0 auto;}
+  .section-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;font-weight:700;}
+  .chapters-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px;}
+  .ch-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;text-decoration:none;display:block;transition:all .22s;position:relative;}
+  .ch-card:hover{border-color:rgba(22,163,74,.35);background:var(--card-hover);transform:translateY(-2px);}
+  .ch-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+  .ch-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+  .ch-num{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.12em;text-transform:uppercase;}
+  .ch-title{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:5px;}
+  .ch-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:16px;}
+  .ch-arrow{position:absolute;bottom:20px;right:20px;font-size:14px;color:var(--muted);transition:all .2s;}
+  .ch-card:hover .ch-arrow{transform:translateX(3px);color:var(--accent);}
+  .qcm-link{display:flex;align-items:center;justify-content:space-between;background:rgba(22,163,74,0.06);border:1px solid rgba(22,163,74,0.22);border-radius:16px;padding:22px 26px;text-decoration:none;margin-top:14px;transition:all .2s;}
+  .qcm-link:hover{border-color:rgba(22,163,74,0.5);}
+  footer{border-top:1px solid var(--border);padding:24px 52px;max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:48px;}
+  .footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--accent);}
+  .footer-copy{font-size:11px;color:var(--muted);}
+  /* Progress bars sur les cartes */
+  .ch-prog-wrap{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);}
+  .ch-prog-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+  .ch-prog-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);width:60px;flex-shrink:0;}
+  .ch-prog-track{flex:1;height:3px;background:var(--progress-track);border-radius:100px;overflow:hidden;}
+  .ch-prog-fill{height:100%;border-radius:100px;transition:width .5s ease;}
+  .ch-prog-fill-read{background:var(--accent2);}
+  .ch-prog-fill-mastery{background:var(--accent);}
+  .ch-prog-pct{font-size:10px;font-weight:700;color:var(--muted);width:28px;text-align:right;flex-shrink:0;}
+  /* Barre globale dans le header */
+  .global-prog{margin-top:24px;max-width:420px;}
+  .global-prog-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px;}
+  .global-prog-track{height:5px;background:var(--progress-track);border-radius:100px;overflow:hidden;}
+  .global-prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:100px;transition:width .5s;}
+  @media(max-width:600px){header{padding:80px 20px 32px;}main{padding:32px 20px;}footer{padding:20px;flex-direction:column;text-align:center;}nav{padding:.9rem 1.2rem;}.chapters-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Constance</a>
+  <a class="nav-back" href="index.html">← Programme PASS</a>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+</nav>
+<header>
+  <div class="badge">Programme Stratégique PASS</div>
+  <h1>Chimie Organique<br><span>4 chapitres.</span></h1>
+  <p class="subtitle">Représentation des molécules, stéréochimie, réactions et groupes fonctionnels — les bases de la biochimie structurale.</p>
+  <div class="global-prog">
+    <div class="global-prog-label">
+      <span>Maîtrise globale</span>
+      <span id="globalPct">–</span>
+    </div>
+    <div class="global-prog-track">
+      <div class="global-prog-fill" id="globalBar" style="width:0%"></div>
+    </div>
+  </div>
+</header>
+<main>
+  <p class="section-label">Chapitres — cliquer pour ouvrir</p>
+  <div class="chapters-grid">
+    <a class="ch-card" href="passchimieorgarepr.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(22,163,74,.12)">🔗</div><span class="ch-num">Chapitre 01</span></div>
+      <div class="ch-title">Représentation des molécules</div>
+      <div class="ch-desc">Formules brutes, développées, semi-développées, topologiques. Modèles 3D.</div>
+      
+      <div class="ch-prog-wrap">
+        <div class="ch-prog-row">
+          <span class="ch-prog-label">Lues</span>
+          <div class="ch-prog-track"><div class="ch-prog-fill ch-prog-fill-read" id="read-passchimieorgarepr"></div></div>
+          <span class="ch-prog-pct" id="pct-read-passchimieorgarepr">0%</span>
+        </div>
+        <div class="ch-prog-row">
+          <span class="ch-prog-label">Quiz</span>
+          <div class="ch-prog-track"><div class="ch-prog-fill ch-prog-fill-mastery" id="mastery-passchimieorgarepr"></div></div>
+          <span class="ch-prog-pct" id="pct-mastery-passchimieorgarepr">0%</span>
+        </div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+    <a class="ch-card" href="passchimieorgastereo.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(124,58,237,.12)">🔄</div><span class="ch-num">Chapitre 02</span></div>
+      <div class="ch-title">Stéréochimie</div>
+      <div class="ch-desc">Chiralité, énantiomères, diastéréoisomères, configuration R/S, activité optique.</div>
+      
+      <div class="ch-prog-wrap">
+        <div class="ch-prog-row">
+          <span class="ch-prog-label">Lues</span>
+          <div class="ch-prog-track"><div class="ch-prog-fill ch-prog-fill-read" id="read-passchimieorgastereo"></div></div>
+          <span class="ch-prog-pct" id="pct-read-passchimieorgastereo">0%</span>
+        </div>
+        <div class="ch-prog-row">
+          <span class="ch-prog-label">Quiz</span>
+          <div class="ch-prog-track"><div class="ch-prog-fill ch-prog-fill-mastery" id="mastery-passchimieorgastereo"></div></div>
+          <span class="ch-prog-pct" id="pct-mastery-passchimieorgastereo">0%</span>
+        </div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+    <a class="ch-card" href="passchimieorgareactions.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(251,191,36,.12)">⚡</div><span class="ch-num">Chapitre 03</span></div>
+      <div class="ch-title">Réactions chimiques</div>
+      <div class="ch-desc">Substitution, addition, élimination, oxydation-réduction. Mécanismes réactionnels.</div>
+      
+      <div class="ch-prog-wrap">
+        <div class="ch-prog-row">
+          <span class="ch-prog-label">Lues</span>
+          <div class="ch-prog-track"><div class="ch-prog-fill ch-prog-fill-read" id="read-passchimieorgareactions"></div></div>
+          <span class="ch-prog-pct" id="pct-read-passchimieorgareactions">0%</span>
+        </div>
+        <div class="ch-prog-row">
+          <span class="ch-prog-label">Quiz</span>
+          <div class="ch-prog-track"><div class="ch-prog-fill ch-prog-fill-mastery" id="mastery-passchimieorgareactions"></div></div>
+          <span class="ch-prog-pct" id="pct-mastery-passchimieorgareactions">0%</span>
+        </div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+    <a class="ch-card" href="passchimieorgafonctions.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(244,114,182,.12)">⚗️</div><span class="ch-num">Chapitre 04</span></div>
+      <div class="ch-title">Groupes fonctionnels</div>
+      <div class="ch-desc">Alcools, aldéhydes, cétones, acides carboxyliques, amines, esters, amides.</div>
+      
+      <div class="ch-prog-wrap">
+        <div class="ch-prog-row">
+          <span class="ch-prog-label">Lues</span>
+          <div class="ch-prog-track"><div class="ch-prog-fill ch-prog-fill-read" id="read-passchimieorgafonctions"></div></div>
+          <span class="ch-prog-pct" id="pct-read-passchimieorgafonctions">0%</span>
+        </div>
+        <div class="ch-prog-row">
+          <span class="ch-prog-label">Quiz</span>
+          <div class="ch-prog-track"><div class="ch-prog-fill ch-prog-fill-mastery" id="mastery-passchimieorgafonctions"></div></div>
+          <span class="ch-prog-pct" id="pct-mastery-passchimieorgafonctions">0%</span>
+        </div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+  </div>
+  <a class="qcm-link" href="passchimieorgaqcm.html">
+    <div>
+      <div style="font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:6px;">🎯 Entraînement</div>
+      <div style="font-family:'Libre Baskerville',serif;font-size:17px;font-weight:700;color:var(--text);">QCM Chimie Organique — 100+ questions</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;">Tous chapitres · 3 niveaux · Barres de maîtrise</div>
+    </div>
+    <div style="font-size:20px;color:var(--accent);">→</div>
+  </a>
+</main>
+<footer>
+  <div class="footer-logo">Constance</div>
+  <div class="footer-copy">© Constance | @constance.cgh · Programme PASS gratuit</div>
+</footer>
+<script>
+function toggleTheme(){var h=document.documentElement,b=document.getElementById('themeBtn');if(h.dataset.theme==='light'){h.dataset.theme='dark';b.textContent='☀️';}else{h.dataset.theme='light';b.textContent='🌙';}}
+
+const CHAPTERS_ORGA = [
+  {slug:'passchimieorgarepr',   rk:'chimorga_repr_read',    mk:'chimorga_repr_mastery',    total:6},
+  {slug:'passchimieorgastereo', rk:'chimorga_stereo_read',  mk:'chimorga_stereo_mastery',  total:6},
+  {slug:'passchimieorgareactions',rk:'chimorga_react_read', mk:'chimorga_react_mastery',   total:6},
+  {slug:'passchimieorgafonctions',rk:'chimorga_fonct_read', mk:'chimorga_fonct_mastery',   total:6},
+];
+
+function loadProgress(){
+  var totalOk=0, totalPossible=0;
+  CHAPTERS_ORGA.forEach(function(ch){
+    // Lus
+    var read = JSON.parse(localStorage.getItem(ch.rk)||'[]');
+    var readPct = Math.round(read.length / ch.total * 100);
+    var rb = document.getElementById('read-'+ch.slug);
+    var rp = document.getElementById('pct-read-'+ch.slug);
+    if(rb) rb.style.width = readPct + '%';
+    if(rp) rp.textContent = readPct + '%';
+    // Maîtrise quiz
+    var mastery = JSON.parse(localStorage.getItem(ch.mk)||'{}');
+    var vals = Object.values(mastery);
+    var ok = vals.filter(function(v){return v==='ok';}).length;
+    var masteryPct = vals.length > 0 ? Math.round(ok / vals.length * 100) : 0;
+    var mb = document.getElementById('mastery-'+ch.slug);
+    var mp = document.getElementById('pct-mastery-'+ch.slug);
+    if(mb) mb.style.width = masteryPct + '%';
+    if(mp) mp.textContent = masteryPct + '%';
+    totalOk += ok; totalPossible += ch.total;
+  });
+  var globalPct = totalPossible > 0 ? Math.round(totalOk / totalPossible * 100) : 0;
+  var gb = document.getElementById('globalBar');
+  var gp = document.getElementById('globalPct');
+  if(gb) gb.style.width = globalPct + '%';
+  if(gp) gp.textContent = globalPct + '% maîtrisé';
+}
+window.addEventListener('DOMContentLoaded', loadProgress);
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Statistiques & Santé Publique PASS — Constance</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+[data-theme="light"]{--bg:#f0fdf4;--surface:#fff;--border:#bbf7d0;--accent:#16a34a;--accent2:#0284c7;--text:#1e1b18;--muted:#6b7280;--progress-track:rgba(0,0,0,0.07);--toggle-bg:#bbf7d0;--card-hover:#dcfce7;}
+[data-theme="dark"]{--bg:#021a0a;--surface:#041f0d;--border:#052e16;--accent:#4ade80;--accent2:#38bdf8;--text:#e2e8f0;--muted:#64748b;--progress-track:rgba(255,255,255,0.06);--toggle-bg:#052e16;--card-hover:#073b14;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;min-height:100vh;transition:background .3s,color .3s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:rgba(240,253,244,.90);}
+[data-theme="dark"] nav{background:rgba(2,26,10,.90);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--accent);text-decoration:none;}
+.nav-back{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;}
+.nav-back:hover{color:var(--text);}
+.theme-toggle{background:var(--toggle-bg);border:1px solid var(--border);border-radius:100px;padding:5px 12px;cursor:pointer;font-size:14px;color:var(--muted);user-select:none;}
+header{padding:100px 52px 48px;border-bottom:1px solid var(--border);max-width:1000px;margin:0 auto;}
+.badge{display:inline-block;background:rgba(22,163,74,.07);border:1px solid rgba(22,163,74,.2);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:5px 14px;border-radius:100px;margin-bottom:20px;}
+h1{font-family:'Libre Baskerville',serif;font-size:clamp(32px,5vw,52px);font-weight:700;line-height:1.1;}
+h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.subtitle{margin-top:12px;color:var(--muted);font-size:15px;max-width:540px;line-height:1.75;}
+.global-prog{margin-top:24px;max-width:420px;}
+.global-prog-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;margin-bottom:6px;}
+.global-prog-track{height:5px;background:var(--progress-track);border-radius:100px;overflow:hidden;}
+.global-prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:100px;transition:width .5s;}
+main{padding:48px 52px;max-width:1000px;margin:0 auto;}
+.section-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:22px;font-weight:700;}
+.chapters-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px;}
+.ch-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;text-decoration:none;display:block;transition:all .22s;position:relative;}
+.ch-card:hover{border-color:rgba(22,163,74,.4);background:var(--card-hover);transform:translateY(-2px);}
+.ch-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;}
+.ch-icon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;}
+.ch-num{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.12em;text-transform:uppercase;}
+.ch-title{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;color:var(--text);margin-bottom:5px;}
+.ch-desc{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:14px;}
+.ch-prog{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);}
+.ch-prog-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;}
+.ch-prog-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);width:50px;flex-shrink:0;}
+.ch-prog-track{flex:1;height:3px;background:var(--progress-track);border-radius:100px;overflow:hidden;}
+.ch-prog-fill-read{height:100%;background:var(--accent2);border-radius:100px;transition:width .5s;width:0%;}
+.ch-prog-fill-quiz{height:100%;background:var(--accent);border-radius:100px;transition:width .5s;width:0%;}
+.ch-prog-pct{font-size:10px;font-weight:700;color:var(--muted);width:28px;text-align:right;flex-shrink:0;}
+.ch-arrow{position:absolute;bottom:20px;right:20px;font-size:14px;color:var(--muted);transition:all .2s;}
+.ch-card:hover .ch-arrow{transform:translateX(3px);color:var(--accent);}
+footer{border-top:1px solid var(--border);padding:24px 52px;max-width:1000px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:48px;}
+@media(max-width:600px){header{padding:80px 20px 32px;}main{padding:32px 20px;}footer{padding:20px;flex-direction:column;text-align:center;}nav{padding:.9rem 1.2rem;}.chapters-grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Constance</a>
+  <a class="nav-back" href="index.html">← Programme PASS</a>
+  <button class="theme-toggle" onclick="document.documentElement.dataset.theme=document.documentElement.dataset.theme==='light'?'dark':'light'">🌙</button>
+</nav>
+<header>
+  <div class="badge">Programme Stratégique PASS</div>
+  <h1>Statistiques &<br><span>Santé Publique.</span></h1>
+  <p class="subtitle">Épidémiologie, biostatistiques, prévention, lecture critique d'article et grandes problématiques de santé — comprendre la médecine dans la société.</p>
+  <div class="global-prog">
+    <div class="global-prog-label"><span>Maîtrise globale</span><span id="globalPct">–</span></div>
+    <div class="global-prog-track"><div class="global-prog-fill" id="globalBar" style="width:0%"></div></div>
+  </div>
+</header>
+<main>
+  <p class="section-label">Chapitres — cliquer pour ouvrir</p>
+  <div class="chapters-grid">
+    <a class="ch-card" href="passstatsepi.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(22,163,74,.12)">📊</div><span class="ch-num">Chapitre 01</span></div>
+      <div class="ch-title">Épidémiologie</div>
+      <div class="ch-desc">Types d'études, prévalence et incidence, facteurs de risque, dépistage, biais.</div>
+      <div class="ch-prog">
+        <div class="ch-prog-row"><span class="ch-prog-label">Lues</span><div class="ch-prog-track"><div class="ch-prog-fill-read" id="read-epi"></div></div><span class="ch-prog-pct" id="pct-read-epi">0%</span></div>
+        <div class="ch-prog-row"><span class="ch-prog-label">Quiz</span><div class="ch-prog-track"><div class="ch-prog-fill-quiz" id="quiz-epi"></div></div><span class="ch-prog-pct" id="pct-quiz-epi">0%</span></div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+    <a class="ch-card" href="passstatsbiostat.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(2,132,199,.12)">📈</div><span class="ch-num">Chapitre 02</span></div>
+      <div class="ch-title">Biostatistiques</div>
+      <div class="ch-desc">Moyenne, médiane, p-value, intervalle de confiance, distribution normale, corrélation.</div>
+      <div class="ch-prog">
+        <div class="ch-prog-row"><span class="ch-prog-label">Lues</span><div class="ch-prog-track"><div class="ch-prog-fill-read" id="read-biostat"></div></div><span class="ch-prog-pct" id="pct-read-biostat">0%</span></div>
+        <div class="ch-prog-row"><span class="ch-prog-label">Quiz</span><div class="ch-prog-track"><div class="ch-prog-fill-quiz" id="quiz-biostat"></div></div><span class="ch-prog-pct" id="pct-quiz-biostat">0%</span></div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+    <a class="ch-card" href="passstatsprevention.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(34,197,94,.12)">🛡️</div><span class="ch-num">Chapitre 03</span></div>
+      <div class="ch-title">Prévention et Promotion de la Santé</div>
+      <div class="ch-desc">3 niveaux de prévention, déterminants de santé, vaccination, système de santé français.</div>
+      <div class="ch-prog">
+        <div class="ch-prog-row"><span class="ch-prog-label">Lues</span><div class="ch-prog-track"><div class="ch-prog-fill-read" id="read-prev"></div></div><span class="ch-prog-pct" id="pct-read-prev">0%</span></div>
+        <div class="ch-prog-row"><span class="ch-prog-label">Quiz</span><div class="ch-prog-track"><div class="ch-prog-fill-quiz" id="quiz-prev"></div></div><span class="ch-prog-pct" id="pct-quiz-prev">0%</span></div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+    <a class="ch-card" href="passstatslca.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(99,102,241,.12)">🔍</div><span class="ch-num">Chapitre 04</span></div>
+      <div class="ch-title">Lecture Critique d'Article</div>
+      <div class="ch-desc">Structure IMRAD, hiérarchie des preuves, qualité d'un ECR, recommandations, IA.</div>
+      <div class="ch-prog">
+        <div class="ch-prog-row"><span class="ch-prog-label">Lues</span><div class="ch-prog-track"><div class="ch-prog-fill-read" id="read-lca"></div></div><span class="ch-prog-pct" id="pct-read-lca">0%</span></div>
+        <div class="ch-prog-row"><span class="ch-prog-label">Quiz</span><div class="ch-prog-track"><div class="ch-prog-fill-quiz" id="quiz-lca"></div></div><span class="ch-prog-pct" id="pct-quiz-lca">0%</span></div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+    <a class="ch-card" href="passstatssante.html">
+      <div class="ch-card-top"><div class="ch-icon" style="background:rgba(16,185,129,.12)">🌍</div><span class="ch-num">Chapitre 05</span></div>
+      <div class="ch-title">Grandes Problématiques de Santé</div>
+      <div class="ch-desc">Maladies chroniques, résistance antibiotiques, santé mentale, vieillissement, One Health.</div>
+      <div class="ch-prog">
+        <div class="ch-prog-row"><span class="ch-prog-label">Lues</span><div class="ch-prog-track"><div class="ch-prog-fill-read" id="read-sante"></div></div><span class="ch-prog-pct" id="pct-read-sante">0%</span></div>
+        <div class="ch-prog-row"><span class="ch-prog-label">Quiz</span><div class="ch-prog-track"><div class="ch-prog-fill-quiz" id="quiz-sante"></div></div><span class="ch-prog-pct" id="pct-quiz-sante">0%</span></div>
+      </div>
+      <div class="ch-arrow">→</div>
+    </a>
+  </div>
+</main>
+<footer>
+  <span style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--accent)">Constance</span>
+  <span style="font-size:11px;color:var(--muted)">© Constance | @constance.cgh · Programme PASS gratuit</span>
+</footer>
+<script>
+var CHAPTERS=[
+  {id:'epi',   rk:'stats_epi_read',    mk:'stats_epi_mastery',    total:5},
+  {id:'biostat',rk:'stats_biostat_read',mk:'stats_biostat_mastery',total:5},
+  {id:'prev',  rk:'stats_prev_read',   mk:'stats_prev_mastery',   total:5},
+  {id:'lca',   rk:'stats_lca_read',    mk:'stats_lca_mastery',    total:5},
+  {id:'sante', rk:'stats_sante_read',  mk:'stats_sante_mastery',  total:5},
+];
+function loadProgress(){
+  var tOk=0,tPoss=0;
+  CHAPTERS.forEach(function(ch){
+    var r=JSON.parse(localStorage.getItem(ch.rk)||'[]');
+    var rP=Math.round(r.length/ch.total*100);
+    var rb=document.getElementById('read-'+ch.id),rp=document.getElementById('pct-read-'+ch.id);
+    if(rb)rb.style.width=rP+'%'; if(rp)rp.textContent=rP+'%';
+    var m=JSON.parse(localStorage.getItem(ch.mk)||'{}');
+    var v=Object.values(m);
+    var ok=v.filter(function(x){return x==='ok';}).length;
+    var mP=v.length>0?Math.round(ok/v.length*100):0;
+    var qb=document.getElementById('quiz-'+ch.id),qp=document.getElementById('pct-quiz-'+ch.id);
+    if(qb)qb.style.width=mP+'%'; if(qp)qp.textContent=mP+'%';
+    tOk+=ok; tPoss+=ch.total;
+  });
+  var gP=tPoss>0?Math.round(tOk/tPoss*100):0;
+  var gb=document.getElementById('globalBar'),gp=document.getElementById('globalPct');
+  if(gb)gb.style.width=gP+'%'; if(gp)gp.textContent=gP+'% maîtrisé';
+}
+window.addEventListener('DOMContentLoaded',loadProgress);
+</script>
+</body>
+</html>

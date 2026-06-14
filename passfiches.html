@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Fiches Rapides PASS — Constance</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+[data-theme="light"]{--bg:#f8f7f4;--surface:#fff;--border:#e8e0d4;--text:#1e1b18;--muted:#6b7280;--accent:#059669;--toggle-bg:#e8e0d4;}
+[data-theme="dark"]{--bg:#0a0a0f;--surface:#13131a;--border:#1e1e2e;--text:#e2e8f0;--muted:#64748b;--accent:#6ee7b7;--toggle-bg:#1e1e2e;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;min-height:100vh;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:rgba(248,247,244,.92);}
+[data-theme="dark"] nav{background:rgba(10,10,15,.92);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--accent);text-decoration:none;}
+.nav-back{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;}
+.nav-back:hover{color:var(--text);}
+.theme-toggle{background:var(--toggle-bg);border:1px solid var(--border);border-radius:100px;padding:5px 12px;cursor:pointer;font-size:13px;color:var(--muted);}
+
+header{padding:90px 48px 36px;max-width:1100px;margin:0 auto;}
+h1{font-family:'Libre Baskerville',serif;font-size:clamp(26px,4vw,40px);font-weight:700;margin-bottom:6px;}
+.header-sub{color:var(--muted);font-size:14px;margin-bottom:24px;}
+
+/* FILTRES */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px;}
+.filter-btn{padding:6px 14px;border:1.5px solid var(--border);border-radius:100px;font-size:12px;font-weight:600;cursor:pointer;background:var(--surface);color:var(--muted);transition:all .18s;font-family:'Source Serif 4',serif;}
+.filter-btn.active{color:#fff;}
+.filter-btn:hover{opacity:.85;}
+
+/* GRILLE FICHES */
+main{padding:0 48px 80px;max-width:1100px;margin:0 auto;}
+.matieres-sections{}
+
+.matiere-section{margin-bottom:48px;}
+.matiere-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);}
+.matiere-icon{font-size:20px;}
+.matiere-name{font-family:'Libre Baskerville',serif;font-size:18px;font-weight:700;}
+.matiere-count{font-size:11px;color:var(--muted);font-weight:600;letter-spacing:.08em;}
+
+.chapitres-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px;}
+
+.fiche-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px 20px;border-left:3px solid var(--ac, #059669);transition:all .2s;}
+.fiche-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06);}
+.fiche-num{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;}
+.fiche-title{font-family:'Libre Baskerville',serif;font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text);}
+.fiche-points{list-style:none;display:flex;flex-direction:column;gap:5px;}
+.fiche-points li{font-size:12px;color:var(--muted);line-height:1.5;padding-left:12px;position:relative;}
+.fiche-points li::before{content:'→';position:absolute;left:0;color:var(--ac,#059669);font-size:10px;top:2px;}
+.fiche-points li strong{color:var(--text);font-weight:600;}
+.fiche-link{display:inline-block;margin-top:12px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ac,#059669);text-decoration:none;transition:opacity .2s;}
+.fiche-link:hover{opacity:.7;}
+
+@media(max-width:600px){header,main{padding-left:16px;padding-right:16px;}header{padding-top:72px;}nav{padding:.85rem 1.2rem;}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nav-logo" href="index.html">Constance</a>
+  <a class="nav-back" href="index.html">← Dashboard</a>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+</nav>
+
+<header>
+  <h1>Fiches Rapides</h1>
+  <p class="header-sub">L'essentiel de chaque chapitre en 5 points. Pour réviser vite, vérifier une notion, ou commencer une matière.</p>
+  <div class="filters" id="filters">
+    <button class="filter-btn active" style="background:#1e1b18;border-color:#1e1b18;" onclick="filterAll(this)">Tout voir</button>
+  </div>
+</header>
+
+<main id="main-content"></main>
+
+<script>
+function toggleTheme(){var h=document.documentElement,b=document.getElementById('themeBtn');h.dataset.theme=h.dataset.theme==='dark'?'light':'dark';b.textContent=h.dataset.theme==='dark'?'☀️':'🌙';}
+
+var DATA = [
+  {
+    matiere:"Biologie Cellulaire", icon:"🔬", color:"#7c3aed",
+    chapitres:[
+      {num:"Ch01", title:"Structure cellulaire", url:"passbiolcellcellule.html", points:[
+        "<strong>Eucaryote</strong> : noyau membranaire, organites, ADN linéaire, ribosomes 80S",
+        "<strong>Procaryote</strong> : pas de noyau, ADN circulaire, ribosomes 70S",
+        "<strong>Membrane plasmique</strong> : bicouche lipidique + protéines intégrées + cholestérol",
+        "<strong>Rapport S/V</strong> : plus la cellule est petite, meilleurs sont les échanges",
+        "<strong>Endosymbiose</strong> : mitochondries = ancêtres bactériens (ADN circulaire, 70S)"
+      ]},
+      {num:"Ch02", title:"Organites cellulaires", url:"passbiolcellorganites.html", points:[
+        "<strong>Mitochondrie</strong> : ATP via chaîne respiratoire (membrane interne) + cycle Krebs (matrice)",
+        "<strong>RER</strong> : synthèse protéines sécrétées/membranaires (ribosomes fixés)",
+        "<strong>Golgi</strong> : tri et expédition (M6P → lysosomes, constitutif → membrane)",
+        "<strong>Lysosome</strong> : dégradation par hydrolases acides (pH ~4,5)",
+        "<strong>REL</strong> : synthèse lipides, détoxification (CYP450), stockage Ca²⁺"
+      ]},
+      {num:"Ch03", title:"Cycle cellulaire et mitose", url:"passbiolcellcycle.html", points:[
+        "<strong>Cycle</strong> : G1 → S (réplication ADN) → G2 → M (mitose)",
+        "<strong>Mitose PMAT</strong> : Prophase, Métaphase, Anaphase, Télophase",
+        "<strong>Méiose</strong> : 2n → 4×n, 2 divisions, crossing-over en prophase I",
+        "<strong>Checkpoints</strong> : G1/S, G2/M, métaphase/anaphase (contrôle qualité)",
+        "<strong>Apoptose</strong> : mort programmée propre ≠ nécrose (inflammatoire)"
+      ]},
+      {num:"Ch04", title:"Signalisation cellulaire", url:"passbiolcellsignalisation.html", points:[
+        "<strong>RCPG</strong> : 7 hélices transmembranaires, protéine G (Gαs → AMPc → PKA)",
+        "<strong>RTK</strong> : dimérisation → autophosphorylation → RAS/MAPK ou PI3K/AKT",
+        "<strong>Second messagers</strong> : AMPc, IP₃, DAG, Ca²⁺",
+        "<strong>Gαq</strong> : PLC → IP₃ (libère Ca²⁺ du RE) + DAG (active PKC)",
+        "<strong>Récepteurs nucléaires</strong> : hormones stéroïdiennes traversent la membrane → ADN"
+      ]},
+      {num:"Ch05", title:"Immunité", url:"passbiolcellimmunite.html", points:[
+        "<strong>CMH I + CD8</strong> = cytotoxique (toutes cellules nucléées, peptides endogènes)",
+        "<strong>CMH II + CD4</strong> = auxiliaire (CPA uniquement, peptides exogènes)",
+        "<strong>Anticorps</strong> : 5 classes (IgM, IgG, IgA, IgE, IgD)",
+        "<strong>NK</strong> : tuent les cellules sans CMH I (virus, tumeurs)",
+        "<strong>Complément</strong> : voie classique (IgG/M) → lyse et opsonisation"
+      ]}
+    ]
+  },
+  {
+    matiere:"Biologie Moléculaire", icon:"🧬", color:"#0284c7",
+    chapitres:[
+      {num:"Ch01", title:"Génome et structure ADN", url:"passbiolmolgenome.html", points:[
+        "<strong>Double hélice</strong> : A-T (2 LH), G-C (3 LH), antiparallèle, désoxyribose",
+        "<strong>Chargaff</strong> : [A]=[T], [G]=[C]",
+        "<strong>Compaction</strong> : nucléosome (ADN + histones) → chromatine → chromosome",
+        "<strong>Réplication semi-conservative</strong> : 1 brin ancien + 1 nouveau dans chaque cellule fille",
+        "<strong>ADN pol</strong> : synthèse 5'→3', besoin d'amorce ARN, activité proofreading"
+      ]},
+      {num:"Ch02", title:"Transcription", url:"passbiolmoltranscription.html", points:[
+        "<strong>Transcription</strong> : ADN → ARN (dans le noyau), ARN pol II, promoteur TATA box",
+        "<strong>Maturation ARNm</strong> : coiffe 5' + queue poly-A + épissage des introns",
+        "<strong>Épissage</strong> : spliceosome retire les introns, soude les exons",
+        "<strong>Épissage alternatif</strong> : 1 gène → plusieurs protéines (25 000 gènes → >100 000 protéines)",
+        "<strong>ARN non codants</strong> : ARNr (ribosome), ARNt (transport acides aminés), ARNm (messager)"
+      ]},
+      {num:"Ch03", title:"Traduction", url:"passbiolmoltraduction.html", points:[
+        "<strong>Codon AUG</strong> : initiateur, code la méthionine",
+        "<strong>Codons stop</strong> : UAA, UAG, UGA → terminent la traduction",
+        "<strong>Ribosome</strong> : sites A (entrée ARNt), P (peptide), E (sortie)",
+        "<strong>Code génétique</strong> : universel et dégénéré (64 codons, 20 AA)",
+        "<strong>Inhibiteurs</strong> : tétracyclines, macrolides, aminosides → bloquent les ribosomes 70S"
+      ]},
+      {num:"Ch04", title:"Régulation du cycle et oncogènes", url:"passbiolmolcycle.html", points:[
+        "<strong>CDK/cyclines</strong> : contrôlent le passage entre les phases du cycle",
+        "<strong>Proto-oncogène</strong> : gène normal de prolifération → oncogène si muté (accélérateur bloqué)",
+        "<strong>Gène suppresseur</strong> : freine la prolifération (TP53, RB) → perte de fonction = cancer",
+        "<strong>TP53</strong> : gardien du génome, déclenche apoptose si ADN endommagé",
+        "<strong>Mutations</strong> : substitution, insertion, délétion, translocation chromosomique"
+      ]},
+      {num:"Ch05", title:"Techniques de biologie moléculaire", url:"passbiolmoltechniques.html", points:[
+        "<strong>PCR</strong> : amplification exponentielle d'un fragment d'ADN (dénaturation → hybridation → élongation)",
+        "<strong>Électrophorèse</strong> : séparation ADN par taille (petits fragments migrent plus vite)",
+        "<strong>Séquençage</strong> : lire la séquence d'un fragment d'ADN (Sanger, NGS)",
+        "<strong>CRISPR-Cas9</strong> : ARN guide + Cas9 → coupe l'ADN → KO ou correction",
+        "<strong>Southern/Northern/Western</strong> : détection ADN/ARN/protéine par hybridation ou anticorps"
+      ]}
+    ]
+  },
+  {
+    matiere:"Biochimie", icon:"⚗️", color:"#d97706",
+    chapitres:[
+      {num:"Ch01", title:"Glucides", url:"passbiochimiegluci.html", points:[
+        "<strong>Glucose</strong> : aldohexose, principal substrat énergétique de la cellule",
+        "<strong>Glycolyse</strong> : glucose → 2 pyruvates + 2 ATP nets + 2 NADH (cytoplasme, anaérobie possible)",
+        "<strong>Liaison α1-4</strong> : amidon/glycogène (digestible). <strong>β1-4</strong> : cellulose (non digestible)",
+        "<strong>Glycogène</strong> : réserve de glucose hépatique et musculaire, très ramifié",
+        "<strong>Index glycémique</strong> : vitesse d'élévation de la glycémie après ingestion"
+      ]},
+      {num:"Ch02", title:"Lipides", url:"passbiochimielipides.html", points:[
+        "<strong>Saturés</strong> : solides (beurre), liaisons C-C simples. <strong>Insaturés</strong> : liquides (huiles), doubles liaisons cis",
+        "<strong>Phospholipides</strong> : amphiphiles → bicouche membranaire (tête polaire + queues apolaires)",
+        "<strong>Cholestérol</strong> : noyau stérane, précurseur hormones stéroïdiennes + acides biliaires + vit D",
+        "<strong>LDL</strong> : vers les tissus (mauvais). <strong>HDL</strong> : retour vers le foie (bon)",
+        "<strong>Statines</strong> : inhibent HMG-CoA réductase → ↓ synthèse cholestérol hépatique → ↓ LDL"
+      ]},
+      {num:"Ch03", title:"Acides aminés", url:"passbiochimieaa.html", points:[
+        "<strong>20 AA protéogènes</strong> : 9 essentiels (dont Trp, Phe, Met, Val, Lys, His)",
+        "<strong>Structure</strong> : NH₂ + COOH + H + chaîne R sur un Cα (sauf Gly : achiral)",
+        "<strong>Proline</strong> : imino-acide, brise les hélices α, abondant dans le collagène",
+        "<strong>Cystéine</strong> : groupement -SH → ponts disulfure. <strong>Méthionine</strong> : codon AUG initiateur",
+        "<strong>PKU</strong> : déficit en Phe hydroxylase → accumulation Phe → retard mental"
+      ]},
+      {num:"Ch04", title:"Protéines", url:"passbiochimieproteines.html", points:[
+        "<strong>Structure 1°</strong> : séquence AA reliés par liaisons peptidiques (plane, rigide)",
+        "<strong>Structure 2°</strong> : hélice α (3,6 AA/tour, brisée par Pro) et feuillet β (antiparallèle > parallèle)",
+        "<strong>Structure 3°</strong> : repliement 3D, force motrice = interactions hydrophobes + ponts S-S",
+        "<strong>Structure 4°</strong> : association de sous-unités (Hb : α₂β₂, coopérativité, courbe sigmoïde)",
+        "<strong>Dénaturation</strong> : perte structure 2°/3°/4° sans rupture liaisons peptidiques → perte fonction"
+      ]},
+      {num:"Ch05", title:"Enzymes", url:"passbiochimieenzymes.html", points:[
+        "<strong>Enzyme</strong> : abaisse l'énergie d'activation, ne modifie pas le ΔG de la réaction",
+        "<strong>Michaelis-Menten</strong> : Km = affinité (bas = haute affinité), Vmax = vitesse maximale",
+        "<strong>Inhibition compétitive</strong> : Km↑, Vmax inchangée (ex : statines/HMG-CoA réductase)",
+        "<strong>Inhibition non compétitive</strong> : Vmax↓, Km inchangé (site allostérique)",
+        "<strong>1 glucose → ~30-32 ATP</strong> : glycolyse (2) + Krebs (2 GTP) + phosphorylation oxydative (~26-28)"
+      ]},
+      {num:"Ch06", title:"ADN et réplication", url:"passbiochimieadn.html", points:[
+        "<strong>ADN pol</strong> : synthèse 5'→3', besoin d'amorce, correction des erreurs (proofreading)",
+        "<strong>Topoisomérases</strong> : déroulent l'ADN devant la fourche de réplication",
+        "<strong>Télomères</strong> : extrémités des chromosomes, raccourcissent à chaque division",
+        "<strong>Réparation</strong> : BER (bases endommagées), NER (lésions volumineuses), HR/NHEJ (cassures double brin)",
+        "<strong>Méthylation</strong> : marque épigénétique, réprime l'expression des gènes"
+      ]}
+    ]
+  },
+  {
+    matiere:"Histologie", icon:"🩺", color:"#db2777",
+    chapitres:[
+      {num:"Ch01", title:"Tissu épithélial", url:"passhistologieepithelium.html", points:[
+        "<strong>Épithélium</strong> : cellules jointives, polarité apico-basale, lame basale, avasculaire",
+        "<strong>Jonctions</strong> : serrées (étanchéité), adhérentes (cohésion), desmosomes (résistance), gap (communication)",
+        "<strong>Simple</strong> : 1 couche (intestin, capillaires). <strong>Stratifié</strong> : plusieurs couches (épiderme)",
+        "<strong>Microvillosités</strong> : plateau strié de l'entérocyte → absorption (↑ surface ×30)",
+        "<strong>Cils</strong> : épithélium respiratoire pseudostratifié cilié → évacuation mucus"
+      ]},
+      {num:"Ch02", title:"Tissu conjonctif", url:"passhistologieconjonctif.html", points:[
+        "<strong>Fibroblastes</strong> : synthèse collagène (résistance) et élastine (élasticité)",
+        "<strong>Collagène</strong> : protéine la plus abondante du corps, résistance à la traction",
+        "<strong>Macrophages</strong> : phagocytose, présentation antigènes (macrophages tissulaires = histiocytes)",
+        "<strong>Mastocytes</strong> : libèrent histamine → allergie et inflammation",
+        "<strong>MEC</strong> : glycosaminoglycanes (acide hyaluronique), fibronectine, laminine (lame basale)"
+      ]},
+      {num:"Ch03", title:"Tissu musculaire", url:"passhistologiemusculaire.html", points:[
+        "<strong>Squelettique</strong> : strié, volontaire, multinucléé, fatigable, jonction neuromusculaire",
+        "<strong>Cardiaque</strong> : strié, involontaire, mononucléé, disques intercalaires (jonctions gap), autorhythme",
+        "<strong>Lisse</strong> : non strié, involontaire, fusiforme, viscères et vaisseaux",
+        "<strong>Sarcomère</strong> : unité contractile (actine + myosine), contraction = glissement des filaments",
+        "<strong>Troponine</strong> : régulateur de la contraction (Ca²⁺ → démasque actine → myosine se fixe)"
+      ]},
+      {num:"Ch04", title:"Tissu nerveux", url:"passhistologienerveux.html", points:[
+        "<strong>Neurone</strong> : corps cellulaire + dendrites (entrées) + axone (sortie, myélinisé ou non)",
+        "<strong>Potentiel d'action</strong> : tout ou rien, dépolarisation (Na⁺ entre) → repolarisation (K⁺ sort)",
+        "<strong>Myéline</strong> : oligodendrocytes (SNC) et cellules de Schwann (SNP) → conduction saltatoire rapide",
+        "<strong>Synapse</strong> : neurotransmetteur libéré → récepteur post-synaptique",
+        "<strong>Cellules gliales</strong> : astrocytes (BHE, soutien), microglie (macrophages du SNC)"
+      ]},
+      {num:"Ch05", title:"Sang", url:"passhistologiesang.html", points:[
+        "<strong>GR</strong> : anucléés, biconcaves, hémoglobine, durée de vie ~120j, production (moelle osseuse)",
+        "<strong>PNN</strong> : 60% des leucocytes, phagocytose des bactéries, noyau plurilobé",
+        "<strong>Lymphocytes</strong> : B (anticorps), T CD4 (auxiliaires), T CD8 (cytotoxiques), NK",
+        "<strong>Plaquettes</strong> : fragments de mégacaryocytes, hémostase primaire (clou plaquettaire)",
+        "<strong>Hématopoïèse</strong> : toutes les cellules sanguines viennent de la cellule souche hématopoïétique"
+      ]}
+    ]
+  },
+  {
+    matiere:"Physiologie", icon:"💓", color:"#059669",
+    chapitres:[
+      {num:"Ch01", title:"Physiologie cardiaque", url:"passphysiocardio.html", points:[
+        "<strong>NSA</strong> : pacemaker naturel (60-100 bpm) → NAV → His → Purkinje",
+        "<strong>DC = VES × FC</strong> : débit cardiaque = volume éjection systolique × fréquence cardiaque",
+        "<strong>Frank-Starling</strong> : plus le cœur est rempli (précharge↑), plus il se contracte fort",
+        "<strong>PA = DC × RPT</strong> : pression artérielle = débit × résistances périphériques",
+        "<strong>Barorécepteurs</strong> : détectent variations PA → réflexe sympathique/parasympathique rapide"
+      ]},
+      {num:"Ch02", title:"Physiologie respiratoire", url:"passphysiorespir.html", points:[
+        "<strong>VA = (VT − VD) × FR</strong> : ventilation alvéolaire efficace",
+        "<strong>Hématose</strong> : diffusion passive O₂ (alvéole → sang) et CO₂ (sang → alvéole)",
+        "<strong>Hb</strong> : courbe sigmoïde (coopérativité). pH↓, T↑, CO₂↑, 2,3-DPG↑ → affinité O₂↓",
+        "<strong>pH 7,40</strong> = HCO₃⁻ 24 mmol/L + PaCO₂ 40 mmHg. Acidose < 7,35, alcalose > 7,45",
+        "<strong>Hyperventilation</strong> → CO₂↓ → alcalose respiratoire → Ca²⁺ ionisé↓ → paresthésies"
+      ]},
+      {num:"Ch03", title:"Physiologie rénale", url:"passphysiorein.html", points:[
+        "<strong>DFG ~120 mL/min</strong> : 180 L filtrés/j → 1-2 L d'urine finale",
+        "<strong>ADH (vasopressine)</strong> : si osmolarité↑ → aquaporines 2 → réabsorption eau",
+        "<strong>Aldostérone</strong> : si angiotensine II ou K⁺↑ → réabsorption Na⁺ → rétention eau",
+        "<strong>Système RAA</strong> : rénine → angiotensine I → II → vasoconstriction + aldostérone",
+        "<strong>Tampon bicarbonate</strong> : rein régule les bicarbonates (compensation métabolique)"
+      ]},
+      {num:"Ch04", title:"Physiologie digestive", url:"passphysiodigest.html", points:[
+        "<strong>Estomac</strong> : HCl (pH~2) + pepsine → digestion protéines, facteur intrinsèque (vit B12)",
+        "<strong>Pancréas exocrine</strong> : amylase, lipase, protéases (trypsine, chymotrypsine) → intestin",
+        "<strong>Bile</strong> : sels biliaires → émulsification graisses (foie → vésicule biliaire → duodénum)",
+        "<strong>Absorption intestinale</strong> : glucose et AA par transport actif Na⁺-dépendant (SGLT1, GLUT2)",
+        "<strong>Sécrétion hormonale</strong> : gastrine (HCl), sécrétine (NaHCO₃), CCK (bile + enzymes)"
+      ]},
+      {num:"Ch05", title:"Physiologie endocrine", url:"passphysioendo.html", points:[
+        "<strong>Insuline</strong> : hyperglycémie → ↑ captage glucose, ↑ glycogénogenèse, ↑ lipogenèse",
+        "<strong>Glucagon</strong> : hypoglycémie → ↑ glycogénolyse hépatique, ↑ néoglucogenèse",
+        "<strong>Cortisol</strong> : stress → ↑ glycémie, ↑ catabolisme protéique, immunosuppresseur",
+        "<strong>Hormones thyroïdiennes (T3/T4)</strong> : métabolisme basal, croissance, thermogenèse",
+        "<strong>Axe HPA</strong> : hypothalamus (CRH) → hypophyse (ACTH) → surrénale (cortisol)"
+      ]}
+    ]
+  },
+  {
+    matiere:"Pharmacologie", icon:"💊", color:"#ea580c",
+    chapitres:[
+      {num:"Ch01", title:"Pharmacocinétique", url:"passpharmapk.html", points:[
+        "<strong>ADME</strong> : Absorption, Distribution, Métabolisme (foie, CYP450), Élimination (rein)",
+        "<strong>Effet premier passage hépatique</strong> : réduction biodisponibilité des médicaments oraux",
+        "<strong>Demi-vie</strong> : temps pour diviser la concentration par 2. Steady-state atteint après ~5 demi-vies",
+        "<strong>Vd (volume de distribution)</strong> : grand Vd = médicament dans les tissus, petit Vd = dans le plasma",
+        "<strong>Clairance</strong> : rénale (filtration + sécrétion − réabsorption) et hépatique (métabolisme)"
+      ]},
+      {num:"Ch02", title:"Pharmacodynamie", url:"passpharmapd.html", points:[
+        "<strong>Agoniste</strong> : se fixe ET active le récepteur. <strong>Antagoniste</strong> : se fixe SANS activer",
+        "<strong>Compétitif</strong> : déplaçable par excès d'agoniste (naloxone/morphine). <strong>Non compétitif</strong> : irréversible",
+        "<strong>Effet dose-réponse</strong> : plus la dose augmente, plus l'effet augmente jusqu'au plateau",
+        "<strong>Index thérapeutique</strong> : rapport dose efficace / dose toxique. Petit IT = médicament dangereux (lithium, digoxine)",
+        "<strong>Tolérance</strong> : diminution de l'effet avec le temps → nécessité d'augmenter la dose"
+      ]},
+      {num:"Ch03", title:"Pharmaco cardiovasculaire", url:"passpharmacardio.html", points:[
+        "<strong>Bêta-bloquants</strong> : bloquent β1 → ↓FC, ↓contractilité, ↓PA (HTA, IC, angor)",
+        "<strong>IEC/ARA2</strong> : bloquent le système RAA → vasodilatation + ↓aldostérone (HTA, IC)",
+        "<strong>Statines</strong> : inhibent HMG-CoA réductase → ↓LDL de 30-50%",
+        "<strong>Antiagrégants</strong> : aspirine (COX-1 irréversible), clopidogrel (P2Y12), prévention thrombose",
+        "<strong>Anticoagulants</strong> : héparine (AT-III), AVK (vit K), AOD (Xa ou thrombine directs)"
+      ]},
+      {num:"Ch04", title:"Pharmaco neurologique", url:"passpharmaneuro.html", points:[
+        "<strong>AINS</strong> : inhibent COX → ↓prostaglandines → anti-inflammatoire, antalgique, antipyrétique",
+        "<strong>Morphine</strong> : agoniste opioïde μ, antalgique central, risque dépression respiratoire",
+        "<strong>Benzodiazépines</strong> : potentialisent GABA (inhibiteur) → anxiolytique, hypnotique, anticonvulsivant",
+        "<strong>Antidépresseurs ISRS</strong> : bloquent recapture sérotonine (fluoxétine, sertraline)",
+        "<strong>L-DOPA</strong> : précurseur dopamine, traitement maladie de Parkinson (déficit dopaminergique)"
+      ]},
+      {num:"Ch05", title:"Antibiotiques", url:"passpharmaabc.html", points:[
+        "<strong>Bêta-lactamines</strong> : inhibent synthèse paroi bactérienne (PLP) → lyse osmotique",
+        "<strong>Aminosides</strong> : inhibent ribosome 30S bactérien → erreurs de traduction → bactéricidie",
+        "<strong>Macrolides</strong> : inhibent ribosome 50S bactérien → bactériostatique",
+        "<strong>Fluoroquinolones</strong> : inhibent ADN gyrase/topoisomérase → bactéricidie",
+        "<strong>Résistance</strong> : finir la cure, pas d'ATB sur les virus, usage raisonné en élevage"
+      ]}
+    ]
+  },
+  {
+    matiere:"Bio. Reproduction", icon:"🤰", color:"#be185d",
+    chapitres:[
+      {num:"Ch01", title:"Gamétogenèse", url:"passbioreprGametogenese.html", points:[
+        "<strong>Ovogenèse</strong> : commence in utero, stock fixé à la naissance (~1-2M), double blocage méiotique",
+        "<strong>Spermatogenèse</strong> : continue après la puberté, ~74 jours, cellules de Sertoli (FSH) et Leydig (LH→testostérone)",
+        "<strong>FSH</strong> : développement folliculaire (F) / spermatogenèse (H). <strong>LH</strong> : ovulation + corps jaune (F) / testostérone (H)",
+        "<strong>Folliculogenèse</strong> : primordial → primaire → antral → dominant → ovulation → corps jaune",
+        "<strong>GnRH pulsatile</strong> = stimulant. GnRH continue = castration chimique (down-régulation)"
+      ]},
+      {num:"Ch02", title:"Fécondation", url:"passbioreprFecondation.html", points:[
+        "<strong>Capacitation</strong> → réaction acrosomiale → pénétration ZP3 → réaction de zona (blocage polyspermie)",
+        "<strong>Fin méiose II</strong> : déclenchée par la fécondation → expulsion 2ème globule polaire → zygote (2n)",
+        "<strong>Segmentation</strong> : zygote → morula → blastocyste (J4-5) : trophoblaste (placenta) + MCI (embryon)",
+        "<strong>Implantation</strong> : J6-7, fenêtre J20-24. hCG dès J8-9 → maintient corps jaune → pas de règles",
+        "<strong>Test grossesse</strong> : détecte β-hCG urinaire dès J10-12 (avant le retard de règles)"
+      ]},
+      {num:"Ch03", title:"Embryogenèse", url:"passbioreprEmbryogenese.html", points:[
+        "<strong>3 feuillets</strong> : Ectoderme (peau + SNC), Mésoderme (muscles + os + rein), Endoderme (tube digestif + poumons)",
+        "<strong>Neurulation</strong> : J18-28, fermeture tube neural. Carence acide folique → spina bifida",
+        "<strong>Acide folique</strong> : 0,4 mg/j AVANT la conception (tube neural fermé avant grossesse connue)",
+        "<strong>SRY → testis</strong> : AMH (régression canaux de Müller) + testostérone + DHT (virilisation)",
+        "<strong>Période critique tératogènes</strong> : 3ème-8ème semaine (organogenèse)"
+      ]},
+      {num:"Ch04", title:"Grossesse et placenta", url:"passbioreprGrossesse.html", points:[
+        "<strong>Placenta hémochorial</strong> : syncytiotrophoblaste baigne dans le sang maternel",
+        "<strong>Fonctions placenta</strong> : échanges O₂/nutriments, endocrine (hCG, hPL, progestérone, œstrogènes), barrière sélective",
+        "<strong>hPL</strong> : insulinorésistance maternelle → plus de glucose pour le fœtus → diabète gestationnel possible",
+        "<strong>3 échographies</strong> : 11-13 SA (clarté nucale), 22 SA (morphologie), 32 SA (croissance)",
+        "<strong>Accouchement</strong> : prostaglandines (maturation col) + ocytocine (contractions) + réflexe de Ferguson"
+      ]},
+      {num:"Ch05", title:"Pathologies de la reproduction", url:"passbioreprPathologies.html", points:[
+        "<strong>Infertilité</strong> : 40% masculin, 40% féminin, 20% mixte. Bilan : spermogramme + HSG + hormones + AMH",
+        "<strong>PMA</strong> : IIU → FIV → ICSI (azoospermie/OAT sévère). Taux succès FIV : ~25-30% / transfert",
+        "<strong>Aménorrhée centrale</strong> : FSH+LH bas (anorexie, stress). <strong>Ovarienne</strong> : FSH+LH élevés (ménopause, Turner)",
+        "<strong>Hyperprolactinémie</strong> : inhibe GnRH → aménorrhée + galactorrhée. Traitement : cabergoline",
+        "<strong>IST en grossesse</strong> : rubéole + toxo + syphilis + VIH = dépistages obligatoires T1"
+      ]}
+    ]
+  },
+  {
+    matiere:"Chimie Générale", icon:"⚛️", color:"#818cf8",
+    chapitres:[
+      {num:"Ch01", title:"Structure atomique", url:"passchimiegenatome.html", points:[
+        "<strong>Atome</strong> : noyau (protons Z + neutrons N) + électrons. A = Z + N",
+        "<strong>Isotopes</strong> : même Z, A différent (¹²C et ¹⁴C radioactif)",
+        "<strong>Couches électroniques</strong> : K(2), L(8), M(18)... électrons de valence = réactivité",
+        "<strong>Tableau périodique</strong> : période = couches, groupe = électrons de valence",
+        "<strong>Énergie photon</strong> : ∝ fréquence, ∝ 1/longueur d'onde. UV > visible > IR"
+      ]},
+      {num:"Ch02", title:"Liaisons chimiques", url:"passchimiegenliaisons.html", points:[
+        "<strong>Ionique</strong> : transfert d'e⁻ (métal + non-métal), NaCl, solide cristallin conducteur en solution",
+        "<strong>Covalente</strong> : partage d'e⁻ (non-métaux). Polaire si ΔEN > 0,4. Simple, double, triple",
+        "<strong>Liaison hydrogène</strong> : H partiellement + entre O, N, F. Faible mais nombreuse → essentielle en biologie",
+        "<strong>Van der Waals</strong> : forces de dispersion entre molécules apolaires",
+        "<strong>Géométrie VSEPR</strong> : H₂O (tétraèdrique coudée), NH₃ (pyramidale), CO₂ (linéaire)"
+      ]},
+      {num:"Ch03", title:"Thermochimie", url:"passchimiegenthermo.html", points:[
+        "<strong>Exothermique</strong> : ΔH < 0, libère chaleur (combustion, respiration cellulaire)",
+        "<strong>Endothermique</strong> : ΔH > 0, absorbe chaleur (photosynthèse, dissolution NH₄Cl)",
+        "<strong>ΔG = ΔH − TΔS</strong> : ΔG < 0 = réaction spontanée",
+        "<strong>Couplage ATP/ADP</strong> : hydrolyse ATP (ΔG < 0) finance les réactions endothermiques",
+        "<strong>Cinétique</strong> : température↑ → vitesse↑. Catalyseur ↓ l'énergie d'activation"
+      ]},
+      {num:"Ch04", title:"Acides-bases", url:"passchimiegenacidebase.html", points:[
+        "<strong>pH = −log[H₃O⁺]</strong> : < 7 acide, = 7 neutre, > 7 basique",
+        "<strong>Acide fort</strong> : dissociation totale (HCl, HNO₃). <strong>Acide faible</strong> : partielle (CH₃COOH, pKa~4,8)",
+        "<strong>Tampon</strong> : mélange acide faible + base conjuguée → résiste aux variations de pH",
+        "<strong>Sang</strong> : pH 7,35-7,45 maintenu par tampon bicarbonate + protéines + phosphates",
+        "<strong>Acidose</strong> : pH < 7,35. <strong>Alcalose</strong> : pH > 7,45 → effets graves sur enzymes et protéines"
+      ]}
+    ]
+  },
+  {
+    matiere:"Chimie Organique", icon:"🧪", color:"#16a34a",
+    chapitres:[
+      {num:"Ch01", title:"Représentation des molécules", url:"passchimieorgarepr.html", points:[
+        "<strong>Formule topologique</strong> : trait = liaison C-C, extrémités et angles = C, H implicites",
+        "<strong>Hybridation sp3</strong> : tétraédrique (alcanes). sp2 : trigonal plan (alcènes, carbonyle). sp : linéaire (alcynes)",
+        "<strong>Carbone asymétrique</strong> : 4 substituants différents → chiralité",
+        "<strong>Représentation de Fischer</strong> : sucres et acides aminés. Horizontal = devant, vertical = derrière",
+        "<strong>Représentation de Newman</strong> : visualiser les conformations autour d'une liaison C-C"
+      ]},
+      {num:"Ch02", title:"Stéréochimie", url:"passchimieorgastereo.html", points:[
+        "<strong>Énantiomères</strong> : images miroir non superposables, notation R/S",
+        "<strong>Diastéréoisomères</strong> : stéréoisomères non énantiomères (propriétés physiques différentes)",
+        "<strong>Racémique</strong> : mélange 50/50 R+S, inactif en optique polarisée",
+        "<strong>Thalidomide</strong> : R sédatif, S tératogène → importance chiralité en pharmacologie",
+        "<strong>Stabilité conformationnelle</strong> : anti > gauche > éclipsé. Cyclohexane : chaise > bateau"
+      ]},
+      {num:"Ch03", title:"Réactions organiques", url:"passchimieorgareactions.html", points:[
+        "<strong>Addition électrophile (AE)</strong> : sur alcènes, E⁺ attaque la double liaison, règle de Markovnikov",
+        "<strong>Substitution nucléophile (SN)</strong> : Nu⁻ remplace un groupe partant sur sp3 (SN1 ou SN2)",
+        "<strong>Substitution aromatique électrophile (SAE)</strong> : remplacement H sur noyau aromatique",
+        "<strong>Élimination</strong> : perte HX → formation double liaison (règle de Zaitsev)",
+        "<strong>Test eau de brome</strong> : décoloration = insaturation présente (double ou triple liaison)"
+      ]},
+      {num:"Ch04", title:"Fonctions organiques", url:"passchimieorgafonctions.html", points:[
+        "<strong>Alcool (-OH)</strong> : polaire, LH, miscible eau. Oxydation → aldéhyde/cétone → acide carboxylique",
+        "<strong>Acide carboxylique (-COOH)</strong> : pKa~4-5. Réaction avec amine → amide (liaison peptidique !)",
+        "<strong>Amine (-NH₂)</strong> : base faible pKa~9-10. Amino-acides = NH₂ + COOH",
+        "<strong>Ester (-COO-)</strong> : dans les triglycérides et phospholipides, hydrolyse → acide + alcool",
+        "<strong>Thiol (-SH)</strong> : cystéine → ponts disulfure (−S−S−) par oxydation"
+      ]}
+    ]
+  },
+  {
+    matiere:"Statistiques & Santé Publique", icon:"📊", color:"#16a34a",
+    chapitres:[
+      {num:"Ch01", title:"Épidémiologie", url:"passstatsepi.html", points:[
+        "<strong>Prévalence</strong> : malades existants à un instant T. <strong>Incidence</strong> : nouveaux cas sur une période",
+        "<strong>Cohorte</strong> : prospective (vers l'avenir). <strong>Cas-témoins</strong> : rétrospective (vers le passé)",
+        "<strong>ECR</strong> : gold standard, randomisation élimine les facteurs de confusion",
+        "<strong>Bradford Hill</strong> : pour établir la causalité (temporalité, force, dose-réponse, plausibilité biologique)",
+        "<strong>Association ≠ causalité</strong> : corrélation fallacieuse, biais de confusion"
+      ]},
+      {num:"Ch02", title:"Biostatistiques", url:"passstatsbiostat.html", points:[
+        "<strong>Médiane</strong> > moyenne si données asymétriques ou valeurs extrêmes",
+        "<strong>p < 0,05</strong> = significatif statistiquement ≠ significatif cliniquement",
+        "<strong>IC à 95%</strong> : si 0 est inclus dans l'IC d'une différence → non significatif",
+        "<strong>NNT</strong> : nombre de patients à traiter pour éviter 1 événement. Petit NNT = traitement très utile",
+        "<strong>Corrélation ≠ causalité</strong> : variable de confusion, hasard, relation inverse"
+      ]},
+      {num:"Ch03", title:"Prévention", url:"passstatsprevention.html", points:[
+        "<strong>Prévention primaire</strong> : avant la maladie (vaccin, tabac, ceinture de sécurité)",
+        "<strong>Prévention secondaire</strong> : dépistage précoce (mammographie, frottis, FIT)",
+        "<strong>Prévention tertiaire</strong> : limiter les complications (rééducation, contrôle HTA)",
+        "<strong>Immunité collective</strong> : seuil % population immunisée → épidémie impossible",
+        "<strong>Déterminants de santé</strong> : sociaux > comportementaux > biologiques"
+      ]},
+      {num:"Ch04", title:"Lecture critique d'article", url:"passstatslca.html", points:[
+        "<strong>IMRAD</strong> : Introduction, Méthodes (section clé !), Résultats, Discussion",
+        "<strong>Pyramide des preuves</strong> : opinion → cas-témoins → cohorte → ECR → méta-analyse",
+        "<strong>Double aveugle</strong> : ni patient ni médecin ne sait qui reçoit le traitement actif",
+        "<strong>Conflits d'intérêts</strong> : études industrielles → résultats positifs plus fréquents",
+        "<strong>IA en santé</strong> : performances mais biais si données d'entraînement non diversifiées"
+      ]},
+      {num:"Ch05", title:"Grandes problématiques de santé", url:"passstatssante.html", points:[
+        "<strong>Transition épidémiologique</strong> : infections → maladies chroniques (tabac, sédentarité, alimentation, alcool)",
+        "<strong>Résistance antibiotiques</strong> : 1ère urgence sanitaire mondiale, finir sa cure, pas d'ATB pour les virus",
+        "<strong>Santé mentale</strong> : sous-diagnostiquée, stigmatisation = frein aux soins",
+        "<strong>One Health</strong> : santé humaine + animale + environnementale sont liées (zoonoses = 60% des émergentes)",
+        "<strong>Vieillissement</strong> : polypathologie, polymédication, fragilité, isolement social"
+      ]}
+    ]
+  }
+];
+
+// Construire les filtres
+var filtersEl = document.getElementById('filters');
+DATA.forEach(function(m){
+  var btn = document.createElement('button');
+  btn.className = 'filter-btn';
+  btn.textContent = m.matiere;
+  btn.style.cssText = 'border-color:'+m.color+';color:'+m.color+';';
+  btn.onclick = function(){ filterMat(btn, m.matiere); };
+  filtersEl.appendChild(btn);
+});
+
+// Construire le contenu
+var mainEl = document.getElementById('main-content');
+DATA.forEach(function(m){
+  var sec = document.createElement('div');
+  sec.className = 'matiere-section';
+  sec.dataset.matiere = m.matiere;
+
+  var chapHTML = m.chapitres.map(function(ch){
+    var pts = ch.points.map(function(p){ return '<li>'+p+'</li>'; }).join('');
+    return '<div class="fiche-card" style="--ac:'+m.color+'"><div class="fiche-num">'+ch.num+'</div><div class="fiche-title">'+ch.title+'</div><ul class="fiche-points">'+pts+'</ul><a class="fiche-link" href="'+ch.url+'">Fiche complète →</a></div>';
+  }).join('');
+
+  sec.innerHTML = '<div class="matiere-header"><span class="matiere-icon">'+m.icon+'</span><span class="matiere-name">'+m.matiere+'</span><span class="matiere-count">'+m.chapitres.length+' chapitres</span></div><div class="chapitres-grid">'+chapHTML+'</div>';
+  mainEl.appendChild(sec);
+});
+
+var activeMatiere = null;
+
+function filterAll(btn){
+  activeMatiere = null;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); b.style.background=''; b.style.color=b.style.borderColor||''; });
+  btn.classList.add('active'); btn.style.background='#1e1b18'; btn.style.color='#fff';
+  document.querySelectorAll('.matiere-section').forEach(function(s){ s.style.display=''; });
+}
+
+function filterMat(btn, matiere){
+  activeMatiere = matiere;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); b.style.background=''; });
+  btn.classList.add('active');
+  var col = btn.style.borderColor;
+  btn.style.background = col; btn.style.color = '#fff';
+  document.querySelectorAll('.matiere-section').forEach(function(s){
+    s.style.display = (s.dataset.matiere === matiere) ? '' : 'none';
+  });
+}
+
+function toggleTheme(){var h=document.documentElement,b=document.getElementById('themeBtn');h.dataset.theme=h.dataset.theme==='dark'?'light':'dark';b.textContent=h.dataset.theme==='dark'?'☀️':'🌙';}
+</script>
+</body>
+</html>
