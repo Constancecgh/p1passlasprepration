@@ -546,8 +546,8 @@ function renderProgress(){
   if(gCnt)gCnt.textContent=gOk>0?(gOk+'/'+gTotal+' notions validées'):'';
 }
 
-window.addEventListener('focus', function(){ loadProgress(); });
-window.addEventListener('visibilitychange', function(){ if(!document.hidden) loadProgress(); });
+window.addEventListener('focus', function(){ renderProgress(); });
+window.addEventListener('visibilitychange', function(){ if(!document.hidden) renderProgress(); });
 window.addEventListener('DOMContentLoaded',function(){
   renderProgress();
   // Révisions physique
