@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Cellule Eucaryote — Schéma interactif</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #080810;
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 28px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    background: rgba(8,8,16,0.9);
+    position: sticky; top: 0; z-index: 10;
+    backdrop-filter: blur(12px);
+  }
+  .nav-back {
+    text-decoration: none; color: rgba(255,255,255,0.4);
+    font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+    transition: color .2s;
+  }
+  .nav-back:hover { color: #fff; }
+  .nav-title {
+    font-size: 13px; font-weight: 500;
+    color: rgba(255,255,255,0.6);
+  }
+  .nav-badge {
+    font-size: 11px; padding: 4px 12px;
+    background: rgba(124,58,237,0.15);
+    border: 1px solid rgba(124,58,237,0.3);
+    border-radius: 100px; color: #a78bfa;
+    letter-spacing: .06em;
+  }
+
+  .page {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px 24px 60px;
+  }
+
+  .header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .header h1 {
+    font-size: 22px; font-weight: 700;
+    color: #f1f5f9;
+    margin-bottom: 6px;
+  }
+  .header p {
+    font-size: 13px; color: rgba(255,255,255,0.35);
+  }
+  .header p span {
+    color: #a78bfa;
+  }
+
+  /* SCHEMA */
+  .schema-container {
+    position: relative;
+    background: linear-gradient(135deg, #0d0d20 0%, #0a0a18 100%);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 20px;
+  }
+
+  svg#cellule {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Glow effects */
+  .organite-group { cursor: pointer; }
+  .organite-shape {
+    transition: filter .25s, opacity .25s;
+  }
+  .organite-group:hover .organite-shape {
+    filter: brightness(1.25) saturate(1.3);
+  }
+
+  /* TOOLTIP */
+  #tooltip {
+    position: fixed;
+    display: none;
+    background: #13131f;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    padding: 14px 18px;
+    max-width: 280px;
+    pointer-events: none;
+    z-index: 1000;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+  }
+  #tt-color {
+    width: 8px; height: 8px; border-radius: 50%;
+    display: inline-block; margin-right: 6px; vertical-align: middle;
+  }
+  #tt-nom {
+    font-size: 14px; font-weight: 700; color: #f1f5f9;
+    display: inline; vertical-align: middle;
+  }
+  #tt-role {
+    font-size: 12px; color: rgba(255,255,255,0.55);
+    line-height: 1.6; margin-top: 8px;
+  }
+  #tt-key {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    font-size: 11px; color: rgba(255,255,255,0.35);
+    letter-spacing: .04em;
+  }
+  #tt-key strong { color: #a78bfa; }
+
+  /* LÉGENDE */
+  .legende {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .leg {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 12px 14px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all .2s;
+  }
+  .leg:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.12); }
+  .leg-dot {
+    width: 10px; height: 10px; border-radius: 50%;
+    flex-shrink: 0; margin-top: 3px;
+  }
+  .leg-nom { font-size: 12px; font-weight: 600; color: #e2e8f0; line-height: 1.3; }
+  .leg-role { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; line-height: 1.4; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-back" href="passbiolcellcellule.html">← Ch01 Structure cellulaire</a>
+  <span class="nav-title">Biologie Cellulaire</span>
+  <span class="nav-badge">Schéma interactif</span>
+</nav>
+
+<div class="page">
+  <div class="header">
+    <h1>Cellule eucaryote animale</h1>
+    <p>Survole un organite pour voir son rôle · <span>Clic sur mobile</span></p>
+  </div>
+
+  <div class="schema-container">
+    <svg id="cellule" viewBox="-10 0 940 600" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <!-- Gradients -->
+        <radialGradient id="gCell" cx="45%" cy="48%" r="55%">
+          <stop offset="0%" stop-color="#1a1635"/>
+          <stop offset="100%" stop-color="#0e0e1e"/>
+        </radialGradient>
+        <radialGradient id="gNoyau" cx="40%" cy="38%" r="55%">
+          <stop offset="0%" stop-color="#6d28d9"/>
+          <stop offset="100%" stop-color="#3b0764"/>
+        </radialGradient>
+        <radialGradient id="gNucleole" cx="40%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#c4b5fd"/>
+          <stop offset="100%" stop-color="#8b5cf6"/>
+        </radialGradient>
+        <radialGradient id="gMito" cx="30%" cy="30%" r="70%">
+          <stop offset="0%" stop-color="#34d399"/>
+          <stop offset="100%" stop-color="#065f46"/>
+        </radialGradient>
+        <radialGradient id="gRER" cx="40%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#fbbf24"/>
+          <stop offset="100%" stop-color="#92400e"/>
+        </radialGradient>
+        <radialGradient id="gGolgi" cx="40%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#f97316"/>
+          <stop offset="100%" stop-color="#7c2d12"/>
+        </radialGradient>
+        <radialGradient id="gLyso" cx="35%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#f87171"/>
+          <stop offset="100%" stop-color="#7f1d1d"/>
+        </radialGradient>
+        <radialGradient id="gCentro" cx="40%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#818cf8"/>
+          <stop offset="100%" stop-color="#312e81"/>
+        </radialGradient>
+        <radialGradient id="gREL" cx="40%" cy="40%" r="60%">
+          <stop offset="0%" stop-color="#fde68a"/>
+          <stop offset="100%" stop-color="#78350f"/>
+        </radialGradient>
+        <!-- Glows -->
+        <filter id="glow-purple" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="8" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+        <filter id="glow-green" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="6" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+        <filter id="glow-soft" x="-20%" y="-20%" width="140%" height="140%">
+          <feGaussianBlur stdDeviation="4" result="blur"/>
+          <feComposite in="SourceGraphic" in2="blur" operator="over"/>
+        </filter>
+      </defs>
+
+      <!-- ═══ MEMBRANE PLASMIQUE ═══ -->
+      <g class="organite-group" data-nom="Membrane plasmique" data-color="#94a3b8" data-role="Bicouche de phospholipides + cholestérol + protéines intégrées. Sépare l'intérieur de la cellule du milieu extérieur. Régule les échanges (perméabilité sélective)." data-key="Modèle mosaïque fluide (Singer & Nicolson, 1972)">
+        <ellipse cx="440" cy="295" rx="400" ry="265" fill="url(#gCell)" stroke="#334155" stroke-width="3" class="organite-shape"/>
+        <ellipse cx="440" cy="295" rx="392" ry="257" fill="none" stroke="#475569" stroke-width="1" stroke-dasharray="5,4" opacity="0.5" class="organite-shape"/>
+      </g>
+
+      <!-- ═══ NOYAU ═══ -->
+      <g class="organite-group" data-nom="Noyau" data-color="#a78bfa" data-role="Contient le génome (ADN + protéines histones). Entouré d'une enveloppe nucléaire double membrane percée de pores. Contrôle l'expression génique et la division cellulaire." data-key="ADN condensé en chromatine → chromosomes lors de la mitose">
+        <ellipse cx="400" cy="265" rx="120" ry="100" fill="url(#gNoyau)" stroke="#7c3aed" stroke-width="2" filter="url(#glow-purple)" class="organite-shape" opacity="0.9"/>
+        <ellipse cx="400" cy="265" rx="112" ry="92" fill="none" stroke="#a78bfa" stroke-width="1" stroke-dasharray="4,3" opacity="0.6" class="organite-shape"/>
+        <!-- Pores nucléaires - positionnés précisément -->
+        <circle cx="295" cy="250" r="5" fill="#c4b5fd" opacity="0.9"/>
+        <circle cx="310" cy="200" r="5" fill="#c4b5fd" opacity="0.9"/>
+        <circle cx="365" cy="170" r="5" fill="#c4b5fd" opacity="0.9"/>
+        <circle cx="425" cy="168" r="5" fill="#c4b5fd" opacity="0.9"/>
+        <circle cx="478" cy="190" r="5" fill="#c4b5fd" opacity="0.9"/>
+        <circle cx="508" cy="242" r="5" fill="#c4b5fd" opacity="0.9"/>
+        <circle cx="500" cy="300" r="5" fill="#c4b5fd" opacity="0.9"/>
+        <circle cx="450" cy="356" r="5" fill="#c4b5fd" opacity="0.9"/>
+        <circle cx="380" cy="362" r="5" fill="#c4b5fd" opacity="0.9"/>
+        <circle cx="313" cy="330" r="5" fill="#c4b5fd" opacity="0.9"/>
+        <!-- Nucléole -->
+        <ellipse cx="390" cy="255" rx="36" ry="30" fill="url(#gNucleole)" stroke="#c4b5fd" stroke-width="1.5" class="organite-shape" opacity="0.95"/>
+      </g>
+
+      <!-- ═══ RER ═══ -->
+      <g class="organite-group" data-nom="Réticulum Endoplasmique Rugueux (RER)" data-color="#fbbf24" data-role="Réseau de sacs membranaires couverts de ribosomes. Synthèse et première maturation des protéines sécrétées, membranaires et lysosomales. N-glycosylation dans le RER." data-key="Rugueux = ribosomes fixés en surface. Lisse (REL) = pas de ribosomes">
+        <path d="M530 200 Q575 185 590 220 Q605 260 585 285 Q565 305 540 295 Q510 280 515 245 Q520 215 530 200Z" fill="url(#gRER)" opacity="0.85" filter="url(#glow-soft)" class="organite-shape"/>
+        <!-- Ribosomes sur RER -->
+        <circle cx="537" cy="208" r="4" fill="#fde68a"/>
+        <circle cx="552" cy="198" r="4" fill="#fde68a"/>
+        <circle cx="567" cy="193" r="4" fill="#fde68a"/>
+        <circle cx="580" cy="200" r="4" fill="#fde68a"/>
+        <circle cx="590" cy="215" r="4" fill="#fde68a"/>
+        <circle cx="594" cy="232" r="4" fill="#fde68a"/>
+        <circle cx="590" cy="250" r="4" fill="#fde68a"/>
+        <circle cx="581" cy="267" r="4" fill="#fde68a"/>
+        <circle cx="566" cy="279" r="4" fill="#fde68a"/>
+        <circle cx="549" cy="286" r="4" fill="#fde68a"/>
+        <circle cx="532" cy="282" r="4" fill="#fde68a"/>
+        <circle cx="518" cy="270" r="4" fill="#fde68a"/>
+        <circle cx="512" cy="253" r="4" fill="#fde68a"/>
+      </g>
+
+      <!-- ═══ REL ═══ -->
+      <g class="organite-group" data-nom="Réticulum Endoplasmique Lisse (REL)" data-color="#fde68a" data-role="Réseau membranaire SANS ribosomes. Synthèse des lipides et stéroïdes. Détoxification des médicaments et toxines (enzymes CYP450 hépatiques). Stockage du Ca²⁺ (réticulum sarcoplasmique du muscle)." data-key="Dans le foie → détox. Dans le muscle → calcium (contraction)">
+        <path d="M535 305 Q575 290 595 315 Q615 345 600 375 Q580 400 555 390 Q525 375 520 348 Q515 320 535 305Z" fill="url(#gREL)" opacity="0.8" filter="url(#glow-soft)" class="organite-shape"/>
+      </g>
+
+      <!-- ═══ GOLGI ═══ -->
+      <g class="organite-group" data-nom="Appareil de Golgi" data-color="#fb923c" data-role="Empilement de sacs membranaires (citernes). Reçoit les protéines du RER (face cis), les modifie (O-glycosylation, clivages, ajout M6P pour les lysosomes) et les trie (face trans) vers leur destination finale." data-key="Face cis = reçoit du RER. Face trans = expédie vers la membrane, les lysosomes ou l'extérieur">
+        <path d="M640 235 Q672 228 682 248 Q692 268 678 278 Q660 285 643 272 Q625 258 640 235Z" fill="url(#gGolgi)" class="organite-shape" opacity="0.9"/>
+        <path d="M645 272 Q677 265 687 285 Q697 305 683 315 Q665 322 648 309 Q630 295 645 272Z" fill="#ea580c" class="organite-shape" opacity="0.85"/>
+        <path d="M650 308 Q682 301 692 321 Q702 341 688 351 Q670 358 653 345 Q635 331 650 308Z" fill="#c2410c" class="organite-shape" opacity="0.8"/>
+        <!-- Vésicules de sécrétion -->
+        <circle cx="715" cy="265" r="10" fill="#fb923c" stroke="#9a3412" stroke-width="1.5" class="organite-shape" opacity="0.85"/>
+        <circle cx="728" cy="290" r="8" fill="#fb923c" stroke="#9a3412" stroke-width="1.5" class="organite-shape" opacity="0.75"/>
+        <circle cx="710" cy="308" r="7" fill="#fdba74" stroke="#9a3412" stroke-width="1.5" class="organite-shape" opacity="0.8"/>
+      </g>
+
+      <!-- ═══ MITOCHONDRIE 1 (grande) ═══ -->
+      <g class="organite-group" data-nom="Mitochondrie" data-color="#34d399" data-role="Centrale énergétique. Produit l'ATP par respiration cellulaire (glycolyse → pyruvate → acétyl-CoA → cycle de Krebs → phosphorylation oxydative sur la membrane interne). Possède son propre ADN circulaire (héritage maternel = origine endosymbiotique)." data-key="1 glucose → ~30-32 ATP · Double membrane · Crêtes = membrane interne replissée">
+        <ellipse cx="230" cy="380" rx="70" ry="38" fill="url(#gMito)" stroke="#059669" stroke-width="2" filter="url(#glow-green)" class="organite-shape" opacity="0.92"/>
+        <!-- Crêtes mitochondriales -->
+        <path d="M168 380 Q185 365 185 395" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round"/>
+        <path d="M193 374 Q210 359 210 389" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round"/>
+        <path d="M218 372 Q235 357 235 387" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round"/>
+        <path d="M244 374 Q261 359 261 389" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round"/>
+        <path d="M270 378 Q287 363 287 393" fill="none" stroke="#6ee7b7" stroke-width="2" stroke-linecap="round"/>
+      </g>
+
+      <!-- ═══ MITOCHONDRIE 2 (petite) ═══ -->
+      <g class="organite-group" data-nom="Mitochondrie" data-color="#34d399" data-role="Centrale énergétique. Produit l'ATP. Double membrane. ADN circulaire propre. La cellule peut en avoir des centaines selon ses besoins énergétiques." data-key="Cellules très actives (muscle, foie, neurones) = plus de mitochondries">
+        <ellipse cx="660" cy="430" rx="48" ry="26" fill="url(#gMito)" stroke="#059669" stroke-width="1.5" class="organite-shape" opacity="0.88"/>
+        <path d="M622 430 Q634 421 634 439" fill="none" stroke="#6ee7b7" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M643 427 Q655 418 655 436" fill="none" stroke="#6ee7b7" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M665 426 Q677 417 677 435" fill="none" stroke="#6ee7b7" stroke-width="1.5" stroke-linecap="round"/>
+        <path d="M686 429 Q698 420 698 438" fill="none" stroke="#6ee7b7" stroke-width="1.5" stroke-linecap="round"/>
+      </g>
+
+      <!-- ═══ LYSOSOMES ═══ -->
+      <g class="organite-group" data-nom="Lysosome" data-color="#f87171" data-role="Vésicules acides (pH ~4,5) contenant ~50 hydrolases. Dégradent les macromolécules (protéines, lipides, glucides, ADN). Fonctions : autophagie (recyclage des organites endommagés), hétérophagie (digestion des phagosomes). Déficit → maladies de surcharge lysosomale (Gaucher, Fabry, Pompe)." data-key="pH 4,5 · H+ pompé activement · Hydrolases acides">
+        <circle cx="740" cy="340" r="24" fill="url(#gLyso)" stroke="#dc2626" stroke-width="2" filter="url(#glow-soft)" class="organite-shape" opacity="0.9"/>
+        <circle cx="700" cy="390" r="17" fill="url(#gLyso)" stroke="#dc2626" stroke-width="1.5" class="organite-shape" opacity="0.85"/>
+        <circle cx="760" cy="390" r="13" fill="url(#gLyso)" stroke="#ef4444" stroke-width="1.5" class="organite-shape" opacity="0.8"/>
+      </g>
+
+      <!-- ═══ CENTROSOME ═══ -->
+      <g class="organite-group" data-nom="Centrosome (centrioles)" data-color="#818cf8" data-role="Centre organisateur des microtubules (MTOC). Forme le fuseau mitotique lors de la division cellulaire. Composé de 2 centrioles perpendiculaires (chacun = 9 triplets de microtubules). Absent des cellules végétales." data-key="2 centrioles perpendiculaires · Indispensable à la mitose">
+        <rect x="148" y="255" width="18" height="36" rx="4" fill="url(#gCentro)" stroke="#818cf8" stroke-width="1.5" class="organite-shape" opacity="0.9"/>
+        <rect x="136" y="242" width="36" height="18" rx="4" fill="#6366f1" stroke="#818cf8" stroke-width="1.5" class="organite-shape" opacity="0.85"/>
+      </g>
+
+      <!-- ═══ RIBOSOMES LIBRES ═══ -->
+      <g class="organite-group" data-nom="Ribosomes libres" data-color="#94a3b8" data-role="Complexes ARNr + protéines (sous-unité 40S + 60S = 80S). Synthétisent les protéines destinées au cytoplasme. Non attachés au RER → protéines cytosoliques. Les ribosomes attachés au RER font les protéines sécrétées/membranaires." data-key="Libres = cytoplasme · Fixés = RER → protéines sécrétées">
+        <circle cx="165" cy="185" r="5" fill="#94a3b8" opacity="0.8" class="organite-shape"/>
+        <circle cx="185" cy="200" r="5" fill="#94a3b8" opacity="0.8" class="organite-shape"/>
+        <circle cx="155" cy="210" r="5" fill="#94a3b8" opacity="0.7" class="organite-shape"/>
+        <circle cx="175" cy="225" r="5" fill="#94a3b8" opacity="0.8" class="organite-shape"/>
+        <circle cx="620" cy="165" r="5" fill="#94a3b8" opacity="0.7" class="organite-shape"/>
+        <circle cx="640" cy="178" r="5" fill="#94a3b8" opacity="0.8" class="organite-shape"/>
+        <circle cx="200" cy="460" r="4" fill="#94a3b8" opacity="0.6" class="organite-shape"/>
+        <circle cx="220" cy="472" r="4" fill="#94a3b8" opacity="0.5" class="organite-shape"/>
+        <circle cx="500" cy="448" r="4" fill="#94a3b8" opacity="0.5" class="organite-shape"/>
+        <circle cx="520" cy="460" r="4" fill="#94a3b8" opacity="0.6" class="organite-shape"/>
+      </g>
+
+      <!-- ═══ VACUOLE ═══ -->
+      <g class="organite-group" data-nom="Vacuole" data-color="#38bdf8" data-role="Compartiment membranaire de stockage. Chez les animaux : petites et nombreuses (stockage eau, ions, déchets). Chez les végétaux : 1 grande vacuole centrale (jusqu'à 90% du volume cellulaire → turgescence)." data-key="Animaux = petites vacuoles multiples · Végétaux = 1 grande vacuole centrale">
+        <ellipse cx="335" cy="415" rx="52" ry="37" fill="rgba(56,189,248,0.12)" stroke="#38bdf8" stroke-width="2.5" class="organite-shape" opacity="0.95" filter="url(#glow-soft)"/>
+      </g>
+
+      <!-- ═══ CYTOSQUELETTE (microtubules) ═══ -->
+      <g class="organite-group" data-nom="Cytosquelette" data-color="#475569" data-role="Réseau de filaments protéiques qui donne sa forme à la cellule et organise ses mouvements. 3 types : microtubules (tubuline, transport vésiculaire), filaments d'actine (contraction, mouvement cellulaire), filaments intermédiaires (résistance mécanique)." data-key="Microtubules → transport · Actine → mouvement · Filaments intermédiaires → résistance">
+        <line x1="170" y1="145" x2="660" y2="480" stroke="#334155" stroke-width="1.5" stroke-dasharray="7,5" opacity="0.6" class="organite-shape"/>
+        <line x1="100" y1="350" x2="780" y2="220" stroke="#334155" stroke-width="1.5" stroke-dasharray="7,5" opacity="0.5" class="organite-shape"/>
+        <line x1="230" y1="130" x2="190" y2="490" stroke="#2d3748" stroke-width="1" stroke-dasharray="5,5" opacity="0.4" class="organite-shape"/>
+      </g>
+
+      <!-- ══════════════════════ LABELS ══════════════════════ -->
+      <!-- Positionnés soigneusement en périphérie, lignes fines -->
+
+      <!-- MEMBRANE PLASMIQUE - haut gauche -->
+      <line x1="58" y1="170" x2="42" y2="145" stroke="#475569" stroke-width="1"/>
+      <text x="10" y="138" font-family="Inter" font-size="11" fill="#94a3b8" font-weight="600">Membrane</text>
+      <text x="10" y="152" font-family="Inter" font-size="11" fill="#94a3b8" font-weight="600">plasmique</text>
+
+      <!-- NOYAU - centre gauche -->
+      <line x1="285" y1="280" x2="235" y2="290" stroke="#7c3aed" stroke-width="1"/>
+      <text x="100" y="284" font-family="Inter" font-size="12" fill="#a78bfa" font-weight="700">Noyau</text>
+      <text x="88" y="298" font-family="Inter" font-size="10" fill="#7c3aed">(enveloppe + pores)</text>
+
+      <!-- NUCLÉOLE - au dessus -->
+      <line x1="390" y1="228" x2="390" y2="195" stroke="#c4b5fd" stroke-width="1"/>
+      <text x="355" y="190" font-family="Inter" font-size="11" fill="#c4b5fd" font-weight="600">Nucléole</text>
+
+      <!-- RER - droite -->
+      <line x1="592" y1="242" x2="625" y2="230" stroke="#fbbf24" stroke-width="1"/>
+      <text x="628" y="222" font-family="Inter" font-size="11" fill="#fbbf24" font-weight="700">RER</text>
+      <text x="628" y="236" font-family="Inter" font-size="10" fill="#92400e">(+ ribosomes)</text>
+
+      <!-- REL - droite bas -->
+      <line x1="600" y1="348" x2="630" y2="340" stroke="#fde68a" stroke-width="1"/>
+      <text x="633" y="334" font-family="Inter" font-size="11" fill="#fde68a" font-weight="700">REL</text>
+      <text x="633" y="348" font-family="Inter" font-size="10" fill="#a16207">(lipides · CYP450)</text>
+
+      <!-- GOLGI - droite milieu -->
+      <line x1="693" y1="293" x2="745" y2="285" stroke="#f97316" stroke-width="1"/>
+      <text x="745" y="280" font-family="Inter" font-size="11" fill="#fb923c" font-weight="700">Golgi</text>
+      <text x="745" y="294" font-family="Inter" font-size="10" fill="#ea580c">(tri + expédition)</text>
+
+      <!-- MITOCHONDRIE 1 - bas gauche -->
+      <line x1="230" y1="418" x2="230" y2="440" stroke="#34d399" stroke-width="1"/>
+      <text x="148" y="450" font-family="Inter" font-size="11" fill="#34d399" font-weight="700">Mitochondrie</text>
+      <text x="161" y="463" font-family="Inter" font-size="10" fill="#059669">(ATP ⚡)</text>
+
+      <!-- MITOCHONDRIE 2 - bas droite -->
+      <line x1="660" y1="456" x2="680" y2="470" stroke="#34d399" stroke-width="1"/>
+      <text x="682" y="467" font-family="Inter" font-size="11" fill="#34d399" font-weight="600">Mitochondrie</text>
+
+      <!-- LYSOSOME - droite bas -->
+      <line x1="757" y1="340" x2="798" y2="325" stroke="#f87171" stroke-width="1"/>
+      <text x="800" y="318" font-family="Inter" font-size="11" fill="#f87171" font-weight="700">Lysosome</text>
+      <text x="800" y="332" font-family="Inter" font-size="10" fill="#dc2626">(pH 4,5 · hydrolases)</text>
+
+      <!-- CENTROSOME - gauche milieu -->
+      <line x1="148" y1="285" x2="110" y2="320" stroke="#818cf8" stroke-width="1"/>
+      <text x="28" y="315" font-family="Inter" font-size="11" fill="#818cf8" font-weight="700">Centrosome</text>
+      <text x="35" y="328" font-family="Inter" font-size="10" fill="#4f46e5">(centrioles)</text>
+
+      <!-- RIBOSOMES LIBRES - gauche haut -->
+      <line x1="170" y1="192" x2="140" y2="175" stroke="#64748b" stroke-width="1"/>
+      <text x="50" y="168" font-family="Inter" font-size="10" fill="#94a3b8" font-weight="600">Ribosomes libres</text>
+
+      <!-- VACUOLE - bas gauche -->
+      <line x1="320" y1="448" x2="315" y2="465" stroke="#38bdf8" stroke-width="1"/>
+      <text x="265" y="492" font-family="Inter" font-size="11" fill="#38bdf8" font-weight="600">Vacuole</text>
+      <text x="265" y="505" font-family="Inter" font-size="10" fill="#7dd3fc">(stockage · eau · ions)</text>
+
+      <!-- CYTOSQUELETTE - bas -->
+      <text x="320" y="565" font-family="Inter" font-size="10" fill="#475569" font-weight="600" opacity="0.7">— — —  Cytosquelette (microtubules)  — — —</text>
+
+      <!-- PORES NUCLÉAIRES mini label -->
+      <text x="460" y="160" font-family="Inter" font-size="9" fill="#7c3aed" opacity="0.8">● pores nucléaires</text>
+    </svg>
+  </div>
+
+  <!-- LÉGENDE -->
+  <div class="legende">
+    <div class="leg" onclick="highlight('Noyau')"><div class="leg-dot" style="background:#a78bfa;box-shadow:0 0 6px #7c3aed"></div><div><div class="leg-nom">Noyau + Nucléole</div><div class="leg-role">ADN · Contrôle génique · Pores nucléaires</div></div></div>
+    <div class="leg" onclick="highlight('Mitochondrie')"><div class="leg-dot" style="background:#34d399;box-shadow:0 0 6px #059669"></div><div><div class="leg-nom">Mitochondrie</div><div class="leg-role">ATP ⚡ · Cycle de Krebs · ADN circulaire</div></div></div>
+    <div class="leg" onclick="highlight('Réticulum Endoplasmique Rugueux')"><div class="leg-dot" style="background:#fbbf24;box-shadow:0 0 6px #d97706"></div><div><div class="leg-nom">RER</div><div class="leg-role">Protéines sécrétées · Ribosomes fixés</div></div></div>
+    <div class="leg" onclick="highlight('Réticulum Endoplasmique Lisse')"><div class="leg-dot" style="background:#fde68a"></div><div><div class="leg-nom">REL</div><div class="leg-role">Lipides · Détox CYP450 · Stockage Ca²⁺</div></div></div>
+    <div class="leg" onclick="highlight('Appareil de Golgi')"><div class="leg-dot" style="background:#fb923c;box-shadow:0 0 6px #ea580c"></div><div><div class="leg-nom">Appareil de Golgi</div><div class="leg-role">Tri · Glycosylation · Expédition</div></div></div>
+    <div class="leg" onclick="highlight('Lysosome')"><div class="leg-dot" style="background:#f87171;box-shadow:0 0 6px #dc2626"></div><div><div class="leg-nom">Lysosome</div><div class="leg-role">pH 4,5 · Hydrolases · Autophagie</div></div></div>
+    <div class="leg" onclick="highlight('Centrosome')"><div class="leg-dot" style="background:#818cf8"></div><div><div class="leg-nom">Centrosome</div><div class="leg-role">Centrioles · Fuseau mitotique</div></div></div>
+    <div class="leg" onclick="highlight('Membrane plasmique')"><div class="leg-dot" style="background:#475569"></div><div><div class="leg-nom">Membrane plasmique</div><div class="leg-role">Bicouche lipidique · Échanges sélectifs</div></div></div>
+  </div>
+</div>
+
+<!-- TOOLTIP -->
+<div id="tooltip">
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+    <div id="tt-color" style="width:8px;height:8px;border-radius:50%;flex-shrink:0;"></div>
+    <div id="tt-nom" style="font-size:14px;font-weight:700;color:#f1f5f9;"></div>
+  </div>
+  <div id="tt-role" style="font-size:12px;color:rgba(255,255,255,0.55);line-height:1.6;"></div>
+  <div id="tt-key" style="margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.07);font-size:11px;color:rgba(255,255,255,0.3);"></div>
+</div>
+
+<script>
+var tt = document.getElementById('tooltip');
+var ttN = document.getElementById('tt-nom');
+var ttR = document.getElementById('tt-role');
+var ttK = document.getElementById('tt-key');
+var ttC = document.getElementById('tt-color');
+
+document.querySelectorAll('.organite-group').forEach(function(g){
+  g.addEventListener('mouseenter', function(e){
+    ttN.textContent = g.dataset.nom;
+    ttR.textContent = g.dataset.role;
+    ttK.textContent = g.dataset.key || '';
+    ttC.style.background = g.dataset.color || '#fff';
+    ttC.style.boxShadow = '0 0 6px ' + (g.dataset.color || '#fff');
+    tt.style.display = 'block';
+  });
+  g.addEventListener('mousemove', function(e){
+    var x = e.clientX + 16, y = e.clientY - 10;
+    if(x + 290 > window.innerWidth) x = e.clientX - 306;
+    if(y + 180 > window.innerHeight) y = e.clientY - 190;
+    tt.style.left = x + 'px'; tt.style.top = y + 'px';
+  });
+  g.addEventListener('mouseleave', function(){ tt.style.display = 'none'; });
+  g.addEventListener('click', function(e){
+    ttN.textContent = g.dataset.nom;
+    ttR.textContent = g.dataset.role;
+    ttK.textContent = g.dataset.key || '';
+    ttC.style.background = g.dataset.color || '#fff';
+    tt.style.display = 'block';
+    tt.style.left = '50%'; tt.style.top = '80px';
+    tt.style.transform = 'translateX(-50%)';
+    tt.style.width = '300px';
+    setTimeout(function(){ tt.style.display='none'; tt.style.transform=''; tt.style.width=''; }, 4000);
+  });
+});
+
+function highlight(nom){
+  document.querySelectorAll('.organite-group').forEach(function(g){
+    if(g.dataset.nom && g.dataset.nom.includes(nom.split(' ')[0])){
+      ttN.textContent = g.dataset.nom;
+      ttR.textContent = g.dataset.role;
+      ttK.textContent = g.dataset.key || '';
+      ttC.style.background = g.dataset.color || '#fff';
+      tt.style.display = 'block';
+      tt.style.left = '50%'; tt.style.top = '80px';
+      tt.style.transform = 'translateX(-50%)';
+      tt.style.width = '300px';
+      setTimeout(function(){ tt.style.display='none'; tt.style.transform=''; tt.style.width=''; }, 4000);
+    }
+  });
+}
+</script>
+</body>
+</html>

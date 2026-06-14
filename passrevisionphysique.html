@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Révisions Physique — PASS/LAS — Constance</title>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet">
+<style>
+[data-theme="light"]{--bg:#f<sub>0</sub>f4ff;--surface:#fff;--border:#c7d2fe;--accent:#4f46e5;--accent2:#7c3aed;--text:#1e1b18;--muted:#6b7280;--tag-bg:rgba(79,70,229,0.07);--progress-track:rgba(0,0,0,0.07);--toggle-bg:#c7d2fe;--formula-bg:rgba(79,70,229,0.05);--formula-border:rgba(79,70,229,0.18);--med-bg:rgba(124,58,237,0.05);--med-border:rgba(124,58,237,0.18);--key-bg:rgba(79,70,229,0.03);}
+[data-theme="dark"]{--bg:#0a0a0f;--surface:#111118;--border:#1e1e3a;--accent:#818cf8;--accent2:#a78bfa;--text:#e2e8f<sub>0</sub>;--muted:#64748b;--tag-bg:rgba(129,140,248,0.08);--progress-track:rgba(255,255,255,0.06);--toggle-bg:#1e1e3a;--formula-bg:rgba(129,140,248,0.06);--formula-border:rgba(129,140,248,0.2);--med-bg:rgba(167,139,250,0.06);--med-border:rgba(167,139,250,0.2);--key-bg:rgba(129,140,248,0.04);}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Source Serif 4',serif;min-height:100vh;transition:background .3s,color .3s;}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;padding:1rem 2.5rem;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border);backdrop-filter:blur(12px);background:rgba(240,244,255,0.92);}
+[data-theme="dark"] nav{background:rgba(10,10,15,0.92);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--accent);text-decoration:none;}
+.nav-back{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s;}
+.nav-back:hover{color:var(--text);}
+.theme-toggle{background:var(--toggle-bg);border:1px solid var(--border);border-radius:100px;padding:5px 12px;cursor:pointer;font-size:14px;color:var(--muted);user-select:none;}
+
+header{padding:100px 52px 36px;border-bottom:1px solid var(--border);max-width:860px;margin:0 auto;}
+.badge{display:inline-block;background:rgba(79,70,229,.08);border:1px solid rgba(79,70,229,.2);color:var(--accent);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;padding:4px 14px;border-radius:100px;margin-bottom:14px;}
+h1{font-family:'Libre Baskerville',serif;font-size:clamp(26px,4vw,42px);font-weight:700;line-height:1.1;margin-bottom:8px;}
+.sub{color:var(--muted);font-size:13px;line-height:1.7;max-width:560px;margin-bottom:6px;}
+
+/* PROGRESS */
+.prog-wrap{max-width:860px;margin:0 auto;padding:20px 52px 0;}
+.prog-row{display:flex;align-items:center;gap:12px;}
+.prog-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap;}
+.prog-track{flex:1;height:5px;background:var(--progress-track);border-radius:100px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:100px;transition:width .5s ease;}
+.prog-pct{font-size:13px;font-weight:700;color:var(--accent);white-space:nowrap;}
+
+main{max-width:860px;margin:0 auto;padding:28px 52px 60px;}
+
+/* CARD */
+.ch-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;margin-bottom:12px;overflow:hidden;transition:box-shadow .2s;}
+.ch-card.mastered{box-shadow:0 0 0 2px var(--accent);}
+.ch-head{display:flex;align-items:center;gap:14px;padding:18px 22px;cursor:pointer;user-select:none;}
+.ch-check{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;transition:all .2s;color:transparent;background:transparent;cursor:pointer;}
+.ch-card.mastered .ch-check{background:var(--accent);border-color:var(--accent);color:#fff;}
+.ch-num{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);flex-shrink:0;width:24px;}
+.ch-title{font-family:'Libre Baskerville',serif;font-size:16px;font-weight:700;flex:1;line-height:1.3;}
+.ch-arrow{font-size:18px;color:var(--muted);transition:transform .25s;flex-shrink:0;line-height:1;}
+.ch-card.open .ch-arrow{transform:rotate(90deg);}
+
+.ch-body{display:none;padding:0 24px 24px 60px;border-top:1px solid var(--border);}
+.ch-card.open .ch-body{display:block;}
+
+/* CONTENU */
+.def{font-size:14px;line-height:1.8;color:var(--text);margin-top:18px;}
+.def strong{color:var(--accent);font-weight:700;}
+
+/* FORMULES — bien lisibles, une par ligne */
+.formulas{margin-top:16px;background:var(--formula-bg);border:1px solid var(--formula-border);border-radius:12px;padding:16px 20px;}
+.formulas-label{font-size:10px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);margin-bottom:12px;}
+.formula-line{display:flex;align-items:baseline;gap:12px;padding:7px 0;border-bottom:1px solid var(--formula-border);}
+.formula-line:last-child{border-bottom:none;padding-bottom:0;}
+.formula-expr{font-family:'Libre Baskerville',serif;font-size:16px;font-style:italic;color:var(--accent2);min-width:180px;flex-shrink:0;}
+.formula-desc{font-size:12px;color:var(--muted);line-height:1.5;}
+
+.med-box{margin-top:14px;padding:14px 16px;background:var(--med-bg);border:1px solid var(--med-border);border-radius:10px;font-size:13px;line-height:1.7;color:var(--text);}
+.med-label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent2);margin-bottom:6px;}
+
+.key-box{margin-top:12px;padding:12px 16px;background:var(--key-bg);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;font-size:13px;line-height:1.65;color:var(--muted);}
+.key-box strong{color:var(--text);}
+
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px;}
+.tag{font-size:10px;font-weight:700;padding:3px 10px;border-radius:100px;background:var(--tag-bg);color:var(--accent);border:1px solid var(--formula-border);}
+
+@media(max-width:600px){
+  header,.prog-wrap,main{padding-left:18px;padding-right:18px;}
+  header{padding-top:80px;}
+  .ch-body{padding-left:18px;}
+  .formula-line{flex-direction:column;gap:4px;}
+  .formula-expr{min-width:unset;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="index.html">Constance</a>
+  <a class="nav-back" href="index.html">← Dashboard</a>
+  <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+</nav>
+
+<header>
+  <div class="badge">Révisions Terminale → PASS / LAS</div>
+  <h1>Physique — Chapitres clés</h1>
+  <p class="sub">Les notions de physique du lycée indispensables, réexpliquées avec leur sens médical concret. Coche quand tu peux l'expliquer à voix haute sans regarder.</p>
+
+</header>
+
+<div class="prog-wrap">
+  <div class="prog-row">
+    <span class="prog-label">Progression</span>
+    <div class="prog-track"><div class="prog-fill" id="globalFill" style="width:0%"></div></div>
+    <span class="prog-pct" id="globalPct">0 / 7</span>
+  </div>
+</div>
+
+<main>
+
+<!-- CH 01 -->
+<div class="ch-card" id="card0">
+  <div class="ch-head" onclick="toggle(0)">
+    <div class="ch-check" id="chk0" onclick="event.stopPropagation();mark(0)"></div>
+    <div class="ch-num">01</div>
+    <div class="ch-title">1er principe de la thermodynamique</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      Le <strong>1er principe</strong> est la loi de conservation de l'énergie appliquée à un système. L'énergie interne d'un système varie sous l'effet de deux échanges : le <strong>travail W</strong> (échanges mécaniques) et la <strong>chaleur Q</strong> (échanges thermiques). Elle ne peut pas être créée ni détruite, seulement transformée.
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Formules du programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">ΔU = W + Q</div>
+        <div class="formula-desc">Variation d'énergie interne = travail reçu + chaleur reçue. Unité : Joule (J).</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">Q = m · c · ΔT</div>
+        <div class="formula-desc">Chaleur échangée lors d'un changement de température. c = capacité thermique massique (joules par kilogramme par kelvin (J·kg<sup>-1</sup>·K<sup>-1</sup>)), ΔT = variation de température.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">Q = m · L</div>
+        <div class="formula-desc">Chaleur lors d'un changement d'état (sans variation de T). L = chaleur latente (joules par kilogramme (J·kg<sup>-1</sup>)).</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>Transformations à connaître :</strong> isotherme (température T constante) — isobare (pression P constante) — isochore (volume V constant, donc aucun travail échangé : W = 0) — adiabatique (aucune chaleur échangée : Q = 0, donc ΔU = W).
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      En fièvre, la thermogenèse augmente d'environ 13% par degré supplémentaire — le corps "brûle" plus pour maintenir T = 37°C. La <strong>calorimétrie indirecte</strong> (mesure du O<sub>2</sub> consommé et du CO<sub>2</sub> produit) permet de calculer la dépense énergétique exacte d'un patient en réanimation.
+    </div>
+    <div class="tags"><span class="tag">Énergie</span><span class="tag">Métabolisme</span><span class="tag">Fièvre</span></div>
+  </div>
+</div>
+
+<!-- CH 02 -->
+<div class="ch-card" id="card1">
+  <div class="ch-head" onclick="toggle(1)">
+    <div class="ch-check" id="chk1" onclick="event.stopPropagation();mark(1)"></div>
+    <div class="ch-num">02</div>
+    <div class="ch-title">Radioactivité</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      La <strong>radioactivité</strong> est la désintégration spontanée de noyaux instables avec émission de rayonnements. Trois types : <strong>α</strong> (noyau d'hélium <sup>4</sup>He (noyau d'hélium), peu pénétrant), <strong>β<sup>−</sup> (électron)</strong> (électron), <strong>γ</strong> (photon très pénétrant). La désintégration suit une loi exponentielle décroissante.
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Formules du programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">N(t) = N<sub>0</sub> × e<sup>−λt</sup></div>
+        <div class="formula-desc">Nombre de noyaux restants à l'instant t. N<sub>0</sub> = nombre initial, λ = constante radioactive (secondes à la puissance −1, c'est-à-dire le nombre de désintégrations s<sup>-1</sup>).</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">t½ = ln2 / λ</div>
+        <div class="formula-desc">Demi-vie = temps pour que N diminue de moitié. ln2 ≈ 0,693. Indépendante de N<sub>0</sub>.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">A = λ × N</div>
+        <div class="formula-desc">Activité = nombre de désintégrations s<sup>-1</sup>. Unité : Becquerel (Bq). 1 Bq = 1 désintégration/s.</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>Lois de conservation :</strong> dans chaque désintégration, Z (numéro atomique) et A (nombre de masse) sont conservés. α : Z − 2, A − 4. β<sup>−</sup> (électron) : Z + 1, A inchangé. γ : Z et A inchangés.
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      Le <strong>Technétium-99m</strong> (technétium-99m, demi-vie = 6h) est l'isotope star de la scintigraphie — émetteur gamma pur, assez court pour irradier le minimum. Le <strong><sup>18</sup>F-FDG</strong> (demi-vie = 110 min, TEP-scan) révèle les tumeurs car elles captent massivement le glucose radioactif.
+    </div>
+    <div class="tags"><span class="tag">Nucléaire</span><span class="tag">Scintigraphie</span><span class="tag">TEP</span><span class="tag">Radiothérapie</span></div>
+  </div>
+</div>
+
+<!-- CH 03 -->
+<div class="ch-card" id="card2">
+  <div class="ch-head" onclick="toggle(2)">
+    <div class="ch-check" id="chk2" onclick="event.stopPropagation();mark(2)"></div>
+    <div class="ch-num">03</div>
+    <div class="ch-title">Logique et raisonnement scientifique</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      Le <strong>raisonnement scientifique</strong> repose sur des règles logiques précises. En PASS, les QCM de méthode testent régulièrement la capacité à distinguer une implication de son inverse, à reconnaître une contraposée, ou à identifier une erreur de raisonnement.
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Logique formelle — programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">P ⟹ Q</div>
+        <div class="formula-desc">Implication : "si P est vrai, alors Q est vrai". Ne dit rien si P est faux.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">¬Q ⟹ ¬P</div>
+        <div class="formula-desc">Contraposée de (P ⟹ Q) : toujours vraie en même temps que l'implication de départ.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">P ⟺ Q</div>
+        <div class="formula-desc">Équivalence : P ⟹ Q ET Q ⟹ P simultanément. "P si et seulement si Q."</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>Piège classique :</strong> la réciproque (Q ⟹ P) n'est pas forcément vraie. Exemple : "si je brûle, j'ai chaud" → la réciproque "si j'ai chaud, je brûle" est fausse. La contraposée ("si je n'ai pas chaud, je ne brûle pas") est toujours vraie.
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      <strong>Sensibilité élevée</strong> = peu de faux négatifs → on utilise ce test pour <em>éliminer</em> un diagnostic. <strong>Spécificité élevée</strong> = peu de faux positifs → on l'utilise pour <em>confirmer</em>. Exemple : la PCR COVID est très sensible (capte presque tous les malades) mais le test rapide antigénique est plus spécifique (moins de faux positifs).
+    </div>
+    <div class="tags"><span class="tag">Méthode</span><span class="tag">QCM</span><span class="tag">Sensibilité/Spécificité</span></div>
+  </div>
+</div>
+
+<!-- CH 04 -->
+<div class="ch-card" id="card3">
+  <div class="ch-head" onclick="toggle(3)">
+    <div class="ch-check" id="chk3" onclick="event.stopPropagation();mark(3)"></div>
+    <div class="ch-num">04</div>
+    <div class="ch-title">Circuit RC</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      Un <strong>circuit RC</strong> associe une résistance R (en ohms, Ω) et un condensateur C (en farads, F). Lors de la charge, la tension aux bornes du condensateur monte exponentiellement vers la tension source. La vitesse de cet ajustement est caractérisée par la <strong>constante de temps τ = RC</strong>.
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Formules du programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">τ = R × C</div>
+        <div class="formula-desc">Constante de temps. Unité : seconde (s). À t = τ, le condensateur est chargé à 63% de la tension finale.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">u_C(t) = E × (1 − e<sup>−t/τ</sup>)</div>
+        <div class="formula-desc">Tension aux bornes du condensateur lors de la charge. E = tension de la source.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">u_C(t) = U<sub>0</sub> × e<sup>−t/τ</sup></div>
+        <div class="formula-desc">Tension aux bornes du condensateur lors de la décharge. U<sub>0</sub> = tension de départ (tension initiale au moment où la décharge commence). Décroissance exponentielle.</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>Régime permanent :</strong> atteint après environ 5τ (99% de la valeur finale). Le condensateur est alors pleinement chargé et ne laisse plus passer de courant en régime continu.
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      La membrane cellulaire se comporte exactement comme un condensateur. Le <strong>défibrillateur</strong> exploite ce principe : il décharge un condensateur en quelques millisecondes pour dépolariser le myocarde en fibrillation. L'ECG est l'enregistrement des cycles de charge/décharge membranaire de tout le cœur.
+    </div>
+    <div class="tags"><span class="tag">Électricité</span><span class="tag">Membrane</span><span class="tag">ECG</span><span class="tag">Défibrillateur</span></div>
+  </div>
+</div>
+
+<!-- CH 05 -->
+<div class="ch-card" id="card4">
+  <div class="ch-head" onclick="toggle(4)">
+    <div class="ch-check" id="chk4" onclick="event.stopPropagation();mark(4)"></div>
+    <div class="ch-num">05</div>
+    <div class="ch-title">Optique — lentilles et lunette astronomique</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      L'<strong>optique géométrique</strong> décrit la propagation de la lumière par des rayons. Une <strong>lentille mince convergente</strong> (distance focale f' > 0) fait converger les rayons parallèles vers son foyer image F'. La <strong>lunette astronomique</strong> associe un objectif (grande focale) et un oculaire (courte focale) pour observer les objets lointains.
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Formules du programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">1/OA' − 1/OA = 1/f'</div>
+        <div class="formula-desc">Relation de conjuguaison. OA = distance entre le centre de la lentille et l'objet (valeur algébrique), OA' = distance entre le centre et l'image, f' = distance focale. Attention : ces distances sont algébriques (peuvent être positives ou négatives selon le sens).</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">Grandissement = OA' / OA</div>
+        <div class="formula-desc">Grandissement transversal. G > 0 = image droite. G < 0 = image renversée. |G| > 1 = image agrandie.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">Grossissement lunette = − focale objectif / focale oculaire</div>
+        <div class="formula-desc">Grossissement commercial de la lunette astronomique afocale. Signe − = image renversée.</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>Cas à connaître :</strong> un objet très loin (dit "à l'infini") donne une image qui se forme exactement au foyer image de la lentille. À l'inverse, un objet placé au foyer objet donne une image à l'infini. La vergence d'une lentille V = 1 / focale s'exprime en dioptries. Une lentille divergente a une focale négative.
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      La <strong>myopie</strong> = l'œil est trop convergent, l'image se forme en avant de la rétine → lunettes à verres divergents. L'<strong>hypermétropie</strong> → verres convergents. Le microscope optique (histologie, microbiologie) fonctionne sur exactement le même principe que la lunette astronomique : deux lentilles convergentes associées.
+    </div>
+    <div class="tags"><span class="tag">Optique</span><span class="tag">Œil</span><span class="tag">Myopie</span><span class="tag">Microscope</span></div>
+  </div>
+</div>
+
+<!-- CH 06 -->
+<div class="ch-card" id="card5">
+  <div class="ch-head" onclick="toggle(5)">
+    <div class="ch-check" id="chk5" onclick="event.stopPropagation();mark(5)"></div>
+    <div class="ch-num">06</div>
+    <div class="ch-title">Ondes — propriétés et effets</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      Une <strong>onde</strong> transporte de l'énergie sans transporter de matière. <strong>Onde mécanique</strong> (son, ultrasons) : nécessite un milieu matériel. <strong>Onde électromagnétique</strong> (lumière, rayons X, ondes radio) : se propage dans le vide. L'<strong>effet Doppler</strong> est le décalage de fréquence perçue quand la source et l'observateur sont en mouvement relatif.
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Formules du programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">v = λ × f</div>
+        <div class="formula-desc">Célérité de l'onde = longueur d'onde × fréquence. v en m/s, λ en m, f en Hz.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">T = 1 / f</div>
+        <div class="formula-desc">Période = inverse de la fréquence. T en secondes, f en hertz.</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">Δf / f<sub>0</sub> = v_S / v_onde</div>
+        <div class="formula-desc">Effet Doppler (source en mouvement). Δf = décalage de fréquence perçu (en hertz), v_S = vitesse de déplacement de la source (en m/s), v_onde = vitesse de propagation de l'onde dans le milieu (en m/s).</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>Célérités à retenir :</strong> son dans l'air ≈ 340 m/s — son dans les tissus biologiques ≈ 1500 m/s — lumière dans le vide = 3 × 10<sup>8</sup> m/s. Plus le milieu est dense (pour le son), plus la vitesse est grande.
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      L'<strong>échographie</strong> envoie des ultrasons dans le corps et écoute les échos — les interfaces entre tissus renvoient le signal différemment. L'<strong>écho-Doppler</strong> mesure la vitesse du sang par décalage de fréquence → détecte une artère bouchée en quelques secondes. L'IRM utilise les ondes radiofréquences pour faire "résonner" les protons de l'eau dans les tissus.
+    </div>
+    <div class="tags"><span class="tag">Ultrasons</span><span class="tag">Doppler</span><span class="tag">IRM</span><span class="tag">Échographie</span></div>
+  </div>
+</div>
+
+<!-- CH 07 -->
+<div class="ch-card" id="card6">
+  <div class="ch-head" onclick="toggle(6)">
+    <div class="ch-check" id="chk6" onclick="event.stopPropagation();mark(6)"></div>
+    <div class="ch-num">07</div>
+    <div class="ch-title">Méthodes physiques d'analyse</div>
+    <div class="ch-arrow">›</div>
+  </div>
+  <div class="ch-body">
+    <div class="def">
+      Les <strong>méthodes physiques d'analyse</strong> exploitent les interactions entre la matière et le rayonnement pour identifier et doser des substances. En Terminale : spectrophotométrie UV-Visible (loi de Beer-Lambert), chromatographie (CCM, HPLC), et les bases de la RMN et de la spectrométrie de masse.
+    </div>
+
+    <div class="formulas">
+      <div class="formulas-label">Formules du programme de Terminale</div>
+      <div class="formula-line">
+        <div class="formula-expr">A = ε × l × c</div>
+        <div class="formula-desc">Loi de Beer-Lambert. A = absorbance (sans unité), ε = coefficient d'extinction molaire (litres par mole par centimètre (L·mol<sup>-1</sup>·cm<sup>-1</sup>)), l = longueur de la cuve (cm), c = concentration (mol/L).</div>
+      </div>
+      <div class="formula-line">
+        <div class="formula-expr">A = log(I<sub>0</sub> / I)</div>
+        <div class="formula-desc">Définition de l'absorbance. I<sub>0</sub> = intensité lumineuse incidente, I = intensité transmise. A = 0 → pas d'absorption. A = 1 → 90% absorbé.</div>
+      </div>
+    </div>
+
+    <div class="key-box">
+      <strong>RMN <sup>1</sup>H :</strong> le déplacement chimique δ (en parties par million, ppm) caractérise l'environnement chimique de chaque hydrogène. Le nombre de pics autour d'un signal (un seul pic = singulet, deux pics = doublet, etc.) révèle combien d'atomes d'hydrogène sont voisins de celui qu'on observe. <strong>Spectrométrie de masse :</strong> le pic de l'ion moléculaire M<sup>+</sup> (ion moléculaire) donne directement la masse molaire.
+    </div>
+
+    <div class="med-box">
+      <div class="med-label">🏥 Application médicale</div>
+      L'<strong>oxymètre de pouls</strong> (la petite pince sur le doigt) mesure deux absorbances à 660 nm et 940 nm pour calculer la SpO<sub>2</sub> en temps réel — Beer-Lambert appliqué en continu. Au labo, ALAT, ASAT, bilirubine sont tous dosés par spectrophotométrie. Le <strong>MALDI-TOF</strong> identifie une bactérie par sa "empreinte" de masse en 2 minutes, contre 24h en culture classique.
+    </div>
+    <div class="tags"><span class="tag">Beer-Lambert</span><span class="tag">Oxymètre</span><span class="tag">Labo clinique</span><span class="tag">RMN/IRM</span></div>
+  </div>
+</div>
+
+</main>
+
+<div style="max-width:860px;margin:0 auto;padding:0 52px 40px;display:flex;justify-content:flex-end;">
+  <a href="passrevisionchimie.html" style="display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--accent);text-decoration:none;padding:10px 20px;border:1px solid var(--border);border-radius:100px;transition:all .2s;" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--border)'">
+    Chimie →
+  </a>
+</div>
+
+<footer style="border-top:1px solid var(--border);padding:24px 52px;max-width:860px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+  <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--accent)">Constance</div>
+  <div style="font-size:11px;color:var(--muted)">© Constance | @constance.cgh · PASS gratuit</div>
+</footer>
+
+<script>
+const KEY = 'revision_physique_done';
+const TOTAL = 7;
+var done = JSON.parse(localStorage.getItem(KEY) || '[]');
+
+function applyState() {
+  for (var i = 0; i < TOTAL; i++) {
+    var card = document.getElementById('card' + i);
+    var chk = document.getElementById('chk' + i);
+    if (!card || !chk) continue;
+    if (done.includes(i)) {
+      card.classList.add('mastered');
+      chk.textContent = '✓';
+    } else {
+      card.classList.remove('mastered');
+      chk.textContent = '';
+    }
+  }
+  var pct = Math.round(done.length / TOTAL * 100);
+  document.getElementById('globalFill').style.width = pct + '%';
+  document.getElementById('globalPct').textContent = done.length + ' / ' + TOTAL;
+}
+
+function mark(i) {
+  var idx = done.indexOf(i);
+  if (idx === -1) done.push(i);
+  else done.splice(idx, 1);
+  localStorage.setItem(KEY, JSON.stringify(done));
+  applyState();
+}
+
+function toggle(i) {
+  document.getElementById('card' + i).classList.toggle('open');
+}
+
+function toggleTheme() {
+  var h = document.documentElement, b = document.getElementById('themeBtn');
+  if (h.dataset.theme === 'light') { h.dataset.theme = 'dark'; b.textContent = '☀️'; }
+  else { h.dataset.theme = 'light'; b.textContent = '🌙'; }
+}
+
+window.addEventListener('DOMContentLoaded', applyState);
+</script>
+</body>
+</html>
