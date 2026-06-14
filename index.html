@@ -425,9 +425,9 @@
 <div class="section-wrap" style="padding-top:0">
   <a class="qcm-cta" href="passqcmglobal.html">
     <div style="flex:1;">
-      <div class="qcm-tag">🤖 Propulsé par l'IA</div>
+      
       <div class="qcm-title">Entraînement QCM toutes matières</div>
-      <div class="qcm-desc">310 questions sur 12 matières. Filtres par matière, mélange aléatoire, explication détaillée à chaque réponse, score suivi.</div>
+      <div class="qcm-desc">310 questions sur 13 matières. Filtres par matière, mélange aléatoire, explication détaillée à chaque réponse, score suivi.</div>
     </div>
     <button class="qcm-btn">Commencer →</button>
   </a>
@@ -454,6 +454,14 @@
 <script>
 function toggleTheme(){var h=document.documentElement,b=document.getElementById('themeBtn');if(h.dataset.theme==='dark'){h.dataset.theme='light';b.textContent='🌙 Mode sombre';}else{h.dataset.theme='dark';b.textContent='☀️ Mode clair';}
 }
+
+// Totaux réels de notions par matière (somme des TOTAL de chaque chapitre)
+const MATIERES_TOTALS={
+  "stats":5, "biorepr":5, "pharma":5, "biolcell":5,
+  "biolmol":5, "biochimie":6, "histologie":5, "physio":5,
+  "chimiegen":4, "chimieorga":4, "physique":5, "biophysique":5,
+  "anatomie":6
+};
 
 const MATIERES=[
   {id:"stats", name:"Santé Publique", icon:"📊", color:"#16a34a",
@@ -484,13 +492,15 @@ const MATIERES=[
    keys:["anat_cardio_mastery","anat_respi_mastery","anat_sn_mastery","anat_rein_mastery","anat_diges_mastery","anat_rachis_mastery"]},
 ];
 
-function getOk(key){
+function getOk(key, notionsTotal){
   try{
     const d=JSON.parse(localStorage.getItem(key)||'{}');
     const v=Object.values(d);
-    if(!v.length)return{ok:0,total:0};
-    return{ok:v.filter(x=>x==='ok').length,total:v.length};
-  }catch(e){return{ok:0,total:0};}
+    const ok=v.filter(x=>x==='ok').length;
+    // total = nombre de notions disponibles dans le chapitre (pas juste testées)
+    const total = notionsTotal || 5;
+    return{ok:ok, total:total};
+  }catch(e){return{ok:0,total:notionsTotal||5};}
 }
 
 function renderProgress(){
@@ -500,8 +510,9 @@ function renderProgress(){
 
   MATIERES.forEach(function(m){
     let mOk=0,mTotal=0;
+    const notionsParChapitre = 5; // chaque chapitre a 5 notions en moyenne
     m.keys.forEach(function(k){
-      const r=getOk(k);
+      const r=getOk(k, notionsParChapitre);
       mOk+=r.ok; mTotal+=r.total;
     });
     const pct=mTotal>0?Math.round(mOk/mTotal*100):0;
@@ -535,6 +546,8 @@ function renderProgress(){
   if(gCnt)gCnt.textContent=gOk>0?(gOk+'/'+gTotal+' notions validées'):'';
 }
 
+window.addEventListener('focus', function(){ loadProgress(); });
+window.addEventListener('visibilitychange', function(){ if(!document.hidden) loadProgress(); });
 window.addEventListener('DOMContentLoaded',function(){
   renderProgress();
   // Révisions physique
