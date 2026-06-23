@@ -138,6 +138,7 @@
     <li><a href="passqcmglobal.html">QCM</a></li>
     <li><a href="passfiches.html">Fiches rapides</a></li>
     <li><a href="passplanning.html">Mon planning</a></li>
+    <li><a href="javascript:void(0)" onclick="openSession()" style="color:var(--accent);font-weight:700;">💾 Ma session</a></li>
     <li><a href="#breakdown-section">Progression</a></li>
     <li><a href="https://www.instagram.com/constance.cgh" target="_blank">Instagram ↗</a></li>
     <li><a href="https://www.tiktok.com/@constance.cgh" target="_blank">TikTok ↗</a></li>
@@ -149,9 +150,9 @@
 <div class="hero">
   <div class="hero-top">
     <div class="hero-left">
-      <div class="brand"><div class="brand-dot"></div>Programme PASS · LAS — S'avancer stratégiquement cet été 2026</div>
+      <div class="brand"><div class="brand-dot"></div>Programme PASS / LAS — S'avancer stratégiquement cet été 2026</div>
       <h1>S'avancer stratégiquement<br>pour le <em>PASS / LAS.</em></h1>
-      <p class="hero-sub">12 matières du PASS en un seul endroit — définitions claires, exemples médicaux, pièges classiques et quiz interactifs. Créée par Constance — entrée en PASS à Nantes, très bien classée dans ses colles. Direction Paris à la rentrée... ce n'est que le début.</p>
+      <p class="hero-sub">13 matières du PASS / LAS en un seul endroit — définitions claires, exemples médicaux, pièges classiques et quiz interactifs. Créée par Constance — entrée en PASS à Nantes, très bien classée dans ses colles. Direction Paris à la rentrée... ce n'est que le début.</p>
     </div>
     <div class="hero-stats">
       <div class="global-stat-card">
@@ -266,6 +267,18 @@
     </div>
     <span style="margin-left:auto;font-size:13px;color:var(--accent);font-weight:700;">Commencer →</span>
   </a>
+</div>
+
+
+<!-- BANNIÈRE INFO PROGRESSION -->
+<div style="max-width:1000px;margin:0 auto;padding:0 48px;margin-bottom:0;">
+  <div style="display:flex;align-items:flex-start;gap:12px;padding:12px 16px;background:rgba(5,150,105,.05);border:1px solid rgba(5,150,105,.15);border-radius:10px;margin-bottom:16px;">
+    <span style="font-size:16px;flex-shrink:0;">💾</span>
+    <div>
+      <div style="font-size:12px;font-weight:700;color:var(--accent);margin-bottom:3px;">Ta progression est sauvegardée automatiquement sur cet appareil.</div>
+      <div style="font-size:11px;color:var(--muted);line-height:1.6;">Pas besoin de compte. Utilise toujours le même navigateur et évite la navigation privée pour retrouver ta progression.</div>
+    </div>
+  </div>
 </div>
 
 <!-- GUIDE D'UTILISATION -->
@@ -448,125 +461,171 @@
 
 <footer>
   <div class="footer-brand">Constance — @constance.cgh</div>
-  <div class="footer-note">© 2026 · Programme PASS gratuit · Tous droits réservés</div>
+  <div class="footer-note">© 2026 · Programme PASS / LAS gratuit · Tous droits réservés</div>
 </footer>
 
+
+
+
+<!-- MODALE SESSION -->
+<div id="session-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:999;backdrop-filter:blur(4px);">
+  <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:32px;width:90%;max-width:460px;max-height:90vh;overflow-y:auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">
+      <div style="font-family:'Libre Baskerville',serif;font-size:17px;font-weight:700;">&#128190; Ma session PASS</div>
+      <button onclick="closeSession()" style="background:none;border:none;font-size:22px;cursor:pointer;color:var(--muted);line-height:1;">&#215;</button>
+    </div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Exporter ma progression</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px;">Copie ce code et colle-le sur ton autre appareil.</div>
+    <textarea id="export-code" readonly style="width:100%;height:72px;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:10px;font-size:10px;font-family:monospace;color:var(--muted);resize:none;"></textarea>
+    <div style="display:flex;gap:8px;margin-top:8px;">
+      <button onclick="doExport()" style="flex:1;padding:10px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;">Generer le code</button>
+      <button onclick="doCopy()" style="padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;color:var(--text);">Copier</button>
+    </div>
+    <div style="height:1px;background:var(--border);margin:20px 0;"></div>
+    <div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Importer une session</div>
+    <div style="font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:10px;">Colle ici le code obtenu depuis ton autre appareil.</div>
+    <textarea id="import-code" style="width:100%;height:72px;padding:10px;background:var(--bg);border:1px solid var(--border);border-radius:10px;font-size:10px;font-family:monospace;color:var(--text);resize:none;"></textarea>
+    <button onclick="doImport()" style="width:100%;margin-top:8px;padding:10px;background:var(--surface);border:1px solid var(--accent);border-radius:10px;font-size:12px;font-weight:700;cursor:pointer;color:var(--accent);">Restaurer ma progression</button>
+    <div id="session-msg" style="font-size:11px;margin-top:8px;text-align:center;min-height:16px;"></div>
+  </div>
+</div>
+
 <script>
-function toggleTheme(){var h=document.documentElement,b=document.getElementById('themeBtn');if(h.dataset.theme==='dark'){h.dataset.theme='light';b.textContent='🌙 Mode sombre';}else{h.dataset.theme='dark';b.textContent='☀️ Mode clair';}
+// ═══ THEME ═══
+function toggleTheme() {
+  var h = document.documentElement;
+  var b = document.getElementById("themeBtn");
+  if (h.dataset.theme === "light") { h.dataset.theme = "dark"; if(b) b.textContent = "☀️"; }
+  else { h.dataset.theme = "light"; if(b) b.textContent = "🌙"; }
 }
 
-// Totaux réels de notions par matière (somme des TOTAL de chaque chapitre)
-const MATIERES_TOTALS={
-  "stats":5, "biorepr":5, "pharma":5, "biolcell":5,
-  "biolmol":5, "biochimie":6, "histologie":5, "physio":5,
-  "chimiegen":4, "chimieorga":4, "physique":5, "biophysique":5,
-  "anatomie":6
+// ═══ PROGRESSION ═══
+var MATIERES_TOTALS = {
+  "stats":5,"biorepr":5,"pharma":5,"biolcell":5,"biolmol":5,
+  "biochimie":6,"histologie":5,"physio":5,"chimiegen":4,
+  "chimieorga":4,"physique":5,"biophysique":5,"anatomie":6
 };
-
-const MATIERES=[
-  {id:"stats", name:"Santé Publique", icon:"📊", color:"#16a34a",
-   keys:["stats_epi_mastery","stats_biostat_mastery","stats_prev_mastery","stats_lca_mastery","stats_sante_mastery"]},
-  {id:"biorepr",  name:"Bio. Reproduction",icon:"🤰", color:"#be185d",
-   keys:["biorepr_gamet_mastery","biorepr_fecon_mastery","biorepr_embryo_mastery","biorepr_gross_mastery","biorepr_patho_mastery"]},
-  {id:"pharma",    name:"Pharmacologie",    icon:"💊", color:"#ea580c",
-   keys:["pharma_pk_mastery","pharma_pd_mastery","pharma_cardio_mastery","pharma_neuro_mastery","pharma_abc_mastery"]},
-  {id:"biolcell",  name:"Bio. Cellulaire",  icon:"🔬", color:"#7c3aed",
-   keys:["biolcell_cellule_mastery","biolcell_organites_mastery","biolcell_cycle_mastery","biolcell_signal_mastery","biolcell_immun_mastery"]},
-  {id:"biolmol",   name:"Bio. Moléculaire", icon:"🧬", color:"#0284c7",
-   keys:["biolmol_genome_mastery","biolmol_transcr_mastery","biolmol_trad_mastery","biolmol_cycle_mastery","biolmol_tech_mastery"]},
-  {id:"biochimie", name:"Biochimie",        icon:"⚗️", color:"#d97706",
-   keys:["biochimie_gluci_mastery","biochimie_lipides_mastery","biochimie_aa_mastery","biochimie_prot_mastery","biochimie_enz_mastery","biochimie_adn_mastery"]},
-  {id:"histologie",name:"Histologie",       icon:"🩺", color:"#db2777",
-   keys:["histo_epithel_mastery","histo_conj_mastery","histo_musc_mastery","histo_nerv_mastery","histo_sang_mastery"]},
-  {id:"physio",    name:"Physiologie",      icon:"💓", color:"#059669",
-   keys:["physio_cardio_mastery","physio_respir_mastery","physio_rein_mastery","physio_digest_mastery","physio_endo_mastery"]},
-  {id:"chimiegen", name:"Chimie Générale",  icon:"⚛️", color:"#818cf8",
-   keys:["chimgen_atome_mastery","chimgen_liaisons_mastery","chimgen_thermo_mastery","chimgen_ab_mastery"]},
-  {id:"chimieorga",name:"Chimie Organique", icon:"🧪", color:"#16a34a",
-   keys:["chimorga_repr_mastery","chimorga_stereo_mastery","chimorga_react_mastery","chimorga_fonct_mastery"]},
-  {id:"physique",  name:"Physique",         icon:"⚙️", color:"#60a5fa",
-   keys:["mecanique_mastery","fluides_mastery","thermo_mastery","ondes_mastery","optique_mastery"]},
-  {id:"biophysique",name:"Biophysique",     icon:"📡", color:"#34d399",
-   keys:["bio_transport_mastery","bio_hemo_mastery","bio_radio_mastery","bio_imagerie_mastery","bio_bioelec_mastery"]},
-  {id:"anatomie",  name:"Anatomie",         icon:"🫀", color:"#f472b6",
-   keys:["anat_cardio_mastery","anat_respi_mastery","anat_sn_mastery","anat_rein_mastery","anat_diges_mastery","anat_rachis_mastery"]},
+var MATIERES = [
+  {id:"stats",     name:"Sante Publique",    icon:"📊", color:"#16a34a", keys:["stats_epi_mastery","stats_biostat_mastery","stats_prev_mastery","stats_lca_mastery","stats_sante_mastery"]},
+  {id:"biorepr",   name:"Bio. Reproduction", icon:"🤰", color:"#be185d", keys:["biorepr_gamet_mastery","biorepr_fecon_mastery","biorepr_embryo_mastery","biorepr_gross_mastery","biorepr_patho_mastery"]},
+  {id:"pharma",    name:"Pharmacologie",     icon:"💊", color:"#ea580c", keys:["pharma_pk_mastery","pharma_pd_mastery","pharma_cardio_mastery","pharma_neuro_mastery","pharma_abc_mastery"]},
+  {id:"biolcell",  name:"Bio. Cellulaire",   icon:"🔬", color:"#7c3aed", keys:["biolcell_cellule_mastery","biolcell_organites_mastery","biolcell_cycle_mastery","biolcell_signal_mastery","biolcell_immun_mastery"]},
+  {id:"biolmol",   name:"Bio. Moleculaire",  icon:"🧬", color:"#0284c7", keys:["biolmol_genome_mastery","biolmol_transcr_mastery","biolmol_trad_mastery","biolmol_cycle_mastery","biolmol_tech_mastery"]},
+  {id:"biochimie", name:"Biochimie",         icon:"⚗️", color:"#d97706", keys:["biochimie_gluci_mastery","biochimie_lipides_mastery","biochimie_aa_mastery","biochimie_prot_mastery","biochimie_enz_mastery","biochimie_adn_mastery"]},
+  {id:"histologie",name:"Histologie",        icon:"🩺", color:"#db2777", keys:["histo_epithel_mastery","histo_conj_mastery","histo_musc_mastery","histo_nerv_mastery","histo_sang_mastery"]},
+  {id:"physio",    name:"Physiologie",       icon:"💓", color:"#059669", keys:["physio_cardio_mastery","physio_respir_mastery","physio_rein_mastery","physio_digest_mastery","physio_endo_mastery"]},
+  {id:"chimiegen", name:"Chimie Generale",   icon:"⚛️", color:"#818cf8", keys:["chimgen_atome_mastery","chimgen_liaisons_mastery","chimgen_thermo_mastery","chimgen_ab_mastery"]},
+  {id:"chimieorga",name:"Chimie Organique",  icon:"🧪", color:"#16a34a", keys:["chimorga_repr_mastery","chimorga_stereo_mastery","chimorga_react_mastery","chimorga_fonct_mastery"]},
+  {id:"physique",  name:"Physique",          icon:"⚙️", color:"#60a5fa", keys:["mecanique_mastery","fluides_mastery","thermo_mastery","ondes_mastery","optique_mastery"]},
+  {id:"biophysique",name:"Biophysique",      icon:"📡", color:"#34d399", keys:["bio_transport_mastery","bio_hemo_mastery","bio_radio_mastery","bio_imagerie_mastery","bio_bioelec_mastery"]},
+  {id:"anatomie",  name:"Anatomie",          icon:"🫀", color:"#f472b6", keys:["anat_cardio_mastery","anat_respi_mastery","anat_sn_mastery","anat_rein_mastery","anat_diges_mastery","anat_rachis_mastery"]}
 ];
 
-function getOk(key, notionsTotal){
-  try{
-    const d=JSON.parse(localStorage.getItem(key)||'{}');
-    const v=Object.values(d);
-    const ok=v.filter(x=>x==='ok').length;
-    // total = nombre de notions disponibles dans le chapitre (pas juste testées)
-    const total = notionsTotal || 5;
-    return{ok:ok, total:total};
-  }catch(e){return{ok:0,total:notionsTotal||5};}
+function getOk(key, n) {
+  try {
+    var d = JSON.parse(localStorage.getItem(key) || "{}");
+    var v = Object.values(d);
+    return { ok: v.filter(function(x){ return x === "ok"; }).length, total: n || 5 };
+  } catch(e) { return { ok: 0, total: n || 5 }; }
 }
 
-function renderProgress(){
-  let gOk=0,gTotal=0;
-  const bd=document.getElementById('matieres-breakdown');
-  let rows='';
-
-  MATIERES.forEach(function(m){
-    let mOk=0,mTotal=0;
-    const notionsParChapitre = 5; // chaque chapitre a 5 notions en moyenne
-    m.keys.forEach(function(k){
-      const r=getOk(k, notionsParChapitre);
-      mOk+=r.ok; mTotal+=r.total;
+function renderProgress() {
+  var gOk = 0, gTotal = 0;
+  var bd = document.getElementById("breakdown-list");
+  var rows = "";
+  MATIERES.forEach(function(m) {
+    var mOk = 0, mTotal = 0;
+    m.keys.forEach(function(k) {
+      var r = getOk(k, 5);
+      mOk += r.ok; mTotal += r.total;
     });
-    const pct=mTotal>0?Math.round(mOk/mTotal*100):0;
-    gOk+=mOk; gTotal+=mTotal;
-
-    // Barre sur la carte
-    const bar=document.getElementById('prog-'+m.id);
-    const pctEl=document.getElementById('pct-'+m.id);
-    if(bar)bar.style.width=pct+'%';
-    if(pctEl)pctEl.textContent=pct+'%';
-
-    // Ligne dans le breakdown — toujours affichée, même à 0%
-    rows+='<div class="bd-row">'
-      +'<div class="bd-icon">'+m.icon+'</div>'
-      +'<div class="bd-name">'+m.name+'</div>'
-      +'<div class="bd-bar-wrap"><div class="bd-bar-track"><div class="bd-bar-fill" style="width:'+pct+'%;background:'+m.color+'"></div></div></div>'
-      +'<div class="bd-pct" style="color:'+m.color+'">'+pct+'%</div>'
-      +'</div>';
+    gOk += mOk; gTotal += mTotal;
+    var pct = mTotal > 0 ? Math.round(mOk / mTotal * 100) : 0;
+    var pb = document.getElementById("prog-" + m.id);
+    var pp = document.getElementById("pct-" + m.id);
+    if(pb) pb.style.width = pct + "%";
+    if(pp) pp.textContent = pct + "%";
+    rows += "<div style='display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border);'>";
+    rows += "<span style='font-size:16px;'>" + m.icon + "</span>";
+    rows += "<span style='flex:1;font-size:13px;font-weight:600;'>" + m.name + "</span>";
+    rows += "<span style='font-size:12px;color:var(--muted);'>" + mOk + "/" + mTotal + "</span>";
+    rows += "<div style='width:80px;height:4px;background:var(--progress-track);border-radius:10px;overflow:hidden;'><div style='height:100%;background:" + m.color + ";border-radius:10px;width:" + pct + "%;'></div></div>";
+    rows += "</div>";
   });
-
-  if(bd)bd.innerHTML=rows;
-
-  const globalPct=gTotal>0?Math.round(gOk/gTotal*100):0;
-  const gEl=document.getElementById('globalPct');
-  const gSub=document.getElementById('globalSub');
-  const gBar=document.getElementById('globalBar');
-  const gCnt=document.getElementById('breakdown-count');
-  if(gEl)gEl.textContent=globalPct+'%';
-  if(gSub)gSub.textContent=gOk+' notion'+(gOk>1?'s':'')+' validée'+(gOk>1?'s':'')+' sur '+gTotal;
-  if(gBar)gBar.style.width=globalPct+'%';
-  if(gCnt)gCnt.textContent=gOk>0?(gOk+'/'+gTotal+' notions validées'):'';
+  if(bd) bd.innerHTML = rows;
+  var globalPct = gTotal > 0 ? Math.round(gOk / gTotal * 100) : 0;
+  var gEl = document.getElementById("globalPct");
+  var gSub = document.getElementById("globalSub");
+  var gBar = document.getElementById("globalBar");
+  var gCnt = document.getElementById("breakdown-count");
+  if(gEl) gEl.textContent = globalPct + "%";
+  if(gSub) gSub.textContent = gOk + " notion" + (gOk > 1 ? "s" : "") + " validee" + (gOk > 1 ? "s" : "") + " sur " + gTotal;
+  if(gBar) gBar.style.width = globalPct + "%";
+  if(gCnt && gOk > 0) gCnt.textContent = gOk + "/" + gTotal + " notions validees";
 }
 
-window.addEventListener('focus', function(){ renderProgress(); });
-window.addEventListener('visibilitychange', function(){ if(!document.hidden) renderProgress(); });
-window.addEventListener('DOMContentLoaded',function(){
+// ═══ SESSION ═══
+function openSession() { document.getElementById("session-modal").style.display = "block"; }
+function closeSession() { document.getElementById("session-modal").style.display = "none"; document.getElementById("session-msg").textContent = ""; }
+
+function doExport() {
+  var keys = ["mastery","_read","revision_physique","revision_chimie","maths_","pass_planning"];
+  var obj = {};
+  for(var i = 0; i < localStorage.length; i++) {
+    var k = localStorage.key(i);
+    for(var j = 0; j < keys.length; j++) { if(k.indexOf(keys[j]) !== -1) { obj[k] = localStorage.getItem(k); break; } }
+  }
+  document.getElementById("export-code").value = btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
+}
+
+function doCopy() {
+  var el = document.getElementById("export-code");
+  if(!el.value) doExport();
+  el.select();
+  try { document.execCommand("copy"); } catch(e) {}
+  if(navigator.clipboard) navigator.clipboard.writeText(el.value);
+  document.getElementById("session-msg").textContent = "Code copie !";
+}
+
+function doImport() {
+  var raw = document.getElementById("import-code").value.trim();
+  var msg = document.getElementById("session-msg");
+  if(!raw) { msg.style.color = "#dc2626"; msg.textContent = "Colle un code."; return; }
+  try {
+    var parsed = JSON.parse(decodeURIComponent(escape(atob(raw))));
+    var n = 0;
+    Object.keys(parsed).forEach(function(k) { localStorage.setItem(k, parsed[k]); n++; });
+    msg.style.color = "var(--accent)";
+    msg.textContent = n + " elements restaures. Rechargement...";
+    setTimeout(function() { closeSession(); location.reload(); }, 1600);
+  } catch(ex) { msg.style.color = "#dc2626"; msg.textContent = "Code invalide."; }
+}
+
+// ═══ INIT ═══
+window.addEventListener("focus", function() { renderProgress(); });
+window.addEventListener("visibilitychange", function() { if(!document.hidden) renderProgress(); });
+document.addEventListener("DOMContentLoaded", function() {
   renderProgress();
-  // Révisions physique
-  const dp=JSON.parse(localStorage.getItem('revision_physique_done')||'[]');
-  const bp=document.getElementById('rev-phys-bar'),pp=document.getElementById('rev-phys-pct');
-  if(bp)bp.style.width=Math.round(dp.length/7*100)+'%';
-  if(pp)pp.textContent=dp.length+'/7';
-  // Révisions chimie
-  const dc=JSON.parse(localStorage.getItem('revision_chimie_done')||'[]');
-  const bc=document.getElementById('rev-chim-bar'),pc=document.getElementById('rev-chim-pct');
-  if(bc)bc.style.width=Math.round(dc.length/6*100)+'%';
-  if(pc)pc.textContent=dc.length+'/6';
-  // Révisions maths
-  const mathsKeys=['maths_fonctions_mastery','maths_logexp_mastery','maths_trigon_mastery','maths_equat_mastery','maths_suites_mastery'];
-  let mathsOk=0,mathsTotal=0;
-  mathsKeys.forEach(function(k){const d=JSON.parse(localStorage.getItem(k)||'{}');const v=Object.values(d);mathsOk+=v.filter(x=>x==='ok').length;mathsTotal+=v.length;});
-  const bm=document.getElementById('rev-maths-bar'),pm=document.getElementById('rev-maths-pct');
-  if(bm)bm.style.width=(mathsTotal>0?Math.round(mathsOk/mathsTotal*100):0)+'%';
-  if(pm)pm.textContent=mathsOk+'/5';
+  // Revisions physique
+  var dp = JSON.parse(localStorage.getItem("revision_physique_done") || "[]");
+  var bp = document.getElementById("rev-phys-bar"), pp = document.getElementById("rev-phys-pct");
+  if(bp) bp.style.width = Math.round(dp.length / 7 * 100) + "%";
+  if(pp) pp.textContent = dp.length + "/7";
+  // Revisions chimie
+  var dc = JSON.parse(localStorage.getItem("revision_chimie_done") || "[]");
+  var bc = document.getElementById("rev-chim-bar"), pc = document.getElementById("rev-chim-pct");
+  if(bc) bc.style.width = Math.round(dc.length / 6 * 100) + "%";
+  if(pc) pc.textContent = dc.length + "/6";
+  // Revisions maths
+  var mathsKeys = ["maths_fonctions_mastery","maths_logexp_mastery","maths_trigon_mastery","maths_equat_mastery","maths_suites_mastery"];
+  var mOk = 0, mTotal = 0;
+  mathsKeys.forEach(function(k) { var d = JSON.parse(localStorage.getItem(k) || "{}"); var v = Object.values(d); mOk += v.filter(function(x){ return x === "ok"; }).length; mTotal += v.length; });
+  var bm = document.getElementById("rev-maths-bar"), pm = document.getElementById("rev-maths-pct");
+  if(bm) bm.style.width = (mTotal > 0 ? Math.round(mOk / mTotal * 100) : 0) + "%";
+  if(pm) pm.textContent = mOk + "/5";
+  // Session modal
+  var modal = document.getElementById("session-modal");
+  if(modal) modal.addEventListener("click", function(e) { if(e.target === modal) closeSession(); });
 });
 </script>
 </body>
