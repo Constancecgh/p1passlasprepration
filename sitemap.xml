@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Page principale -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Planning -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passplanning.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Maths -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passmaths.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passmathsfonctions.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passmathslogexp.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passmathstrigon.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passmathsequations.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passmathssuites.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Biologie Cellulaire -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passbiolcell.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Biologie Moléculaire -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passbiolmol.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Biochimie -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passbiochimie.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Physiologie -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passphysio.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Pharmacologie -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passpharma.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Histologie -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passhisto.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chimie Générale -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passchimiegen.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Chimie Organique -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passchimieorga.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Statistiques & Santé Publique -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passstats.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Biophysique -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passbiophysique.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Bio. Reproduction -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passbiorepr.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Anatomie -->
+  <url>
+    <loc>https://constancecgh.github.io/p1passlasprepration/passanatomie.html</loc>
+    <lastmod>2026-06-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+</urlset>
